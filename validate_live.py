@@ -23,12 +23,28 @@ RESULTS_DIR = ROOT / "results"
 BODIES_DIR = RESULTS_DIR / "bodies"
 LATEST_JSON = RESULTS_DIR / "latest.json"
 HISTORY_JSONL = RESULTS_DIR / "history.jsonl"
+DOTENV_PATH = ROOT.parent / ".env"
 
 KEY_MAP = {
     "openai": "OPENAI_API_KEY",
     "anthropic": "ANTHROPIC_API_KEY",
     "gemini": "GEMINI_API_KEY",
 }
+
+
+def load_dotenv(path: Path = DOTENV_PATH):
+    if not path.exists():
+        return
+    for raw_line in path.read_text().splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, value = line.split("=", 1)
+        key = key.strip()
+        value = value.strip()
+        if value and ((value[0] == value[-1]) and value[0] in {'"', "'"}):
+            value = value[1:-1]
+        os.environ.setdefault(key, value)
 
 _COST_INDEX = None
 _ADDITIVE_CACHE_PROVIDERS = {"anthropic"}
@@ -253,6 +269,67 @@ def estimate_cost_usd(provider: str, case: dict, raw_body: str):
     return estimate_cost_from_usage(usage, spec, provider)
 
 
+def is_streaming_case(case: dict) -> bool:
+    body = case.get("request", {}).get("body", {}) or {}
+    params = case.get("request", {}).get("params", {}) or {}
+    url = case.get("request", {}).get("url", "")
+    return bool(body.get("stream") is True or params.get("alt") == "sse" or "streamGenerateContent" in url)
+
+
+def validate_response(provider: str, case: dict, raw_body: str):
+    expect = case.get("expect", {}) or {}
+    checks = []
+
+    if is_streaming_case(case):
+        if provider == "openai":
+            if "event: response.completed" not in raw_body:
+                checks.append("missing response.completed event")
+            if extract_usage(provider, raw_body) is None:
+                checks.append("missing usage in streaming response")
+        elif provider == "anthropic":
+            if "event:" not in raw_body:
+                checks.append("missing SSE events")
+            if "message_start" not in raw_body and "message_stop" not in raw_body:
+                checks.append("missing Anthropic message lifecycle events")
+        elif provider == "gemini":
+            if "data: " not in raw_body:
+                checks.append("missing SSE data events")
+            if extract_usage(provider, raw_body) is None:
+                checks.append("missing usageMetadata in streaming response")
+    else:
+        try:
+            data = json.loads(raw_body)
+        except Exception:
+            return False, ["response body is not valid JSON"]
+
+        if provider == "openai":
+            if not data.get("id"):
+                checks.append("missing id")
+            if data.get("object") != "response":
+                checks.append("missing/invalid object=response")
+            if extract_usage(provider, raw_body) is None:
+                checks.append("missing usage")
+        elif provider == "anthropic":
+            if not data.get("id"):
+                checks.append("missing id")
+            if "content" not in data:
+                checks.append("missing content")
+            if extract_usage(provider, raw_body) is None:
+                checks.append("missing usage")
+        elif provider == "gemini":
+            if not data.get("candidates"):
+                checks.append("missing candidates")
+            if extract_usage(provider, raw_body) is None:
+                checks.append("missing usageMetadata")
+
+        body_contains = expect.get("body_contains") or []
+        for s in body_contains:
+            if s not in raw_body:
+                checks.append(f"body missing expected substring: {s}")
+
+    return len(checks) == 0, checks
+
+
 def save_body(case_id: str, tested_at: str, raw_body: str) -> str | None:
     if raw_body is None:
         return None
@@ -285,14 +362,27 @@ def persist_results(run_results: dict):
 
 
 def main():
+    load_dotenv()
+
     filter_provider = None
+    filter_task = None
     dry_run = False
 
-    for arg in sys.argv[1:]:
+    args = sys.argv[1:]
+    i = 0
+    while i < len(args):
+        arg = args[i]
         if arg == "--dry-run":
             dry_run = True
+        elif arg == "--task":
+            if i + 1 >= len(args):
+                print("--task requires a value", file=sys.stderr)
+                return 2
+            filter_task = args[i + 1]
+            i += 1
         elif arg in KEY_MAP:
             filter_provider = arg
+        i += 1
 
     passed = failed = skipped = 0
     run_results = {}
@@ -310,6 +400,8 @@ def main():
         for case_file in sorted(provider_dir.glob("*.json")):
             feature = case_file.stem
             case_id = f"{provider}.{feature}"
+            if filter_task and case_id != filter_task:
+                continue
             case = json.loads(case_file.read_text())
             tested_at = now_iso()
 
@@ -343,7 +435,8 @@ def main():
             try:
                 result = run_curl(case, api_key)
                 expected = str(case.get("expect", {}).get("status", 200))
-                outcome = "pass" if result["http_code"] == expected else "fail"
+                semantic_ok, semantic_errors = validate_response(provider, case, result["raw_body"]) if result["http_code"] == expected else (False, [])
+                outcome = "pass" if result["http_code"] == expected and semantic_ok else "fail"
                 body_path = save_body(case_id, tested_at, result["raw_body"])
                 rec = {
                     "case_id": case_id,
@@ -356,6 +449,7 @@ def main():
                     "estimated_cost_usd": estimate_cost_usd(provider, case, result["raw_body"]),
                     "body_path": body_path,
                     "stderr": result["stderr"] or None,
+                    "semantic_errors": semantic_errors or None,
                 }
                 run_results[case_id] = rec
                 if outcome == "pass":
@@ -363,7 +457,12 @@ def main():
                     passed += 1
                 else:
                     preview = result['raw_body'][:200].replace("\n", " ")
-                    print(f"  ❌ {case_id} (expected {expected}, got {result['http_code']}, {result['duration_seconds']}s)")
+                    if result['http_code'] != expected:
+                        print(f"  ❌ {case_id} (expected {expected}, got {result['http_code']}, {result['duration_seconds']}s)")
+                    else:
+                        print(f"  ❌ {case_id} (semantic validation failed, {result['duration_seconds']}s)")
+                        if semantic_errors:
+                            print(f"     {'; '.join(semantic_errors[:3])}")
                     if preview:
                         print(f"     {preview}")
                     failed += 1
