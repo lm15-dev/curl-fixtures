@@ -1,0 +1,648 @@
+{
+  "args": {
+    "concurrency": 4,
+    "dry_run": false,
+    "max_attempts": 3,
+    "model": "openai-codex/gpt-5.4:medium",
+    "provider": "anthropic",
+    "retry_failed": true,
+    "task": null
+  },
+  "created_at": "2026-04-13T14:37:39Z",
+  "cwd": "/home/maxime/Projects/lm15-dev/curl-fixtures",
+  "run_file": "/home/maxime/Projects/lm15-dev/curl-fixtures/pipeline/runs/20260413T143739Z.json",
+  "run_id": "20260413T143739Z",
+  "tasks": [
+    {
+      "attempt_log_files": [
+        "pipeline/logs/anthropic/image_base64.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/anthropic/image_base64.json",
+      "covered_marked": true,
+      "description": "Image input via base64 source",
+      "ended_at": "2026-04-13T14:38:00Z",
+      "feature": "image_base64",
+      "id": "anthropic.image_base64",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/anthropic/image_base64.log",
+      "provider": "anthropic",
+      "session_file": "pipeline/sessions/anthropic/image_base64.jsonl",
+      "started_at": "2026-04-13T14:37:39Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/anthropic.image_base64/2026-04-13T14-37-58Z.txt",
+          "case_id": "anthropic.image_base64",
+          "duration_seconds": 1.215,
+          "estimated_cost_usd": 0.000282,
+          "feature": "image_base64",
+          "http_code": 200,
+          "provider": "anthropic",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T14:37:58Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 anthropic.image_base64 (HTTP 200, 1.215s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T14:38:00Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/anthropic/pdf_base64.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/anthropic/pdf_base64.json",
+      "covered_marked": true,
+      "description": "PDF input via base64 document source",
+      "ended_at": "2026-04-13T14:38:21Z",
+      "feature": "pdf_base64",
+      "id": "anthropic.pdf_base64",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/anthropic/pdf_base64.log",
+      "provider": "anthropic",
+      "session_file": "pipeline/sessions/anthropic/pdf_base64.jsonl",
+      "started_at": "2026-04-13T14:37:39Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/anthropic.pdf_base64/2026-04-13T14-38-19Z.txt",
+          "case_id": "anthropic.pdf_base64",
+          "duration_seconds": 1.339,
+          "estimated_cost_usd": 0.004842,
+          "feature": "pdf_base64",
+          "http_code": 200,
+          "provider": "anthropic",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T14:38:19Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 anthropic.pdf_base64 (HTTP 200, 1.339s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T14:38:21Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/anthropic/multi_turn.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/anthropic/multi_turn.json",
+      "covered_marked": true,
+      "description": "Multiple user/assistant messages",
+      "ended_at": "2026-04-13T14:37:56Z",
+      "feature": "multi_turn",
+      "id": "anthropic.multi_turn",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/anthropic/multi_turn.log",
+      "provider": "anthropic",
+      "session_file": "pipeline/sessions/anthropic/multi_turn.jsonl",
+      "started_at": "2026-04-13T14:37:39Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/anthropic.multi_turn/2026-04-13T14-37-55Z.txt",
+          "case_id": "anthropic.multi_turn",
+          "duration_seconds": 0.978,
+          "estimated_cost_usd": 0.000183,
+          "feature": "multi_turn",
+          "http_code": 200,
+          "provider": "anthropic",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T14:37:55Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 anthropic.multi_turn (HTTP 200, 0.978s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T14:37:56Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/anthropic/multi_turn_tool_result.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/anthropic/multi_turn_tool_result.json",
+      "covered_marked": true,
+      "description": "Conversation with tool_use + tool_result blocks",
+      "ended_at": "2026-04-13T14:38:04Z",
+      "feature": "multi_turn_tool_result",
+      "id": "anthropic.multi_turn_tool_result",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/anthropic/multi_turn_tool_result.log",
+      "provider": "anthropic",
+      "session_file": "pipeline/sessions/anthropic/multi_turn_tool_result.jsonl",
+      "started_at": "2026-04-13T14:37:39Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/anthropic.multi_turn_tool_result/2026-04-13T14-38-03Z.txt",
+          "case_id": "anthropic.multi_turn_tool_result",
+          "duration_seconds": 0.83,
+          "estimated_cost_usd": 0.001992,
+          "feature": "multi_turn_tool_result",
+          "http_code": 200,
+          "provider": "anthropic",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T14:38:03Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 anthropic.multi_turn_tool_result (HTTP 200, 0.83s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T14:38:04Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/anthropic/system_content_blocks.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/anthropic/system_content_blocks.json",
+      "covered_marked": true,
+      "description": "System as array of TextBlockParam (with cache_control)",
+      "ended_at": "2026-04-13T14:38:24Z",
+      "feature": "system_content_blocks",
+      "id": "anthropic.system_content_blocks",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/anthropic/system_content_blocks.log",
+      "provider": "anthropic",
+      "session_file": "pipeline/sessions/anthropic/system_content_blocks.jsonl",
+      "started_at": "2026-04-13T14:37:56Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/anthropic.system_content_blocks/2026-04-13T14-38-22Z.txt",
+          "case_id": "anthropic.system_content_blocks",
+          "duration_seconds": 1.542,
+          "estimated_cost_usd": 0.000162,
+          "feature": "system_content_blocks",
+          "http_code": 200,
+          "provider": "anthropic",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T14:38:22Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 anthropic.system_content_blocks (HTTP 200, 1.542s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T14:38:24Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/anthropic/stop_sequences.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/anthropic/stop_sequences.json",
+      "covered_marked": true,
+      "description": "Custom stop sequences",
+      "ended_at": "2026-04-13T14:38:25Z",
+      "feature": "stop_sequences",
+      "id": "anthropic.stop_sequences",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/anthropic/stop_sequences.log",
+      "provider": "anthropic",
+      "session_file": "pipeline/sessions/anthropic/stop_sequences.jsonl",
+      "started_at": "2026-04-13T14:38:00Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/anthropic.stop_sequences/2026-04-13T14-38-24Z.txt",
+          "case_id": "anthropic.stop_sequences",
+          "duration_seconds": 0.902,
+          "estimated_cost_usd": 0.000192,
+          "feature": "stop_sequences",
+          "http_code": 200,
+          "provider": "anthropic",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T14:38:24Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 anthropic.stop_sequences (HTTP 200, 0.902s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T14:38:25Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/anthropic/top_p.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/anthropic/top_p.json",
+      "covered_marked": true,
+      "description": "top_p (nucleus sampling)",
+      "ended_at": "2026-04-13T14:38:32Z",
+      "feature": "top_p",
+      "id": "anthropic.top_p",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/anthropic/top_p.log",
+      "provider": "anthropic",
+      "session_file": "pipeline/sessions/anthropic/top_p.jsonl",
+      "started_at": "2026-04-13T14:38:04Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/anthropic.top_p/2026-04-13T14-38-31Z.txt",
+          "case_id": "anthropic.top_p",
+          "duration_seconds": 1.452,
+          "estimated_cost_usd": 0.000195,
+          "feature": "top_p",
+          "http_code": 200,
+          "provider": "anthropic",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T14:38:31Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 anthropic.top_p (HTTP 200, 1.452s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T14:38:32Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/anthropic/top_k.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/anthropic/top_k.json",
+      "covered_marked": true,
+      "description": "top_k sampling",
+      "ended_at": "2026-04-13T14:38:36Z",
+      "feature": "top_k",
+      "id": "anthropic.top_k",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/anthropic/top_k.log",
+      "provider": "anthropic",
+      "session_file": "pipeline/sessions/anthropic/top_k.jsonl",
+      "started_at": "2026-04-13T14:38:21Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/anthropic.top_k/2026-04-13T14-38-35Z.txt",
+          "case_id": "anthropic.top_k",
+          "duration_seconds": 1.122,
+          "estimated_cost_usd": 0.000111,
+          "feature": "top_k",
+          "http_code": 200,
+          "provider": "anthropic",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T14:38:35Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 anthropic.top_k (HTTP 200, 1.122s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T14:38:36Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/anthropic/thinking_budget.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/anthropic/thinking_budget.json",
+      "covered_marked": true,
+      "description": "Thinking with budget_tokens",
+      "ended_at": "2026-04-13T14:38:52Z",
+      "feature": "thinking_budget",
+      "id": "anthropic.thinking_budget",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/anthropic/thinking_budget.log",
+      "provider": "anthropic",
+      "session_file": "pipeline/sessions/anthropic/thinking_budget.jsonl",
+      "started_at": "2026-04-13T14:38:24Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/anthropic.thinking_budget/2026-04-13T14-38-47Z.txt",
+          "case_id": "anthropic.thinking_budget",
+          "duration_seconds": 4.392,
+          "estimated_cost_usd": 0.004029,
+          "feature": "thinking_budget",
+          "http_code": 200,
+          "provider": "anthropic",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T14:38:47Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 anthropic.thinking_budget (HTTP 200, 4.392s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T14:38:51Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/anthropic/cache_control.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/anthropic/cache_control.json",
+      "covered_marked": true,
+      "description": "Prompt caching via cache_control on messages/system",
+      "ended_at": "2026-04-13T14:39:18Z",
+      "feature": "cache_control",
+      "id": "anthropic.cache_control",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/anthropic/cache_control.log",
+      "provider": "anthropic",
+      "session_file": "pipeline/sessions/anthropic/cache_control.jsonl",
+      "started_at": "2026-04-13T14:38:25Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/anthropic.cache_control/2026-04-13T14-39-16Z.txt",
+          "case_id": "anthropic.cache_control",
+          "duration_seconds": 0.928,
+          "estimated_cost_usd": 0.000114,
+          "feature": "cache_control",
+          "http_code": 200,
+          "provider": "anthropic",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T14:39:16Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 anthropic.cache_control (HTTP 200, 0.928s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T14:39:18Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/anthropic/metadata.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/anthropic/metadata.json",
+      "covered_marked": true,
+      "description": "Request metadata (user_id)",
+      "ended_at": "2026-04-13T14:38:54Z",
+      "feature": "metadata",
+      "id": "anthropic.metadata",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/anthropic/metadata.log",
+      "provider": "anthropic",
+      "session_file": "pipeline/sessions/anthropic/metadata.jsonl",
+      "started_at": "2026-04-13T14:38:32Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/anthropic.metadata/2026-04-13T14-38-52Z.txt",
+          "case_id": "anthropic.metadata",
+          "duration_seconds": 1.761,
+          "estimated_cost_usd": 9.6e-05,
+          "feature": "metadata",
+          "http_code": 200,
+          "provider": "anthropic",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T14:38:52Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 anthropic.metadata (HTTP 200, 1.761s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T14:38:54Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/anthropic/service_tier.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/anthropic/service_tier.json",
+      "covered_marked": true,
+      "description": "service_tier selection",
+      "ended_at": "2026-04-13T14:38:56Z",
+      "feature": "service_tier",
+      "id": "anthropic.service_tier",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/anthropic/service_tier.log",
+      "provider": "anthropic",
+      "session_file": "pipeline/sessions/anthropic/service_tier.jsonl",
+      "started_at": "2026-04-13T14:38:36Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/anthropic.service_tier/2026-04-13T14-38-54Z.txt",
+          "case_id": "anthropic.service_tier",
+          "duration_seconds": 1.441,
+          "estimated_cost_usd": 0.000114,
+          "feature": "service_tier",
+          "http_code": 200,
+          "provider": "anthropic",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T14:38:54Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 anthropic.service_tier (HTTP 200, 1.441s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T14:38:56Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/anthropic/output_config.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/anthropic/output_config.json",
+      "covered_marked": true,
+      "description": "Output configuration (JSON mode etc)",
+      "ended_at": "2026-04-13T14:39:28Z",
+      "feature": "output_config",
+      "id": "anthropic.output_config",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/anthropic/output_config.log",
+      "provider": "anthropic",
+      "session_file": "pipeline/sessions/anthropic/output_config.jsonl",
+      "started_at": "2026-04-13T14:38:52Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/anthropic.output_config/2026-04-13T14-39-25Z.txt",
+          "case_id": "anthropic.output_config",
+          "duration_seconds": 2.464,
+          "estimated_cost_usd": 0.0006,
+          "feature": "output_config",
+          "http_code": 200,
+          "provider": "anthropic",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T14:39:25Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 anthropic.output_config (HTTP 200, 2.464s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T14:39:28Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/anthropic/container.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/anthropic/container.json",
+      "covered_marked": true,
+      "description": "Container for sandboxed execution",
+      "ended_at": "2026-04-13T14:39:40Z",
+      "feature": "container",
+      "id": "anthropic.container",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/anthropic/container.log",
+      "provider": "anthropic",
+      "session_file": "pipeline/sessions/anthropic/container.jsonl",
+      "started_at": "2026-04-13T14:38:54Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/anthropic.container/2026-04-13T14-39-36Z.txt",
+          "case_id": "anthropic.container",
+          "duration_seconds": 4.499,
+          "estimated_cost_usd": 0.007491,
+          "feature": "container",
+          "http_code": 200,
+          "provider": "anthropic",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T14:39:36Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 anthropic.container (HTTP 200, 4.499s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T14:39:40Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/anthropic/inference_geo.attempt1.log",
+        "pipeline/logs/anthropic/inference_geo.attempt2.log"
+      ],
+      "attempts": 2,
+      "case_file": "cases/anthropic/inference_geo.json",
+      "covered_marked": true,
+      "description": "inference_geo region preference",
+      "ended_at": "2026-04-13T14:39:51Z",
+      "feature": "inference_geo",
+      "id": "anthropic.inference_geo",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/anthropic/inference_geo.log",
+      "provider": "anthropic",
+      "session_file": "pipeline/sessions/anthropic/inference_geo.jsonl",
+      "started_at": "2026-04-13T14:38:56Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/anthropic.inference_geo/2026-04-13T14-39-47Z.txt",
+          "case_id": "anthropic.inference_geo",
+          "duration_seconds": 2.944,
+          "estimated_cost_usd": 0.00065,
+          "feature": "inference_geo",
+          "http_code": 200,
+          "provider": "anthropic",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T14:39:47Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 anthropic.inference_geo (HTTP 200, 2.944s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T14:39:50Z"
+      }
+    }
+  ]
+}

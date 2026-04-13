@@ -22,16 +22,16 @@ openai:
       status: covered
     image_file:
       description: Image input via file_id
-      status: todo
+      status: covered
     file_input:
       description: File/PDF input via file object
-      status: todo
+      status: covered
     multi_turn:
       description: Multiple user/assistant messages
-      status: todo
+      status: covered
     multi_turn_tool_result:
       description: Conversation with tool call + tool result
-      status: todo
+      status: covered
     tool_choice_auto:
       description: 'tool_choice: ''auto'''
       status: covered
@@ -46,10 +46,10 @@ openai:
       status: covered
     parallel_tool_calls:
       description: 'parallel_tool_calls: true/false'
-      status: todo
+      status: covered
     max_tool_calls:
       description: max_tool_calls limit
-      status: todo
+      status: covered
     structured_output:
       description: text.format with json_schema response format
       status: covered
@@ -61,70 +61,70 @@ openai:
       status: covered
     top_logprobs:
       description: top_logprobs for token probabilities
-      status: todo
+      status: covered
     reasoning:
       description: reasoning.effort parameter
-      status: todo
+      status: covered
     reasoning_encrypted:
       description: reasoning with encrypted_content include
-      status: todo
+      status: covered
     web_search:
       description: Web search tool
-      status: todo
+      status: covered
     file_search:
       description: File search / retrieval tool
-      status: todo
+      status: covered
     code_interpreter:
       description: Code interpreter tool
-      status: todo
+      status: covered
     computer_use:
       description: Computer use tool
-      status: todo
+      status: covered
     previous_response_id:
       description: Chain responses via previous_response_id
-      status: todo
+      status: covered
     conversation:
       description: Conversation object for multi-turn
-      status: todo
+      status: covered
     store:
       description: 'store: true/false for response storage'
-      status: todo
+      status: covered
     background:
       description: 'background: true for async processing'
-      status: todo
+      status: covered
     truncation:
       description: 'truncation: ''auto'' or ''disabled'''
-      status: todo
+      status: covered
     service_tier:
       description: service_tier selection
-      status: todo
+      status: covered
     metadata:
       description: Request metadata
-      status: todo
+      status: covered
     prompt:
       description: Stored prompt reference
-      status: todo
+      status: covered
     include:
       description: include array for additional output data
-      status: todo
+      status: covered
     context_management:
       description: Context management / compaction configuration
-      status: todo
+      status: covered
     prompt_cache_key:
       description: prompt_cache_key for caching
-      status: todo
+      status: covered
     prompt_cache_retention:
       description: prompt_cache_retention duration
-      status: todo
+      status: covered
     safety_identifier:
       description: safety_identifier for content filtering
-      status: todo
+      status: covered
     stream_options:
       description: stream_options (include_obfuscation)
-      status: todo
+      status: covered
     user:
       description: user identifier for abuse tracking
-      status: todo
+      status: covered
 anthropic:
   endpoint: POST https://api.anthropic.com/v1/messages
   doc: api-references/anthropic/pages/messages--create.md
@@ -149,22 +149,22 @@ anthropic:
       status: covered
     image_base64:
       description: Image input via base64 source
-      status: todo
+      status: covered
     image_url:
       description: Image input via URL source
       status: covered
     pdf_base64:
       description: PDF input via base64 document source
-      status: todo
+      status: covered
     multi_turn:
       description: Multiple user/assistant messages
-      status: todo
+      status: covered
     multi_turn_tool_result:
       description: Conversation with tool_use + tool_result blocks
-      status: todo
+      status: covered
     system_content_blocks:
       description: System as array of TextBlockParam (with cache_control)
-      status: todo
+      status: covered
     tool_choice_auto:
       description: 'tool_choice: {type: ''auto''}'
       status: covered
@@ -179,37 +179,37 @@ anthropic:
       status: covered
     stop_sequences:
       description: Custom stop sequences
-      status: todo
+      status: covered
     top_p:
       description: top_p (nucleus sampling)
-      status: todo
+      status: covered
     top_k:
       description: top_k sampling
-      status: todo
+      status: covered
     thinking:
       description: Extended thinking with thinking.type='enabled'
       status: covered
     thinking_budget:
       description: Thinking with budget_tokens
-      status: todo
+      status: covered
     cache_control:
       description: Prompt caching via cache_control on messages/system
-      status: todo
+      status: covered
     metadata:
       description: Request metadata (user_id)
-      status: todo
+      status: covered
     service_tier:
       description: service_tier selection
-      status: todo
+      status: covered
     output_config:
       description: Output configuration (JSON mode etc)
-      status: todo
+      status: covered
     container:
       description: Container for sandboxed execution
-      status: todo
+      status: covered
     inference_geo:
       description: inference_geo region preference
-      status: todo
+      status: covered
 gemini:
   endpoint: POST https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent
   doc: api-references/gemini/pages/generate-content.md
@@ -231,37 +231,37 @@ gemini:
       status: covered
     image_file_uri:
       description: Image via fileData (Google file URI)
-      status: todo
+      status: covered
     audio_inline:
       description: Audio via inlineData
-      status: todo
+      status: covered
     video_file:
       description: Video via fileData
-      status: todo
+      status: covered
     pdf_inline:
       description: PDF via inlineData
-      status: todo
+      status: covered
     multi_turn:
       description: Multi-turn conversation (multiple contents)
-      status: todo
+      status: covered
     multi_turn_function_response:
       description: Conversation with functionCall + functionResponse
-      status: todo
+      status: covered
     temperature:
       description: generationConfig.temperature
       status: covered
     max_output_tokens:
       description: generationConfig.maxOutputTokens
-      status: todo
+      status: covered
     top_p:
       description: generationConfig.topP
-      status: todo
+      status: covered
     top_k:
       description: generationConfig.topK
-      status: todo
+      status: covered
     stop_sequences:
       description: generationConfig.stopSequences
-      status: todo
+      status: covered
     response_mime_type:
       description: generationConfig.responseMimeType (JSON mode)
       status: covered
@@ -279,19 +279,19 @@ gemini:
       status: covered
     tool_config_none:
       description: 'toolConfig.functionCallingConfig.mode: NONE'
-      status: todo
+      status: covered
     safety_settings:
       description: Safety settings (harm categories + thresholds)
       status: covered
     google_search:
       description: Google Search grounding tool
-      status: todo
+      status: covered
     code_execution:
       description: Code execution tool
-      status: todo
+      status: covered
     cached_content:
       description: Use cachedContent for context caching
-      status: todo
+      status: covered
     store:
       description: Logging/storage configuration
-      status: todo
+      status: covered

@@ -1,0 +1,1253 @@
+{
+  "args": {
+    "concurrency": 6,
+    "dry_run": false,
+    "max_attempts": 3,
+    "model": "openai-codex/gpt-5.4:medium",
+    "provider": null,
+    "retry_failed": true,
+    "task": null
+  },
+  "created_at": "2026-04-13T14:09:41Z",
+  "cwd": "/home/maxime/Projects/lm15-dev/curl-fixtures",
+  "run_file": "/home/maxime/Projects/lm15-dev/curl-fixtures/pipeline/runs/20260413T140941Z.json",
+  "run_id": "20260413T140941Z",
+  "tasks": [
+    {
+      "attempt_log_files": [
+        "pipeline/logs/openai/prompt.attempt1.log",
+        "pipeline/logs/openai/prompt.attempt2.log"
+      ],
+      "attempts": 2,
+      "case_file": "cases/openai/prompt.json",
+      "covered_marked": true,
+      "description": "Stored prompt reference",
+      "ended_at": "2026-04-13T14:15:03Z",
+      "feature": "prompt",
+      "id": "openai.prompt",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/openai/prompt.log",
+      "provider": "openai",
+      "session_file": "pipeline/sessions/openai/prompt.jsonl",
+      "started_at": "2026-04-13T14:09:41Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/openai.prompt/2026-04-13T14-15-01Z.txt",
+          "case_id": "openai.prompt",
+          "duration_seconds": 0.941,
+          "estimated_cost_usd": 8e-06,
+          "feature": "prompt",
+          "http_code": 200,
+          "provider": "openai",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T14:15:01Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 openai.prompt (HTTP 200, 0.941s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T14:15:03Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/openai/context_management.attempt1.log",
+        "pipeline/logs/openai/context_management.attempt2.log"
+      ],
+      "attempts": 2,
+      "case_file": "cases/openai/context_management.json",
+      "covered_marked": true,
+      "description": "Context management / compaction configuration",
+      "ended_at": "2026-04-13T14:10:07Z",
+      "feature": "context_management",
+      "id": "openai.context_management",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/openai/context_management.log",
+      "provider": "openai",
+      "session_file": "pipeline/sessions/openai/context_management.jsonl",
+      "started_at": "2026-04-13T14:09:41Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/openai.context_management/2026-04-13T14-10-05Z.txt",
+          "case_id": "openai.context_management",
+          "duration_seconds": 1.028,
+          "estimated_cost_usd": 1e-05,
+          "feature": "context_management",
+          "http_code": 200,
+          "provider": "openai",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T14:10:05Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 openai.context_management (HTTP 200, 1.028s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T14:10:07Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/openai/safety_identifier.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/openai/safety_identifier.json",
+      "covered_marked": true,
+      "description": "safety_identifier for content filtering",
+      "ended_at": "2026-04-13T14:10:26Z",
+      "feature": "safety_identifier",
+      "id": "openai.safety_identifier",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/openai/safety_identifier.log",
+      "provider": "openai",
+      "session_file": "pipeline/sessions/openai/safety_identifier.jsonl",
+      "started_at": "2026-04-13T14:09:41Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/openai.safety_identifier/2026-04-13T14-10-24Z.txt",
+          "case_id": "openai.safety_identifier",
+          "duration_seconds": 1.297,
+          "estimated_cost_usd": 1e-05,
+          "feature": "safety_identifier",
+          "http_code": 200,
+          "provider": "openai",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T14:10:24Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 openai.safety_identifier (HTTP 200, 1.297s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T14:10:26Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/openai/stream_options.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/openai/stream_options.json",
+      "covered_marked": true,
+      "description": "stream_options (include_obfuscation)",
+      "ended_at": "2026-04-13T14:10:15Z",
+      "feature": "stream_options",
+      "id": "openai.stream_options",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/openai/stream_options.log",
+      "provider": "openai",
+      "session_file": "pipeline/sessions/openai/stream_options.jsonl",
+      "started_at": "2026-04-13T14:09:41Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/openai.stream_options/2026-04-13T14-10-12Z.txt",
+          "case_id": "openai.stream_options",
+          "duration_seconds": 2.758,
+          "estimated_cost_usd": 8e-06,
+          "feature": "stream_options",
+          "http_code": 200,
+          "provider": "openai",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T14:10:12Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 openai.stream_options (HTTP 200, 2.758s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T14:10:15Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/openai/user.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/openai/user.json",
+      "covered_marked": true,
+      "description": "user identifier for abuse tracking",
+      "ended_at": "2026-04-13T14:10:24Z",
+      "feature": "user",
+      "id": "openai.user",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/openai/user.log",
+      "provider": "openai",
+      "session_file": "pipeline/sessions/openai/user.jsonl",
+      "started_at": "2026-04-13T14:09:41Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/openai.user/2026-04-13T14-10-19Z.txt",
+          "case_id": "openai.user",
+          "duration_seconds": 4.469,
+          "estimated_cost_usd": 8e-06,
+          "feature": "user",
+          "http_code": 200,
+          "provider": "openai",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T14:10:19Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 openai.user (HTTP 200, 4.469s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T14:10:23Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/anthropic/image_base64.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/anthropic/image_base64.json",
+      "description": "Image input via base64 source",
+      "ended_at": "2026-04-13T14:10:08Z",
+      "feature": "image_base64",
+      "id": "anthropic.image_base64",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/anthropic/image_base64.log",
+      "provider": "anthropic",
+      "session_file": "pipeline/sessions/anthropic/image_base64.jsonl",
+      "started_at": "2026-04-13T14:09:41Z",
+      "status": "skipped_validation",
+      "validation": {
+        "reason": "ANTHROPIC_API_KEY not set",
+        "status": "skipped_validation",
+        "validated_at": "2026-04-13T14:10:08Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/anthropic/pdf_base64.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/anthropic/pdf_base64.json",
+      "description": "PDF input via base64 document source",
+      "ended_at": "2026-04-13T14:10:57Z",
+      "feature": "pdf_base64",
+      "id": "anthropic.pdf_base64",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/anthropic/pdf_base64.log",
+      "provider": "anthropic",
+      "session_file": "pipeline/sessions/anthropic/pdf_base64.jsonl",
+      "started_at": "2026-04-13T14:10:07Z",
+      "status": "skipped_validation",
+      "validation": {
+        "reason": "ANTHROPIC_API_KEY not set",
+        "status": "skipped_validation",
+        "validated_at": "2026-04-13T14:10:57Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/anthropic/multi_turn.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/anthropic/multi_turn.json",
+      "description": "Multiple user/assistant messages",
+      "ended_at": "2026-04-13T14:10:52Z",
+      "feature": "multi_turn",
+      "id": "anthropic.multi_turn",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/anthropic/multi_turn.log",
+      "provider": "anthropic",
+      "session_file": "pipeline/sessions/anthropic/multi_turn.jsonl",
+      "started_at": "2026-04-13T14:10:08Z",
+      "status": "skipped_validation",
+      "validation": {
+        "reason": "ANTHROPIC_API_KEY not set",
+        "status": "skipped_validation",
+        "validated_at": "2026-04-13T14:10:52Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/anthropic/multi_turn_tool_result.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/anthropic/multi_turn_tool_result.json",
+      "description": "Conversation with tool_use + tool_result blocks",
+      "ended_at": "2026-04-13T14:11:03Z",
+      "feature": "multi_turn_tool_result",
+      "id": "anthropic.multi_turn_tool_result",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/anthropic/multi_turn_tool_result.log",
+      "provider": "anthropic",
+      "session_file": "pipeline/sessions/anthropic/multi_turn_tool_result.jsonl",
+      "started_at": "2026-04-13T14:10:15Z",
+      "status": "skipped_validation",
+      "validation": {
+        "reason": "ANTHROPIC_API_KEY not set",
+        "status": "skipped_validation",
+        "validated_at": "2026-04-13T14:11:03Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/anthropic/system_content_blocks.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/anthropic/system_content_blocks.json",
+      "description": "System as array of TextBlockParam (with cache_control)",
+      "ended_at": "2026-04-13T14:11:24Z",
+      "feature": "system_content_blocks",
+      "id": "anthropic.system_content_blocks",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/anthropic/system_content_blocks.log",
+      "provider": "anthropic",
+      "session_file": "pipeline/sessions/anthropic/system_content_blocks.jsonl",
+      "started_at": "2026-04-13T14:10:24Z",
+      "status": "skipped_validation",
+      "validation": {
+        "reason": "ANTHROPIC_API_KEY not set",
+        "status": "skipped_validation",
+        "validated_at": "2026-04-13T14:11:24Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/anthropic/stop_sequences.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/anthropic/stop_sequences.json",
+      "description": "Custom stop sequences",
+      "ended_at": "2026-04-13T14:11:58Z",
+      "feature": "stop_sequences",
+      "id": "anthropic.stop_sequences",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/anthropic/stop_sequences.log",
+      "provider": "anthropic",
+      "session_file": "pipeline/sessions/anthropic/stop_sequences.jsonl",
+      "started_at": "2026-04-13T14:10:26Z",
+      "status": "skipped_validation",
+      "validation": {
+        "reason": "ANTHROPIC_API_KEY not set",
+        "status": "skipped_validation",
+        "validated_at": "2026-04-13T14:11:58Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/anthropic/top_p.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/anthropic/top_p.json",
+      "description": "top_p (nucleus sampling)",
+      "ended_at": "2026-04-13T14:11:44Z",
+      "feature": "top_p",
+      "id": "anthropic.top_p",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/anthropic/top_p.log",
+      "provider": "anthropic",
+      "session_file": "pipeline/sessions/anthropic/top_p.jsonl",
+      "started_at": "2026-04-13T14:10:52Z",
+      "status": "skipped_validation",
+      "validation": {
+        "reason": "ANTHROPIC_API_KEY not set",
+        "status": "skipped_validation",
+        "validated_at": "2026-04-13T14:11:44Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/anthropic/top_k.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/anthropic/top_k.json",
+      "description": "top_k sampling",
+      "ended_at": "2026-04-13T14:11:46Z",
+      "feature": "top_k",
+      "id": "anthropic.top_k",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/anthropic/top_k.log",
+      "provider": "anthropic",
+      "session_file": "pipeline/sessions/anthropic/top_k.jsonl",
+      "started_at": "2026-04-13T14:10:57Z",
+      "status": "skipped_validation",
+      "validation": {
+        "reason": "ANTHROPIC_API_KEY not set",
+        "status": "skipped_validation",
+        "validated_at": "2026-04-13T14:11:46Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/anthropic/thinking_budget.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/anthropic/thinking_budget.json",
+      "description": "Thinking with budget_tokens",
+      "ended_at": "2026-04-13T14:11:40Z",
+      "feature": "thinking_budget",
+      "id": "anthropic.thinking_budget",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/anthropic/thinking_budget.log",
+      "provider": "anthropic",
+      "session_file": "pipeline/sessions/anthropic/thinking_budget.jsonl",
+      "started_at": "2026-04-13T14:11:03Z",
+      "status": "skipped_validation",
+      "validation": {
+        "reason": "ANTHROPIC_API_KEY not set",
+        "status": "skipped_validation",
+        "validated_at": "2026-04-13T14:11:40Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/anthropic/cache_control.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/anthropic/cache_control.json",
+      "description": "Prompt caching via cache_control on messages/system",
+      "ended_at": "2026-04-13T14:12:53Z",
+      "feature": "cache_control",
+      "id": "anthropic.cache_control",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/anthropic/cache_control.log",
+      "provider": "anthropic",
+      "session_file": "pipeline/sessions/anthropic/cache_control.jsonl",
+      "started_at": "2026-04-13T14:11:24Z",
+      "status": "skipped_validation",
+      "validation": {
+        "reason": "ANTHROPIC_API_KEY not set",
+        "status": "skipped_validation",
+        "validated_at": "2026-04-13T14:12:53Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/anthropic/metadata.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/anthropic/metadata.json",
+      "description": "Request metadata (user_id)",
+      "ended_at": "2026-04-13T14:12:36Z",
+      "feature": "metadata",
+      "id": "anthropic.metadata",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/anthropic/metadata.log",
+      "provider": "anthropic",
+      "session_file": "pipeline/sessions/anthropic/metadata.jsonl",
+      "started_at": "2026-04-13T14:11:40Z",
+      "status": "skipped_validation",
+      "validation": {
+        "reason": "ANTHROPIC_API_KEY not set",
+        "status": "skipped_validation",
+        "validated_at": "2026-04-13T14:12:36Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/anthropic/service_tier.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/anthropic/service_tier.json",
+      "description": "service_tier selection",
+      "ended_at": "2026-04-13T14:12:20Z",
+      "feature": "service_tier",
+      "id": "anthropic.service_tier",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/anthropic/service_tier.log",
+      "provider": "anthropic",
+      "session_file": "pipeline/sessions/anthropic/service_tier.jsonl",
+      "started_at": "2026-04-13T14:11:44Z",
+      "status": "skipped_validation",
+      "validation": {
+        "reason": "ANTHROPIC_API_KEY not set",
+        "status": "skipped_validation",
+        "validated_at": "2026-04-13T14:12:20Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/anthropic/output_config.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/anthropic/output_config.json",
+      "description": "Output configuration (JSON mode etc)",
+      "ended_at": "2026-04-13T14:12:38Z",
+      "feature": "output_config",
+      "id": "anthropic.output_config",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/anthropic/output_config.log",
+      "provider": "anthropic",
+      "session_file": "pipeline/sessions/anthropic/output_config.jsonl",
+      "started_at": "2026-04-13T14:11:46Z",
+      "status": "skipped_validation",
+      "validation": {
+        "reason": "ANTHROPIC_API_KEY not set",
+        "status": "skipped_validation",
+        "validated_at": "2026-04-13T14:12:38Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/anthropic/container.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/anthropic/container.json",
+      "description": "Container for sandboxed execution",
+      "ended_at": "2026-04-13T14:13:59Z",
+      "feature": "container",
+      "id": "anthropic.container",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/anthropic/container.log",
+      "provider": "anthropic",
+      "session_file": "pipeline/sessions/anthropic/container.jsonl",
+      "started_at": "2026-04-13T14:11:58Z",
+      "status": "skipped_validation",
+      "validation": {
+        "reason": "ANTHROPIC_API_KEY not set",
+        "status": "skipped_validation",
+        "validated_at": "2026-04-13T14:13:59Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/anthropic/inference_geo.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/anthropic/inference_geo.json",
+      "description": "inference_geo region preference",
+      "ended_at": "2026-04-13T14:13:02Z",
+      "feature": "inference_geo",
+      "id": "anthropic.inference_geo",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/anthropic/inference_geo.log",
+      "provider": "anthropic",
+      "session_file": "pipeline/sessions/anthropic/inference_geo.jsonl",
+      "started_at": "2026-04-13T14:12:20Z",
+      "status": "skipped_validation",
+      "validation": {
+        "reason": "ANTHROPIC_API_KEY not set",
+        "status": "skipped_validation",
+        "validated_at": "2026-04-13T14:13:02Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/gemini/image_file_uri.attempt1.log",
+        "pipeline/logs/gemini/image_file_uri.attempt2.log"
+      ],
+      "attempts": 2,
+      "case_file": "cases/gemini/image_file_uri.json",
+      "covered_marked": true,
+      "description": "Image via fileData (Google file URI)",
+      "ended_at": "2026-04-13T14:17:22Z",
+      "feature": "image_file_uri",
+      "id": "gemini.image_file_uri",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/gemini/image_file_uri.log",
+      "provider": "gemini",
+      "session_file": "pipeline/sessions/gemini/image_file_uri.jsonl",
+      "started_at": "2026-04-13T14:12:36Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/gemini.image_file_uri/2026-04-13T14-17-11Z.txt",
+          "case_id": "gemini.image_file_uri",
+          "duration_seconds": 10.546,
+          "estimated_cost_usd": 3.158e-05,
+          "feature": "image_file_uri",
+          "http_code": 200,
+          "provider": "gemini",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T14:17:11Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 gemini.image_file_uri (HTTP 200, 10.546s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T14:17:22Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/gemini/audio_inline.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/gemini/audio_inline.json",
+      "covered_marked": true,
+      "description": "Audio via inlineData",
+      "ended_at": "2026-04-13T14:14:32Z",
+      "feature": "audio_inline",
+      "id": "gemini.audio_inline",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/gemini/audio_inline.log",
+      "provider": "gemini",
+      "session_file": "pipeline/sessions/gemini/audio_inline.jsonl",
+      "started_at": "2026-04-13T14:12:38Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/gemini.audio_inline/2026-04-13T14-14-27Z.txt",
+          "case_id": "gemini.audio_inline",
+          "duration_seconds": 4.238,
+          "estimated_cost_usd": 6.58e-06,
+          "feature": "audio_inline",
+          "http_code": 200,
+          "provider": "gemini",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T14:14:27Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 gemini.audio_inline (HTTP 200, 4.238s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T14:14:32Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/gemini/video_file.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/gemini/video_file.json",
+      "covered_marked": true,
+      "description": "Video via fileData",
+      "ended_at": "2026-04-13T14:15:36Z",
+      "feature": "video_file",
+      "id": "gemini.video_file",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/gemini/video_file.log",
+      "provider": "gemini",
+      "session_file": "pipeline/sessions/gemini/video_file.jsonl",
+      "started_at": "2026-04-13T14:12:53Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/gemini.video_file/2026-04-13T14-15-25Z.txt",
+          "case_id": "gemini.video_file",
+          "duration_seconds": 11.256,
+          "estimated_cost_usd": 1.207e-05,
+          "feature": "video_file",
+          "http_code": 200,
+          "provider": "gemini",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T14:15:25Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 gemini.video_file (HTTP 200, 11.256s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T14:15:36Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/gemini/pdf_inline.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/gemini/pdf_inline.json",
+      "covered_marked": true,
+      "description": "PDF via inlineData",
+      "ended_at": "2026-04-13T14:14:02Z",
+      "feature": "pdf_inline",
+      "id": "gemini.pdf_inline",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/gemini/pdf_inline.log",
+      "provider": "gemini",
+      "session_file": "pipeline/sessions/gemini/pdf_inline.jsonl",
+      "started_at": "2026-04-13T14:13:02Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/gemini.pdf_inline/2026-04-13T14-14-00Z.txt",
+          "case_id": "gemini.pdf_inline",
+          "duration_seconds": 1.722,
+          "estimated_cost_usd": 2.617e-05,
+          "feature": "pdf_inline",
+          "http_code": 200,
+          "provider": "gemini",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T14:14:00Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 gemini.pdf_inline (HTTP 200, 1.722s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T14:14:02Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/gemini/multi_turn.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/gemini/multi_turn.json",
+      "covered_marked": true,
+      "description": "Multi-turn conversation (multiple contents)",
+      "ended_at": "2026-04-13T14:14:43Z",
+      "feature": "multi_turn",
+      "id": "gemini.multi_turn",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/gemini/multi_turn.log",
+      "provider": "gemini",
+      "session_file": "pipeline/sessions/gemini/multi_turn.jsonl",
+      "started_at": "2026-04-13T14:13:59Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/gemini.multi_turn/2026-04-13T14-14-42Z.txt",
+          "case_id": "gemini.multi_turn",
+          "duration_seconds": 0.937,
+          "estimated_cost_usd": 3.32e-06,
+          "feature": "multi_turn",
+          "http_code": 200,
+          "provider": "gemini",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T14:14:42Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 gemini.multi_turn (HTTP 200, 0.937s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T14:14:43Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/gemini/multi_turn_function_response.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/gemini/multi_turn_function_response.json",
+      "covered_marked": true,
+      "description": "Conversation with functionCall + functionResponse",
+      "ended_at": "2026-04-13T14:15:48Z",
+      "feature": "multi_turn_function_response",
+      "id": "gemini.multi_turn_function_response",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/gemini/multi_turn_function_response.log",
+      "provider": "gemini",
+      "session_file": "pipeline/sessions/gemini/multi_turn_function_response.jsonl",
+      "started_at": "2026-04-13T14:14:02Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/gemini.multi_turn_function_response/2026-04-13T14-15-46Z.txt",
+          "case_id": "gemini.multi_turn_function_response",
+          "duration_seconds": 1.097,
+          "estimated_cost_usd": 8.98e-06,
+          "feature": "multi_turn_function_response",
+          "http_code": 200,
+          "provider": "gemini",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T14:15:46Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 gemini.multi_turn_function_response (HTTP 200, 1.097s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T14:15:47Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/gemini/max_output_tokens.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/gemini/max_output_tokens.json",
+      "covered_marked": true,
+      "description": "generationConfig.maxOutputTokens",
+      "ended_at": "2026-04-13T14:15:16Z",
+      "feature": "max_output_tokens",
+      "id": "gemini.max_output_tokens",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/gemini/max_output_tokens.log",
+      "provider": "gemini",
+      "session_file": "pipeline/sessions/gemini/max_output_tokens.jsonl",
+      "started_at": "2026-04-13T14:14:32Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/gemini.max_output_tokens/2026-04-13T14-15-15Z.txt",
+          "case_id": "gemini.max_output_tokens",
+          "duration_seconds": 0.777,
+          "estimated_cost_usd": 1.26e-06,
+          "feature": "max_output_tokens",
+          "http_code": 200,
+          "provider": "gemini",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T14:15:15Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 gemini.max_output_tokens (HTTP 200, 0.777s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T14:15:16Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/gemini/top_p.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/gemini/top_p.json",
+      "covered_marked": true,
+      "description": "generationConfig.topP",
+      "ended_at": "2026-04-13T14:15:45Z",
+      "feature": "top_p",
+      "id": "gemini.top_p",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/gemini/top_p.log",
+      "provider": "gemini",
+      "session_file": "pipeline/sessions/gemini/top_p.jsonl",
+      "started_at": "2026-04-13T14:14:43Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/gemini.top_p/2026-04-13T14-15-36Z.txt",
+          "case_id": "gemini.top_p",
+          "duration_seconds": 8.588,
+          "estimated_cost_usd": 5.69e-06,
+          "feature": "top_p",
+          "http_code": 200,
+          "provider": "gemini",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T14:15:36Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 gemini.top_p (HTTP 200, 8.588s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T14:15:45Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/gemini/top_k.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/gemini/top_k.json",
+      "covered_marked": true,
+      "description": "generationConfig.topK",
+      "ended_at": "2026-04-13T14:16:15Z",
+      "feature": "top_k",
+      "id": "gemini.top_k",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/gemini/top_k.log",
+      "provider": "gemini",
+      "session_file": "pipeline/sessions/gemini/top_k.jsonl",
+      "started_at": "2026-04-13T14:15:03Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/gemini.top_k/2026-04-13T14-16-06Z.txt",
+          "case_id": "gemini.top_k",
+          "duration_seconds": 8.244,
+          "estimated_cost_usd": 5.69e-06,
+          "feature": "top_k",
+          "http_code": 200,
+          "provider": "gemini",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T14:16:06Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 gemini.top_k (HTTP 200, 8.244s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T14:16:14Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/gemini/stop_sequences.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/gemini/stop_sequences.json",
+      "covered_marked": true,
+      "description": "generationConfig.stopSequences",
+      "ended_at": "2026-04-13T14:16:00Z",
+      "feature": "stop_sequences",
+      "id": "gemini.stop_sequences",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/gemini/stop_sequences.log",
+      "provider": "gemini",
+      "session_file": "pipeline/sessions/gemini/stop_sequences.jsonl",
+      "started_at": "2026-04-13T14:15:16Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/gemini.stop_sequences/2026-04-13T14-15-59Z.txt",
+          "case_id": "gemini.stop_sequences",
+          "duration_seconds": 0.88,
+          "estimated_cost_usd": 1.34e-06,
+          "feature": "stop_sequences",
+          "http_code": 200,
+          "provider": "gemini",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T14:15:59Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 gemini.stop_sequences (HTTP 200, 0.88s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T14:16:00Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/gemini/tool_config_none.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/gemini/tool_config_none.json",
+      "covered_marked": true,
+      "description": "toolConfig.functionCallingConfig.mode: NONE",
+      "ended_at": "2026-04-13T14:16:18Z",
+      "feature": "tool_config_none",
+      "id": "gemini.tool_config_none",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/gemini/tool_config_none.log",
+      "provider": "gemini",
+      "session_file": "pipeline/sessions/gemini/tool_config_none.jsonl",
+      "started_at": "2026-04-13T14:15:36Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/gemini.tool_config_none/2026-04-13T14-16-14Z.txt",
+          "case_id": "gemini.tool_config_none",
+          "duration_seconds": 3.615,
+          "estimated_cost_usd": 5.44e-05,
+          "feature": "tool_config_none",
+          "http_code": 200,
+          "provider": "gemini",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T14:16:14Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 gemini.tool_config_none (HTTP 200, 3.615s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T14:16:18Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/gemini/google_search.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/gemini/google_search.json",
+      "covered_marked": true,
+      "description": "Google Search grounding tool",
+      "ended_at": "2026-04-13T14:16:56Z",
+      "feature": "google_search",
+      "id": "gemini.google_search",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/gemini/google_search.log",
+      "provider": "gemini",
+      "session_file": "pipeline/sessions/gemini/google_search.jsonl",
+      "started_at": "2026-04-13T14:15:45Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/gemini.google_search/2026-04-13T14-16-53Z.txt",
+          "case_id": "gemini.google_search",
+          "duration_seconds": 3.365,
+          "estimated_cost_usd": 5.673e-05,
+          "feature": "google_search",
+          "http_code": 200,
+          "provider": "gemini",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T14:16:53Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 gemini.google_search (HTTP 200, 3.365s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T14:16:56Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/gemini/code_execution.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/gemini/code_execution.json",
+      "covered_marked": true,
+      "description": "Code execution tool",
+      "ended_at": "2026-04-13T14:16:59Z",
+      "feature": "code_execution",
+      "id": "gemini.code_execution",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/gemini/code_execution.log",
+      "provider": "gemini",
+      "session_file": "pipeline/sessions/gemini/code_execution.jsonl",
+      "started_at": "2026-04-13T14:15:48Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/gemini.code_execution/2026-04-13T14-16-56Z.txt",
+          "case_id": "gemini.code_execution",
+          "duration_seconds": 1.974,
+          "estimated_cost_usd": 4.822e-05,
+          "feature": "code_execution",
+          "http_code": 200,
+          "provider": "gemini",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T14:16:56Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 gemini.code_execution (HTTP 200, 1.974s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T14:16:59Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/gemini/cached_content.attempt1.log",
+        "pipeline/logs/gemini/cached_content.attempt2.log",
+        "pipeline/logs/gemini/cached_content.attempt3.log"
+      ],
+      "attempts": 3,
+      "case_file": "cases/gemini/cached_content.json",
+      "description": "Use cachedContent for context caching",
+      "ended_at": "2026-04-13T14:19:43Z",
+      "feature": "cached_content",
+      "id": "gemini.cached_content",
+      "last_error": "  \u274c gemini.cached_content (semantic validation failed, 0.723s)\n     missing candidates\n     {   \"name\": \"cachedContents/ol7mgy3mk9hl7n9lqkpnta2rc6vlgg7xckcotxcu\",   \"model\": \"models/gemini-2.5-flash\",   \"createTime\": \"2026-04-13T14:19:43.527929Z\",   \"updateTime\": \"2026-04-13T14:19:43.527929Z\n\n=== Summary ===\nPass: 0\nFail: 1\nSkip: 0\n",
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/gemini/cached_content.log",
+      "provider": "gemini",
+      "session_file": "pipeline/sessions/gemini/cached_content.jsonl",
+      "started_at": "2026-04-13T14:16:00Z",
+      "status": "validation_failed",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/gemini.cached_content/2026-04-13T14-19-42Z.txt",
+          "case_id": "gemini.cached_content",
+          "duration_seconds": 0.723,
+          "estimated_cost_usd": null,
+          "feature": "cached_content",
+          "http_code": 200,
+          "provider": "gemini",
+          "result": "fail",
+          "semantic_errors": [
+            "missing candidates"
+          ],
+          "stderr": null,
+          "tested_at": "2026-04-13T14:19:42Z"
+        },
+        "returncode": 1,
+        "status": "validation_failed",
+        "stderr": "",
+        "stdout": "  \u274c gemini.cached_content (semantic validation failed, 0.723s)\n     missing candidates\n     {   \"name\": \"cachedContents/ol7mgy3mk9hl7n9lqkpnta2rc6vlgg7xckcotxcu\",   \"model\": \"models/gemini-2.5-flash\",   \"createTime\": \"2026-04-13T14:19:43.527929Z\",   \"updateTime\": \"2026-04-13T14:19:43.527929Z\n\n=== Summary ===\nPass: 0\nFail: 1\nSkip: 0\n",
+        "validated_at": "2026-04-13T14:19:43Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/gemini/store.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/gemini/store.json",
+      "covered_marked": true,
+      "description": "Logging/storage configuration",
+      "ended_at": "2026-04-13T14:17:09Z",
+      "feature": "store",
+      "id": "gemini.store",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/gemini/store.log",
+      "provider": "gemini",
+      "session_file": "pipeline/sessions/gemini/store.jsonl",
+      "started_at": "2026-04-13T14:16:15Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/gemini.store/2026-04-13T14-17-07Z.txt",
+          "case_id": "gemini.store",
+          "duration_seconds": 0.954,
+          "estimated_cost_usd": 1.25e-06,
+          "feature": "store",
+          "http_code": 200,
+          "provider": "gemini",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T14:17:07Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 gemini.store (HTTP 200, 0.954s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T14:17:09Z"
+      }
+    }
+  ]
+}

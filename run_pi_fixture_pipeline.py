@@ -65,12 +65,15 @@ def load_dotenv(path: Path = DOTENV_PATH) -> None:
         line = raw_line.strip()
         if not line or line.startswith("#") or "=" not in line:
             continue
+        if line.startswith("export "):
+            line = line[len("export "):].strip()
         key, value = line.split("=", 1)
         key = key.strip()
         value = value.strip()
         if value and ((value[0] == value[-1]) and value[0] in {'"', "'"}):
             value = value[1:-1]
-        os.environ.setdefault(key, value)
+        if not os.environ.get(key):
+            os.environ[key] = value
 
 
 def now_iso() -> str:
@@ -450,7 +453,7 @@ def main() -> int:
     parser.add_argument("--provider", choices=["openai", "anthropic", "gemini"])
     parser.add_argument("--task", help="Exact task id, e.g. openai.tool_choice_auto")
     parser.add_argument("--concurrency", type=int, default=2)
-    parser.add_argument("--model", help="pi model; default is pi's own default model")
+    parser.add_argument("--model", default="openai-codex/gpt-5.4:medium", help="pi model; default openai-codex/gpt-5.4:medium")
     parser.add_argument("--max-attempts", type=int, default=3)
     parser.add_argument("--retry-failed", action="store_true")
     parser.add_argument("--dry-run", action="store_true")

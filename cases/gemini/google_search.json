@@ -1,0 +1,34 @@
+{
+  "id": "gemini.google_search",
+  "provider": "gemini",
+  "feature": "google_search",
+  "description": "Google Search grounding tool",
+  "request": {
+    "method": "POST",
+    "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
+    "headers": {
+      "x-goog-api-key": "$GEMINI_API_KEY",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "contents": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "text": "What was one positive news story from today? Reply in one sentence."
+            }
+          ]
+        }
+      ],
+      "tools": [
+        {
+          "googleSearch": {}
+        }
+      ]
+    }
+  },
+  "expect": {
+    "status": 200
+  }
+}

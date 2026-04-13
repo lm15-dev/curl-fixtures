@@ -1,0 +1,1654 @@
+{
+  "args": {
+    "concurrency": 6,
+    "dry_run": false,
+    "max_attempts": 3,
+    "model": "openai/gpt-5.4:medium",
+    "provider": null,
+    "retry_failed": false,
+    "task": null
+  },
+  "created_at": "2026-04-13T13:48:36Z",
+  "cwd": "/home/maxime/Projects/lm15-dev/curl-fixtures",
+  "run_file": "/home/maxime/Projects/lm15-dev/curl-fixtures/pipeline/runs/20260413T134836Z.json",
+  "run_id": "20260413T134836Z",
+  "tasks": [
+    {
+      "attempt_log_files": [
+        "pipeline/logs/openai/image_file.attempt1.log",
+        "pipeline/logs/openai/image_file.attempt2.log",
+        "pipeline/logs/openai/image_file.attempt3.log"
+      ],
+      "attempts": 3,
+      "case_file": "cases/openai/image_file.json",
+      "covered_marked": true,
+      "description": "Image input via file_id",
+      "ended_at": "2026-04-13T13:52:44Z",
+      "feature": "image_file",
+      "id": "openai.image_file",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/openai/image_file.log",
+      "provider": "openai",
+      "session_file": "pipeline/sessions/openai/image_file.jsonl",
+      "started_at": "2026-04-13T13:48:36Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/openai.image_file/2026-04-13T13-52-41Z.txt",
+          "case_id": "openai.image_file",
+          "duration_seconds": 2.781,
+          "estimated_cost_usd": 9.92e-05,
+          "feature": "image_file",
+          "http_code": 200,
+          "provider": "openai",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T13:52:41Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 openai.image_file (HTTP 200, 2.781s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T13:52:44Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/openai/file_input.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/openai/file_input.json",
+      "covered_marked": true,
+      "description": "File/PDF input via file object",
+      "ended_at": "2026-04-13T13:54:29Z",
+      "feature": "file_input",
+      "id": "openai.file_input",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/openai/file_input.log",
+      "provider": "openai",
+      "session_file": "pipeline/sessions/openai/file_input.jsonl",
+      "started_at": "2026-04-13T13:48:36Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/openai.file_input/2026-04-13T13-54-27Z.txt",
+          "case_id": "openai.file_input",
+          "duration_seconds": 1.139,
+          "estimated_cost_usd": 2.16e-05,
+          "feature": "file_input",
+          "http_code": 200,
+          "provider": "openai",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T13:54:27Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 openai.file_input (HTTP 200, 1.139s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T13:54:28Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/openai/multi_turn.attempt1.log",
+        "pipeline/logs/openai/multi_turn.attempt2.log"
+      ],
+      "attempts": 2,
+      "case_file": "cases/openai/multi_turn.json",
+      "covered_marked": true,
+      "description": "Multiple user/assistant messages",
+      "ended_at": "2026-04-13T13:50:09Z",
+      "feature": "multi_turn",
+      "id": "openai.multi_turn",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/openai/multi_turn.log",
+      "provider": "openai",
+      "session_file": "pipeline/sessions/openai/multi_turn.jsonl",
+      "started_at": "2026-04-13T13:48:36Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/openai.multi_turn/2026-04-13T13-50-08Z.txt",
+          "case_id": "openai.multi_turn",
+          "duration_seconds": 0.622,
+          "estimated_cost_usd": 1.92e-05,
+          "feature": "multi_turn",
+          "http_code": 200,
+          "provider": "openai",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T13:50:08Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 openai.multi_turn (HTTP 200, 0.622s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T13:50:09Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/openai/multi_turn_tool_result.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/openai/multi_turn_tool_result.json",
+      "covered_marked": true,
+      "description": "Conversation with tool call + tool result",
+      "ended_at": "2026-04-13T13:49:55Z",
+      "feature": "multi_turn_tool_result",
+      "id": "openai.multi_turn_tool_result",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/openai/multi_turn_tool_result.log",
+      "provider": "openai",
+      "session_file": "pipeline/sessions/openai/multi_turn_tool_result.jsonl",
+      "started_at": "2026-04-13T13:48:36Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/openai.multi_turn_tool_result/2026-04-13T13-49-52Z.txt",
+          "case_id": "openai.multi_turn_tool_result",
+          "duration_seconds": 2.187,
+          "estimated_cost_usd": 5.28e-05,
+          "feature": "multi_turn_tool_result",
+          "http_code": 200,
+          "provider": "openai",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T13:49:52Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 openai.multi_turn_tool_result (HTTP 200, 2.187s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T13:49:55Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/openai/parallel_tool_calls.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/openai/parallel_tool_calls.json",
+      "covered_marked": true,
+      "description": "parallel_tool_calls: true/false",
+      "ended_at": "2026-04-13T13:49:41Z",
+      "feature": "parallel_tool_calls",
+      "id": "openai.parallel_tool_calls",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/openai/parallel_tool_calls.log",
+      "provider": "openai",
+      "session_file": "pipeline/sessions/openai/parallel_tool_calls.jsonl",
+      "started_at": "2026-04-13T13:48:36Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/openai.parallel_tool_calls/2026-04-13T13-49-40Z.txt",
+          "case_id": "openai.parallel_tool_calls",
+          "duration_seconds": 1.13,
+          "estimated_cost_usd": 0.000106,
+          "feature": "parallel_tool_calls",
+          "http_code": 200,
+          "provider": "openai",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T13:49:40Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 openai.parallel_tool_calls (HTTP 200, 1.13s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T13:49:41Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/openai/max_tool_calls.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/openai/max_tool_calls.json",
+      "covered_marked": true,
+      "description": "max_tool_calls limit",
+      "ended_at": "2026-04-13T13:51:29Z",
+      "feature": "max_tool_calls",
+      "id": "openai.max_tool_calls",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/openai/max_tool_calls.log",
+      "provider": "openai",
+      "session_file": "pipeline/sessions/openai/max_tool_calls.jsonl",
+      "started_at": "2026-04-13T13:48:36Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/openai.max_tool_calls/2026-04-13T13-51-26Z.txt",
+          "case_id": "openai.max_tool_calls",
+          "duration_seconds": 2.283,
+          "estimated_cost_usd": 0.0033352,
+          "feature": "max_tool_calls",
+          "http_code": 200,
+          "provider": "openai",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T13:51:26Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 openai.max_tool_calls (HTTP 200, 2.283s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T13:51:29Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/openai/top_logprobs.attempt1.log",
+        "pipeline/logs/openai/top_logprobs.attempt2.log"
+      ],
+      "attempts": 2,
+      "case_file": "cases/openai/top_logprobs.json",
+      "covered_marked": true,
+      "description": "top_logprobs for token probabilities",
+      "ended_at": "2026-04-13T13:50:33Z",
+      "feature": "top_logprobs",
+      "id": "openai.top_logprobs",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/openai/top_logprobs.log",
+      "provider": "openai",
+      "session_file": "pipeline/sessions/openai/top_logprobs.jsonl",
+      "started_at": "2026-04-13T13:49:41Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/openai.top_logprobs/2026-04-13T13-50-32Z.txt",
+          "case_id": "openai.top_logprobs",
+          "duration_seconds": 0.656,
+          "estimated_cost_usd": 9.2e-06,
+          "feature": "top_logprobs",
+          "http_code": 200,
+          "provider": "openai",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T13:50:32Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 openai.top_logprobs (HTTP 200, 0.656s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T13:50:33Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/openai/reasoning.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/openai/reasoning.json",
+      "covered_marked": true,
+      "description": "reasoning.effort parameter",
+      "ended_at": "2026-04-13T13:50:29Z",
+      "feature": "reasoning",
+      "id": "openai.reasoning",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/openai/reasoning.log",
+      "provider": "openai",
+      "session_file": "pipeline/sessions/openai/reasoning.jsonl",
+      "started_at": "2026-04-13T13:49:55Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/openai.reasoning/2026-04-13T13-50-27Z.txt",
+          "case_id": "openai.reasoning",
+          "duration_seconds": 1.769,
+          "estimated_cost_usd": 1.53e-05,
+          "feature": "reasoning",
+          "http_code": 200,
+          "provider": "openai",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T13:50:27Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 openai.reasoning (HTTP 200, 1.769s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T13:50:29Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/openai/reasoning_encrypted.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/openai/reasoning_encrypted.json",
+      "covered_marked": true,
+      "description": "reasoning with encrypted_content include",
+      "ended_at": "2026-04-13T13:51:26Z",
+      "feature": "reasoning_encrypted",
+      "id": "openai.reasoning_encrypted",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/openai/reasoning_encrypted.log",
+      "provider": "openai",
+      "session_file": "pipeline/sessions/openai/reasoning_encrypted.jsonl",
+      "started_at": "2026-04-13T13:50:09Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/openai.reasoning_encrypted/2026-04-13T13-51-24Z.txt",
+          "case_id": "openai.reasoning_encrypted",
+          "duration_seconds": 1.675,
+          "estimated_cost_usd": 1.443e-05,
+          "feature": "reasoning_encrypted",
+          "http_code": 200,
+          "provider": "openai",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T13:51:24Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 openai.reasoning_encrypted (HTTP 200, 1.675s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T13:51:26Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/openai/web_search.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/openai/web_search.json",
+      "covered_marked": true,
+      "description": "Web search tool",
+      "ended_at": "2026-04-13T13:51:50Z",
+      "feature": "web_search",
+      "id": "openai.web_search",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/openai/web_search.log",
+      "provider": "openai",
+      "session_file": "pipeline/sessions/openai/web_search.jsonl",
+      "started_at": "2026-04-13T13:50:29Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/openai.web_search/2026-04-13T13-51-43Z.txt",
+          "case_id": "openai.web_search",
+          "duration_seconds": 6.707,
+          "estimated_cost_usd": 0.0219,
+          "feature": "web_search",
+          "http_code": 200,
+          "provider": "openai",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T13:51:43Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 openai.web_search (HTTP 200, 6.707s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T13:51:49Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/openai/file_search.attempt1.log",
+        "pipeline/logs/openai/file_search.attempt2.log"
+      ],
+      "attempts": 2,
+      "case_file": "cases/openai/file_search.json",
+      "covered_marked": true,
+      "description": "File search / retrieval tool",
+      "ended_at": "2026-04-13T13:54:48Z",
+      "feature": "file_search",
+      "id": "openai.file_search",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/openai/file_search.log",
+      "provider": "openai",
+      "session_file": "pipeline/sessions/openai/file_search.jsonl",
+      "started_at": "2026-04-13T13:50:33Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/openai.file_search/2026-04-13T13-54-46Z.txt",
+          "case_id": "openai.file_search",
+          "duration_seconds": 1.969,
+          "estimated_cost_usd": 0.0004064,
+          "feature": "file_search",
+          "http_code": 200,
+          "provider": "openai",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T13:54:46Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 openai.file_search (HTTP 200, 1.969s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T13:54:48Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/openai/code_interpreter.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/openai/code_interpreter.json",
+      "covered_marked": true,
+      "description": "Code interpreter tool",
+      "ended_at": "2026-04-13T13:52:49Z",
+      "feature": "code_interpreter",
+      "id": "openai.code_interpreter",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/openai/code_interpreter.log",
+      "provider": "openai",
+      "session_file": "pipeline/sessions/openai/code_interpreter.jsonl",
+      "started_at": "2026-04-13T13:51:26Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/openai.code_interpreter/2026-04-13T13-52-44Z.txt",
+          "case_id": "openai.code_interpreter",
+          "duration_seconds": 4.443,
+          "estimated_cost_usd": 0.0046275,
+          "feature": "code_interpreter",
+          "http_code": 200,
+          "provider": "openai",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T13:52:44Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 openai.code_interpreter (HTTP 200, 4.443s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T13:52:49Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/openai/computer_use.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/openai/computer_use.json",
+      "covered_marked": true,
+      "description": "Computer use tool",
+      "ended_at": "2026-04-13T13:56:35Z",
+      "feature": "computer_use",
+      "id": "openai.computer_use",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/openai/computer_use.log",
+      "provider": "openai",
+      "session_file": "pipeline/sessions/openai/computer_use.jsonl",
+      "started_at": "2026-04-13T13:51:29Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/openai.computer_use/2026-04-13T13-56-31Z.txt",
+          "case_id": "openai.computer_use",
+          "duration_seconds": 2.766,
+          "estimated_cost_usd": null,
+          "feature": "computer_use",
+          "http_code": 200,
+          "provider": "openai",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T13:56:31Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 openai.computer_use (HTTP 200, 2.766s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T13:56:34Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/openai/previous_response_id.attempt1.log",
+        "pipeline/logs/openai/previous_response_id.attempt2.log"
+      ],
+      "attempts": 2,
+      "case_file": "cases/openai/previous_response_id.json",
+      "covered_marked": true,
+      "description": "Chain responses via previous_response_id",
+      "ended_at": "2026-04-13T13:55:52Z",
+      "feature": "previous_response_id",
+      "id": "openai.previous_response_id",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/openai/previous_response_id.log",
+      "provider": "openai",
+      "session_file": "pipeline/sessions/openai/previous_response_id.jsonl",
+      "started_at": "2026-04-13T13:51:50Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/openai.previous_response_id/2026-04-13T13-55-50Z.txt",
+          "case_id": "openai.previous_response_id",
+          "duration_seconds": 0.783,
+          "estimated_cost_usd": 2.36e-05,
+          "feature": "previous_response_id",
+          "http_code": 200,
+          "provider": "openai",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T13:55:50Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 openai.previous_response_id (HTTP 200, 0.783s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T13:55:51Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/openai/conversation.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/openai/conversation.json",
+      "covered_marked": true,
+      "description": "Conversation object for multi-turn",
+      "ended_at": "2026-04-13T13:56:31Z",
+      "feature": "conversation",
+      "id": "openai.conversation",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/openai/conversation.log",
+      "provider": "openai",
+      "session_file": "pipeline/sessions/openai/conversation.jsonl",
+      "started_at": "2026-04-13T13:52:44Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/openai.conversation/2026-04-13T13-56-30Z.txt",
+          "case_id": "openai.conversation",
+          "duration_seconds": 1.075,
+          "estimated_cost_usd": 3.36e-05,
+          "feature": "conversation",
+          "http_code": 200,
+          "provider": "openai",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T13:56:30Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 openai.conversation (HTTP 200, 1.075s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T13:56:31Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/openai/store.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/openai/store.json",
+      "covered_marked": true,
+      "description": "store: true/false for response storage",
+      "ended_at": "2026-04-13T13:53:45Z",
+      "feature": "store",
+      "id": "openai.store",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/openai/store.log",
+      "provider": "openai",
+      "session_file": "pipeline/sessions/openai/store.jsonl",
+      "started_at": "2026-04-13T13:52:49Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/openai.store/2026-04-13T13-53-44Z.txt",
+          "case_id": "openai.store",
+          "duration_seconds": 0.516,
+          "estimated_cost_usd": 8e-06,
+          "feature": "store",
+          "http_code": 200,
+          "provider": "openai",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T13:53:44Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 openai.store (HTTP 200, 0.516s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T13:53:45Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/openai/background.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/openai/background.json",
+      "covered_marked": true,
+      "description": "background: true for async processing",
+      "ended_at": "2026-04-13T13:56:06Z",
+      "feature": "background",
+      "id": "openai.background",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/openai/background.log",
+      "provider": "openai",
+      "session_file": "pipeline/sessions/openai/background.jsonl",
+      "started_at": "2026-04-13T13:53:45Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/openai.background/2026-04-13T13-56-00Z.txt",
+          "case_id": "openai.background",
+          "duration_seconds": 5.684,
+          "estimated_cost_usd": 8e-06,
+          "feature": "background",
+          "http_code": 200,
+          "provider": "openai",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T13:56:00Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 openai.background (HTTP 200, 5.684s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T13:56:06Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/openai/truncation.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/openai/truncation.json",
+      "covered_marked": true,
+      "description": "truncation: 'auto' or 'disabled'",
+      "ended_at": "2026-04-13T13:55:27Z",
+      "feature": "truncation",
+      "id": "openai.truncation",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/openai/truncation.log",
+      "provider": "openai",
+      "session_file": "pipeline/sessions/openai/truncation.jsonl",
+      "started_at": "2026-04-13T13:54:29Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/openai.truncation/2026-04-13T13-55-26Z.txt",
+          "case_id": "openai.truncation",
+          "duration_seconds": 0.731,
+          "estimated_cost_usd": 9.6e-06,
+          "feature": "truncation",
+          "http_code": 200,
+          "provider": "openai",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T13:55:26Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 openai.truncation (HTTP 200, 0.731s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T13:55:27Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/openai/service_tier.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/openai/service_tier.json",
+      "covered_marked": true,
+      "description": "service_tier selection",
+      "ended_at": "2026-04-13T13:56:10Z",
+      "feature": "service_tier",
+      "id": "openai.service_tier",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/openai/service_tier.log",
+      "provider": "openai",
+      "session_file": "pipeline/sessions/openai/service_tier.jsonl",
+      "started_at": "2026-04-13T13:54:48Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/openai.service_tier/2026-04-13T13-56-09Z.txt",
+          "case_id": "openai.service_tier",
+          "duration_seconds": 0.888,
+          "estimated_cost_usd": 1e-05,
+          "feature": "service_tier",
+          "http_code": 200,
+          "provider": "openai",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T13:56:09Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 openai.service_tier (HTTP 200, 0.888s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T13:56:10Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/openai/metadata.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/openai/metadata.json",
+      "covered_marked": true,
+      "description": "Request metadata",
+      "ended_at": "2026-04-13T13:57:05Z",
+      "feature": "metadata",
+      "id": "openai.metadata",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/openai/metadata.log",
+      "provider": "openai",
+      "session_file": "pipeline/sessions/openai/metadata.jsonl",
+      "started_at": "2026-04-13T13:55:27Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/openai.metadata/2026-04-13T13-57-03Z.txt",
+          "case_id": "openai.metadata",
+          "duration_seconds": 0.889,
+          "estimated_cost_usd": 8e-06,
+          "feature": "metadata",
+          "http_code": 200,
+          "provider": "openai",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T13:57:03Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 openai.metadata (HTTP 200, 0.889s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T13:57:04Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/openai/prompt.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/openai/prompt.json",
+      "description": "Stored prompt reference",
+      "ended_at": "2026-04-13T13:57:27Z",
+      "feature": "prompt",
+      "id": "openai.prompt",
+      "last_error": "You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.\n",
+      "lint": null,
+      "log_file": "pipeline/logs/openai/prompt.log",
+      "provider": "openai",
+      "session_file": "pipeline/sessions/openai/prompt.jsonl",
+      "started_at": "2026-04-13T13:55:52Z",
+      "status": "pi_failed",
+      "validation": null
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/openai/include.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/openai/include.json",
+      "covered_marked": true,
+      "description": "include array for additional output data",
+      "ended_at": "2026-04-13T13:57:02Z",
+      "feature": "include",
+      "id": "openai.include",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/openai/include.log",
+      "provider": "openai",
+      "session_file": "pipeline/sessions/openai/include.jsonl",
+      "started_at": "2026-04-13T13:56:06Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/openai.include/2026-04-13T13-57-00Z.txt",
+          "case_id": "openai.include",
+          "duration_seconds": 1.424,
+          "estimated_cost_usd": 9.2e-06,
+          "feature": "include",
+          "http_code": 200,
+          "provider": "openai",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T13:57:00Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 openai.include (HTTP 200, 1.424s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T13:57:02Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/openai/context_management.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/openai/context_management.json",
+      "description": "Context management / compaction configuration",
+      "ended_at": "2026-04-13T13:57:17Z",
+      "feature": "context_management",
+      "id": "openai.context_management",
+      "last_error": "You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.\n",
+      "lint": null,
+      "log_file": "pipeline/logs/openai/context_management.log",
+      "provider": "openai",
+      "session_file": "pipeline/sessions/openai/context_management.jsonl",
+      "started_at": "2026-04-13T13:56:10Z",
+      "status": "pi_failed",
+      "validation": null
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/openai/prompt_cache_key.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/openai/prompt_cache_key.json",
+      "covered_marked": true,
+      "description": "prompt_cache_key for caching",
+      "ended_at": "2026-04-13T13:57:14Z",
+      "feature": "prompt_cache_key",
+      "id": "openai.prompt_cache_key",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/openai/prompt_cache_key.log",
+      "provider": "openai",
+      "session_file": "pipeline/sessions/openai/prompt_cache_key.jsonl",
+      "started_at": "2026-04-13T13:56:31Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/openai.prompt_cache_key/2026-04-13T13-57-13Z.txt",
+          "case_id": "openai.prompt_cache_key",
+          "duration_seconds": 0.644,
+          "estimated_cost_usd": 8e-06,
+          "feature": "prompt_cache_key",
+          "http_code": 200,
+          "provider": "openai",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T13:57:13Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 openai.prompt_cache_key (HTTP 200, 0.644s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T13:57:14Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/openai/prompt_cache_retention.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/openai/prompt_cache_retention.json",
+      "covered_marked": true,
+      "description": "prompt_cache_retention duration",
+      "ended_at": "2026-04-13T13:57:09Z",
+      "feature": "prompt_cache_retention",
+      "id": "openai.prompt_cache_retention",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/openai/prompt_cache_retention.log",
+      "provider": "openai",
+      "session_file": "pipeline/sessions/openai/prompt_cache_retention.jsonl",
+      "started_at": "2026-04-13T13:56:35Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/openai.prompt_cache_retention/2026-04-13T13-57-06Z.txt",
+          "case_id": "openai.prompt_cache_retention",
+          "duration_seconds": 1.845,
+          "estimated_cost_usd": 8e-06,
+          "feature": "prompt_cache_retention",
+          "http_code": 200,
+          "provider": "openai",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T13:57:06Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 openai.prompt_cache_retention (HTTP 200, 1.845s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T13:57:08Z"
+      }
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/openai/safety_identifier.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/openai/safety_identifier.json",
+      "description": "safety_identifier for content filtering",
+      "ended_at": "2026-04-13T13:57:25Z",
+      "feature": "safety_identifier",
+      "id": "openai.safety_identifier",
+      "last_error": "You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.\n",
+      "lint": null,
+      "log_file": "pipeline/logs/openai/safety_identifier.log",
+      "provider": "openai",
+      "session_file": "pipeline/sessions/openai/safety_identifier.jsonl",
+      "started_at": "2026-04-13T13:57:02Z",
+      "status": "pi_failed",
+      "validation": null
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/openai/stream_options.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/openai/stream_options.json",
+      "description": "stream_options (include_obfuscation)",
+      "ended_at": "2026-04-13T13:57:44Z",
+      "feature": "stream_options",
+      "id": "openai.stream_options",
+      "last_error": "You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.\n",
+      "lint": null,
+      "log_file": "pipeline/logs/openai/stream_options.log",
+      "provider": "openai",
+      "session_file": "pipeline/sessions/openai/stream_options.jsonl",
+      "started_at": "2026-04-13T13:57:05Z",
+      "status": "pi_failed",
+      "validation": null
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/openai/user.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/openai/user.json",
+      "description": "user identifier for abuse tracking",
+      "ended_at": "2026-04-13T13:57:20Z",
+      "feature": "user",
+      "id": "openai.user",
+      "last_error": "You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.\n",
+      "lint": null,
+      "log_file": "pipeline/logs/openai/user.log",
+      "provider": "openai",
+      "session_file": "pipeline/sessions/openai/user.jsonl",
+      "started_at": "2026-04-13T13:57:09Z",
+      "status": "pi_failed",
+      "validation": null
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/anthropic/image_base64.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/anthropic/image_base64.json",
+      "description": "Image input via base64 source",
+      "ended_at": "2026-04-13T13:57:17Z",
+      "feature": "image_base64",
+      "id": "anthropic.image_base64",
+      "last_error": "You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.\n",
+      "lint": null,
+      "log_file": "pipeline/logs/anthropic/image_base64.log",
+      "provider": "anthropic",
+      "session_file": "pipeline/sessions/anthropic/image_base64.jsonl",
+      "started_at": "2026-04-13T13:57:14Z",
+      "status": "pi_failed",
+      "validation": null
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/anthropic/pdf_base64.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/anthropic/pdf_base64.json",
+      "description": "PDF input via base64 document source",
+      "ended_at": "2026-04-13T13:57:20Z",
+      "feature": "pdf_base64",
+      "id": "anthropic.pdf_base64",
+      "last_error": "You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.\n",
+      "lint": null,
+      "log_file": "pipeline/logs/anthropic/pdf_base64.log",
+      "provider": "anthropic",
+      "session_file": "pipeline/sessions/anthropic/pdf_base64.jsonl",
+      "started_at": "2026-04-13T13:57:17Z",
+      "status": "pi_failed",
+      "validation": null
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/anthropic/multi_turn.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/anthropic/multi_turn.json",
+      "description": "Multiple user/assistant messages",
+      "ended_at": "2026-04-13T13:57:21Z",
+      "feature": "multi_turn",
+      "id": "anthropic.multi_turn",
+      "last_error": "You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.\n",
+      "lint": null,
+      "log_file": "pipeline/logs/anthropic/multi_turn.log",
+      "provider": "anthropic",
+      "session_file": "pipeline/sessions/anthropic/multi_turn.jsonl",
+      "started_at": "2026-04-13T13:57:17Z",
+      "status": "pi_failed",
+      "validation": null
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/anthropic/multi_turn_tool_result.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/anthropic/multi_turn_tool_result.json",
+      "description": "Conversation with tool_use + tool_result blocks",
+      "ended_at": "2026-04-13T13:57:23Z",
+      "feature": "multi_turn_tool_result",
+      "id": "anthropic.multi_turn_tool_result",
+      "last_error": "You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.\n",
+      "lint": null,
+      "log_file": "pipeline/logs/anthropic/multi_turn_tool_result.log",
+      "provider": "anthropic",
+      "session_file": "pipeline/sessions/anthropic/multi_turn_tool_result.jsonl",
+      "started_at": "2026-04-13T13:57:20Z",
+      "status": "pi_failed",
+      "validation": null
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/anthropic/system_content_blocks.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/anthropic/system_content_blocks.json",
+      "description": "System as array of TextBlockParam (with cache_control)",
+      "ended_at": "2026-04-13T13:57:24Z",
+      "feature": "system_content_blocks",
+      "id": "anthropic.system_content_blocks",
+      "last_error": "You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.\n",
+      "lint": null,
+      "log_file": "pipeline/logs/anthropic/system_content_blocks.log",
+      "provider": "anthropic",
+      "session_file": "pipeline/sessions/anthropic/system_content_blocks.jsonl",
+      "started_at": "2026-04-13T13:57:20Z",
+      "status": "pi_failed",
+      "validation": null
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/anthropic/stop_sequences.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/anthropic/stop_sequences.json",
+      "description": "Custom stop sequences",
+      "ended_at": "2026-04-13T13:57:27Z",
+      "feature": "stop_sequences",
+      "id": "anthropic.stop_sequences",
+      "last_error": "You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.\n",
+      "lint": null,
+      "log_file": "pipeline/logs/anthropic/stop_sequences.log",
+      "provider": "anthropic",
+      "session_file": "pipeline/sessions/anthropic/stop_sequences.jsonl",
+      "started_at": "2026-04-13T13:57:21Z",
+      "status": "pi_failed",
+      "validation": null
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/anthropic/top_p.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/anthropic/top_p.json",
+      "description": "top_p (nucleus sampling)",
+      "ended_at": "2026-04-13T13:57:26Z",
+      "feature": "top_p",
+      "id": "anthropic.top_p",
+      "last_error": "You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.\n",
+      "lint": null,
+      "log_file": "pipeline/logs/anthropic/top_p.log",
+      "provider": "anthropic",
+      "session_file": "pipeline/sessions/anthropic/top_p.jsonl",
+      "started_at": "2026-04-13T13:57:23Z",
+      "status": "pi_failed",
+      "validation": null
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/anthropic/top_k.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/anthropic/top_k.json",
+      "description": "top_k sampling",
+      "ended_at": "2026-04-13T13:57:27Z",
+      "feature": "top_k",
+      "id": "anthropic.top_k",
+      "last_error": "You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.\n",
+      "lint": null,
+      "log_file": "pipeline/logs/anthropic/top_k.log",
+      "provider": "anthropic",
+      "session_file": "pipeline/sessions/anthropic/top_k.jsonl",
+      "started_at": "2026-04-13T13:57:24Z",
+      "status": "pi_failed",
+      "validation": null
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/anthropic/thinking_budget.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/anthropic/thinking_budget.json",
+      "description": "Thinking with budget_tokens",
+      "ended_at": "2026-04-13T13:57:33Z",
+      "feature": "thinking_budget",
+      "id": "anthropic.thinking_budget",
+      "last_error": "You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.\n",
+      "lint": null,
+      "log_file": "pipeline/logs/anthropic/thinking_budget.log",
+      "provider": "anthropic",
+      "session_file": "pipeline/sessions/anthropic/thinking_budget.jsonl",
+      "started_at": "2026-04-13T13:57:25Z",
+      "status": "pi_failed",
+      "validation": null
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/anthropic/cache_control.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/anthropic/cache_control.json",
+      "description": "Prompt caching via cache_control on messages/system",
+      "ended_at": "2026-04-13T13:57:31Z",
+      "feature": "cache_control",
+      "id": "anthropic.cache_control",
+      "last_error": "You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.\n",
+      "lint": null,
+      "log_file": "pipeline/logs/anthropic/cache_control.log",
+      "provider": "anthropic",
+      "session_file": "pipeline/sessions/anthropic/cache_control.jsonl",
+      "started_at": "2026-04-13T13:57:26Z",
+      "status": "pi_failed",
+      "validation": null
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/anthropic/metadata.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/anthropic/metadata.json",
+      "description": "Request metadata (user_id)",
+      "ended_at": "2026-04-13T13:57:31Z",
+      "feature": "metadata",
+      "id": "anthropic.metadata",
+      "last_error": "You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.\n",
+      "lint": null,
+      "log_file": "pipeline/logs/anthropic/metadata.log",
+      "provider": "anthropic",
+      "session_file": "pipeline/sessions/anthropic/metadata.jsonl",
+      "started_at": "2026-04-13T13:57:27Z",
+      "status": "pi_failed",
+      "validation": null
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/anthropic/service_tier.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/anthropic/service_tier.json",
+      "description": "service_tier selection",
+      "ended_at": "2026-04-13T13:57:31Z",
+      "feature": "service_tier",
+      "id": "anthropic.service_tier",
+      "last_error": "You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.\n",
+      "lint": null,
+      "log_file": "pipeline/logs/anthropic/service_tier.log",
+      "provider": "anthropic",
+      "session_file": "pipeline/sessions/anthropic/service_tier.jsonl",
+      "started_at": "2026-04-13T13:57:27Z",
+      "status": "pi_failed",
+      "validation": null
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/anthropic/output_config.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/anthropic/output_config.json",
+      "description": "Output configuration (JSON mode etc)",
+      "ended_at": "2026-04-13T13:57:32Z",
+      "feature": "output_config",
+      "id": "anthropic.output_config",
+      "last_error": "You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.\n",
+      "lint": null,
+      "log_file": "pipeline/logs/anthropic/output_config.log",
+      "provider": "anthropic",
+      "session_file": "pipeline/sessions/anthropic/output_config.jsonl",
+      "started_at": "2026-04-13T13:57:27Z",
+      "status": "pi_failed",
+      "validation": null
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/anthropic/container.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/anthropic/container.json",
+      "description": "Container for sandboxed execution",
+      "ended_at": "2026-04-13T13:57:34Z",
+      "feature": "container",
+      "id": "anthropic.container",
+      "last_error": "You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.\n",
+      "lint": null,
+      "log_file": "pipeline/logs/anthropic/container.log",
+      "provider": "anthropic",
+      "session_file": "pipeline/sessions/anthropic/container.jsonl",
+      "started_at": "2026-04-13T13:57:31Z",
+      "status": "pi_failed",
+      "validation": null
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/anthropic/inference_geo.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/anthropic/inference_geo.json",
+      "description": "inference_geo region preference",
+      "ended_at": "2026-04-13T13:57:34Z",
+      "feature": "inference_geo",
+      "id": "anthropic.inference_geo",
+      "last_error": "You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.\n",
+      "lint": null,
+      "log_file": "pipeline/logs/anthropic/inference_geo.log",
+      "provider": "anthropic",
+      "session_file": "pipeline/sessions/anthropic/inference_geo.jsonl",
+      "started_at": "2026-04-13T13:57:31Z",
+      "status": "pi_failed",
+      "validation": null
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/gemini/image_file_uri.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/gemini/image_file_uri.json",
+      "description": "Image via fileData (Google file URI)",
+      "ended_at": "2026-04-13T13:57:38Z",
+      "feature": "image_file_uri",
+      "id": "gemini.image_file_uri",
+      "last_error": "You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.\n",
+      "lint": null,
+      "log_file": "pipeline/logs/gemini/image_file_uri.log",
+      "provider": "gemini",
+      "session_file": "pipeline/sessions/gemini/image_file_uri.jsonl",
+      "started_at": "2026-04-13T13:57:31Z",
+      "status": "pi_failed",
+      "validation": null
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/gemini/audio_inline.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/gemini/audio_inline.json",
+      "description": "Audio via inlineData",
+      "ended_at": "2026-04-13T13:57:36Z",
+      "feature": "audio_inline",
+      "id": "gemini.audio_inline",
+      "last_error": "You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.\n",
+      "lint": null,
+      "log_file": "pipeline/logs/gemini/audio_inline.log",
+      "provider": "gemini",
+      "session_file": "pipeline/sessions/gemini/audio_inline.jsonl",
+      "started_at": "2026-04-13T13:57:32Z",
+      "status": "pi_failed",
+      "validation": null
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/gemini/video_file.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/gemini/video_file.json",
+      "description": "Video via fileData",
+      "ended_at": "2026-04-13T13:57:36Z",
+      "feature": "video_file",
+      "id": "gemini.video_file",
+      "last_error": "You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.\n",
+      "lint": null,
+      "log_file": "pipeline/logs/gemini/video_file.log",
+      "provider": "gemini",
+      "session_file": "pipeline/sessions/gemini/video_file.jsonl",
+      "started_at": "2026-04-13T13:57:33Z",
+      "status": "pi_failed",
+      "validation": null
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/gemini/pdf_inline.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/gemini/pdf_inline.json",
+      "description": "PDF via inlineData",
+      "ended_at": "2026-04-13T13:57:38Z",
+      "feature": "pdf_inline",
+      "id": "gemini.pdf_inline",
+      "last_error": "You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.\n",
+      "lint": null,
+      "log_file": "pipeline/logs/gemini/pdf_inline.log",
+      "provider": "gemini",
+      "session_file": "pipeline/sessions/gemini/pdf_inline.jsonl",
+      "started_at": "2026-04-13T13:57:34Z",
+      "status": "pi_failed",
+      "validation": null
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/gemini/multi_turn.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/gemini/multi_turn.json",
+      "description": "Multi-turn conversation (multiple contents)",
+      "ended_at": "2026-04-13T13:57:44Z",
+      "feature": "multi_turn",
+      "id": "gemini.multi_turn",
+      "last_error": "You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.\n",
+      "lint": null,
+      "log_file": "pipeline/logs/gemini/multi_turn.log",
+      "provider": "gemini",
+      "session_file": "pipeline/sessions/gemini/multi_turn.jsonl",
+      "started_at": "2026-04-13T13:57:34Z",
+      "status": "pi_failed",
+      "validation": null
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/gemini/multi_turn_function_response.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/gemini/multi_turn_function_response.json",
+      "description": "Conversation with functionCall + functionResponse",
+      "ended_at": "2026-04-13T13:57:39Z",
+      "feature": "multi_turn_function_response",
+      "id": "gemini.multi_turn_function_response",
+      "last_error": "You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.\n",
+      "lint": null,
+      "log_file": "pipeline/logs/gemini/multi_turn_function_response.log",
+      "provider": "gemini",
+      "session_file": "pipeline/sessions/gemini/multi_turn_function_response.jsonl",
+      "started_at": "2026-04-13T13:57:36Z",
+      "status": "pi_failed",
+      "validation": null
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/gemini/max_output_tokens.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/gemini/max_output_tokens.json",
+      "description": "generationConfig.maxOutputTokens",
+      "ended_at": "2026-04-13T13:57:39Z",
+      "feature": "max_output_tokens",
+      "id": "gemini.max_output_tokens",
+      "last_error": "You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.\n",
+      "lint": null,
+      "log_file": "pipeline/logs/gemini/max_output_tokens.log",
+      "provider": "gemini",
+      "session_file": "pipeline/sessions/gemini/max_output_tokens.jsonl",
+      "started_at": "2026-04-13T13:57:36Z",
+      "status": "pi_failed",
+      "validation": null
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/gemini/top_p.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/gemini/top_p.json",
+      "description": "generationConfig.topP",
+      "ended_at": "2026-04-13T13:57:41Z",
+      "feature": "top_p",
+      "id": "gemini.top_p",
+      "last_error": "You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.\n",
+      "lint": null,
+      "log_file": "pipeline/logs/gemini/top_p.log",
+      "provider": "gemini",
+      "session_file": "pipeline/sessions/gemini/top_p.jsonl",
+      "started_at": "2026-04-13T13:57:38Z",
+      "status": "pi_failed",
+      "validation": null
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/gemini/top_k.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/gemini/top_k.json",
+      "description": "generationConfig.topK",
+      "ended_at": "2026-04-13T13:57:45Z",
+      "feature": "top_k",
+      "id": "gemini.top_k",
+      "last_error": "You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.\n",
+      "lint": null,
+      "log_file": "pipeline/logs/gemini/top_k.log",
+      "provider": "gemini",
+      "session_file": "pipeline/sessions/gemini/top_k.jsonl",
+      "started_at": "2026-04-13T13:57:38Z",
+      "status": "pi_failed",
+      "validation": null
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/gemini/stop_sequences.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/gemini/stop_sequences.json",
+      "description": "generationConfig.stopSequences",
+      "ended_at": "2026-04-13T13:57:41Z",
+      "feature": "stop_sequences",
+      "id": "gemini.stop_sequences",
+      "last_error": "You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.\n",
+      "lint": null,
+      "log_file": "pipeline/logs/gemini/stop_sequences.log",
+      "provider": "gemini",
+      "session_file": "pipeline/sessions/gemini/stop_sequences.jsonl",
+      "started_at": "2026-04-13T13:57:39Z",
+      "status": "pi_failed",
+      "validation": null
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/gemini/tool_config_none.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/gemini/tool_config_none.json",
+      "description": "toolConfig.functionCallingConfig.mode: NONE",
+      "ended_at": "2026-04-13T13:57:42Z",
+      "feature": "tool_config_none",
+      "id": "gemini.tool_config_none",
+      "last_error": "You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.\n",
+      "lint": null,
+      "log_file": "pipeline/logs/gemini/tool_config_none.log",
+      "provider": "gemini",
+      "session_file": "pipeline/sessions/gemini/tool_config_none.jsonl",
+      "started_at": "2026-04-13T13:57:39Z",
+      "status": "pi_failed",
+      "validation": null
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/gemini/google_search.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/gemini/google_search.json",
+      "description": "Google Search grounding tool",
+      "ended_at": "2026-04-13T13:57:43Z",
+      "feature": "google_search",
+      "id": "gemini.google_search",
+      "last_error": "You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.\n",
+      "lint": null,
+      "log_file": "pipeline/logs/gemini/google_search.log",
+      "provider": "gemini",
+      "session_file": "pipeline/sessions/gemini/google_search.jsonl",
+      "started_at": "2026-04-13T13:57:41Z",
+      "status": "pi_failed",
+      "validation": null
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/gemini/code_execution.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/gemini/code_execution.json",
+      "description": "Code execution tool",
+      "ended_at": "2026-04-13T13:57:47Z",
+      "feature": "code_execution",
+      "id": "gemini.code_execution",
+      "last_error": "You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.\n",
+      "lint": null,
+      "log_file": "pipeline/logs/gemini/code_execution.log",
+      "provider": "gemini",
+      "session_file": "pipeline/sessions/gemini/code_execution.jsonl",
+      "started_at": "2026-04-13T13:57:41Z",
+      "status": "pi_failed",
+      "validation": null
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/gemini/cached_content.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/gemini/cached_content.json",
+      "description": "Use cachedContent for context caching",
+      "ended_at": "2026-04-13T13:57:45Z",
+      "feature": "cached_content",
+      "id": "gemini.cached_content",
+      "last_error": "You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.\n",
+      "lint": null,
+      "log_file": "pipeline/logs/gemini/cached_content.log",
+      "provider": "gemini",
+      "session_file": "pipeline/sessions/gemini/cached_content.jsonl",
+      "started_at": "2026-04-13T13:57:42Z",
+      "status": "pi_failed",
+      "validation": null
+    },
+    {
+      "attempt_log_files": [
+        "pipeline/logs/gemini/store.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/gemini/store.json",
+      "description": "Logging/storage configuration",
+      "ended_at": "2026-04-13T13:57:45Z",
+      "feature": "store",
+      "id": "gemini.store",
+      "last_error": "You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.\n",
+      "lint": null,
+      "log_file": "pipeline/logs/gemini/store.log",
+      "provider": "gemini",
+      "session_file": "pipeline/sessions/gemini/store.jsonl",
+      "started_at": "2026-04-13T13:57:43Z",
+      "status": "pi_failed",
+      "validation": null
+    }
+  ]
+}

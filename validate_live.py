@@ -8,10 +8,12 @@ Outputs:
 - results/bodies/<case-id>/<timestamp>.txt
 """
 
+import copy
 import json
 import os
 import subprocess
 import sys
+import tempfile
 import time
 import urllib.request
 from datetime import datetime, timezone
@@ -39,12 +41,15 @@ def load_dotenv(path: Path = DOTENV_PATH):
         line = raw_line.strip()
         if not line or line.startswith("#") or "=" not in line:
             continue
+        if line.startswith("export "):
+            line = line[len("export "):].strip()
         key, value = line.split("=", 1)
         key = key.strip()
         value = value.strip()
         if value and ((value[0] == value[-1]) and value[0] in {'"', "'"}):
             value = value[1:-1]
-        os.environ.setdefault(key, value)
+        if not os.environ.get(key):
+            os.environ[key] = value
 
 _COST_INDEX = None
 _ADDITIVE_CACHE_PROVIDERS = {"anthropic"}
@@ -83,7 +88,65 @@ def build_curl_display(case: dict, api_key: str) -> str:
     return " \\\n".join(parts)
 
 
+def _curl_json(method: str, url: str, headers: dict[str, str], body: dict | None = None, timeout: int = 45):
+    cmd = ["curl", "-sS", "-X", method, url]
+    for k, v in headers.items():
+        cmd.extend(["-H", f"{k}: {v}"])
+    if body is not None:
+        cmd.extend(["-d", json.dumps(body)])
+    proc = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout)
+    return json.loads(proc.stdout)
+
+
+def _curl_multipart(url: str, headers: dict[str, str], form_parts: list[tuple[str, str]], timeout: int = 45):
+    cmd = ["curl", "-sS", url]
+    for k, v in headers.items():
+        cmd.extend(["-H", f"{k}: {v}"])
+    for k, v in form_parts:
+        cmd.extend(["-F", f"{k}={v}"])
+    proc = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout)
+    return json.loads(proc.stdout)
+
+
+def prepare_case(provider: str, case: dict, api_key: str):
+    case = copy.deepcopy(case)
+    if provider != "openai":
+        return case
+
+    headers = {
+        "Authorization": f"Bearer {api_key}",
+        "Content-Type": "application/json",
+    }
+    body = case.get("request", {}).get("body", {}) or {}
+
+    # previous_response_id setup
+    if body.get("previous_response_id") == "$AUTO_PREVIOUS_RESPONSE_ID":
+        seed = {
+            "model": body.get("model", "gpt-4.1-mini"),
+            "input": [{"role": "user", "content": [{"type": "input_text", "text": "Remember the codeword: maple."}]}],
+            "stream": False,
+        }
+        resp = _curl_json("POST", "https://api.openai.com/v1/responses", headers, seed)
+        case["request"]["body"]["previous_response_id"] = resp["id"]
+
+    # conversation setup
+    conv = body.get("conversation")
+    if isinstance(conv, dict) and conv.get("id") == "$AUTO_CONVERSATION_ID":
+        conv_obj = _curl_json("POST", "https://api.openai.com/v1/conversations", headers, {})
+        case["request"]["body"]["conversation"] = {"id": conv_obj["id"]}
+
+    # file_search setup
+    tools = body.get("tools") or []
+    for tool in tools:
+        if tool.get("type") == "file_search" and "$AUTO_VECTOR_STORE_ID" in (tool.get("vector_store_ids") or []):
+            vs = _curl_json("POST", "https://api.openai.com/v1/vector_stores", headers, {"name": "curl-fixtures-temp-vs"})
+            tool["vector_store_ids"] = [vs["id"]]
+
+    return case
+
+
 def run_curl(case: dict, api_key: str, timeout: int = 45):
+    case = prepare_case(case.get("provider"), case, api_key)
     url, headers, body = build_request(case, api_key, redact=False)
     body_file = RESULTS_DIR / ".tmp_body.txt"
     cmd = [
@@ -317,10 +380,17 @@ def validate_response(provider: str, case: dict, raw_body: str):
             if extract_usage(provider, raw_body) is None:
                 checks.append("missing usage")
         elif provider == "gemini":
-            if not data.get("candidates"):
-                checks.append("missing candidates")
-            if extract_usage(provider, raw_body) is None:
-                checks.append("missing usageMetadata")
+            req_url = case.get("request", {}).get("url", "")
+            if "/cachedContents" in req_url:
+                if not data.get("name"):
+                    checks.append("missing cache resource name")
+                if extract_usage(provider, raw_body) is None:
+                    checks.append("missing usageMetadata")
+            else:
+                if not data.get("candidates"):
+                    checks.append("missing candidates")
+                if extract_usage(provider, raw_body) is None:
+                    checks.append("missing usageMetadata")
 
         body_contains = expect.get("body_contains") or []
         for s in body_contains:
