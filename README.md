@@ -34,9 +34,9 @@ python3 generate_readme.py
 
 | Provider | Total features | Done | Todo | Last tested cases | Pass | Fail | Skipped | Cost to run covered tests USD |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
-| openai | 41 | 12 | 29 | 12 | 12 | 0 | 0 | 0.00075840 |
+| openai | 41 | 13 | 28 | 13 | 13 | 0 | 0 | 0.00080240 |
 | anthropic | 27 | 12 | 15 | 12 | 12 | 0 | 0 | 0.01771800 |
-| gemini | 27 | 11 | 16 | 11 | 11 | 0 | 0 | 0.00040616 |
+| gemini | 27 | 12 | 15 | 12 | 12 | 0 | 0 | 0.00042719 |
 
 ## Fixture matrix
 
@@ -52,7 +52,7 @@ python3 generate_readme.py
 | openai | file_input | no | yes | no | not_tested | — | — | — | — | — | File/PDF input via file object |
 | openai | multi_turn | no | yes | no | not_tested | — | — | — | — | — | Multiple user/assistant messages |
 | openai | multi_turn_tool_result | no | yes | no | not_tested | — | — | — | — | — | Conversation with tool call + tool result |
-| openai | tool_choice_auto | no | yes | no | not_tested | — | — | — | — | — | tool_choice: 'auto' |
+| openai | tool_choice_auto | yes | no | yes | pass | 2026-04-13T13:42:43Z | 200 | 5.108 | 4.4e-05 | [2026-04-13T13-42-43Z.txt](results/bodies/openai.tool_choice_auto/2026-04-13T13-42-43Z.txt) | tool_choice: 'auto' |
 | openai | tool_choice_required | yes | no | yes | pass | 2026-04-13T13:30:44Z | 200 | 0.716 | 3.48e-05 | [2026-04-13T13-30-44Z.txt](results/bodies/openai.tool_choice_required/2026-04-13T13-30-44Z.txt) | tool_choice: 'required' |
 | openai | tool_choice_none | yes | no | yes | pass | 2026-04-13T13:30:42Z | 200 | 1.535 | 3.48e-05 | [2026-04-13T13-30-42Z.txt](results/bodies/openai.tool_choice_none/2026-04-13T13-30-42Z.txt) | tool_choice: 'none' |
 | openai | tool_choice_specific | yes | no | yes | pass | 2026-04-13T13:30:44Z | 200 | 0.717 | 3.28e-05 | [2026-04-13T13-30-44Z.txt](results/bodies/openai.tool_choice_specific/2026-04-13T13-30-44Z.txt) | tool_choice: {type: 'function', name: 'fn'} |
@@ -129,7 +129,7 @@ python3 generate_readme.py
 | gemini | response_mime_type | yes | no | yes | pass | 2026-04-13T13:29:57Z | 200 | 1.498 | 8.859e-05 | [2026-04-13T13-29-57Z.txt](results/bodies/gemini.response_mime_type/2026-04-13T13-29-57Z.txt) | generationConfig.responseMimeType (JSON mode) |
 | gemini | response_schema | yes | no | yes | pass | 2026-04-13T13:29:59Z | 200 | 2.492 | 8.947e-05 | [2026-04-13T13-29-59Z.txt](results/bodies/gemini.response_schema/2026-04-13T13-29-59Z.txt) | generationConfig.responseSchema (structured output) |
 | gemini | thinking | yes | no | yes | pass | 2026-04-13T13:30:19Z | 200 | 4.317 | 6.312e-05 | [2026-04-13T13-30-19Z.txt](results/bodies/gemini.thinking/2026-04-13T13-30-19Z.txt) | generationConfig.thinkingConfig |
-| gemini | tool_config_auto | no | yes | no | not_tested | — | — | — | — | — | toolConfig.functionCallingConfig.mode: AUTO |
+| gemini | tool_config_auto | yes | no | yes | pass | 2026-04-13T13:43:36Z | 200 | 1.417 | 2.103e-05 | [2026-04-13T13-43-36Z.txt](results/bodies/gemini.tool_config_auto/2026-04-13T13-43-36Z.txt) | toolConfig.functionCallingConfig.mode: AUTO |
 | gemini | tool_config_any | yes | no | yes | pass | 2026-04-13T13:30:24Z | 200 | 1.188 | 2.103e-05 | [2026-04-13T13-30-24Z.txt](results/bodies/gemini.tool_config_any/2026-04-13T13-30-24Z.txt) | toolConfig.functionCallingConfig.mode: ANY |
 | gemini | tool_config_none | no | yes | no | not_tested | — | — | — | — | — | toolConfig.functionCallingConfig.mode: NONE |
 | gemini | safety_settings | yes | no | yes | pass | 2026-04-13T13:30:01Z | 200 | 5.598 | 8.388e-05 | [2026-04-13T13-30-01Z.txt](results/bodies/gemini.safety_settings/2026-04-13T13-30-01Z.txt) | Safety settings (harm categories + thresholds) |
@@ -144,4 +144,4 @@ python3 generate_readme.py
 - Run history: `results/history.jsonl`
 - Response bodies: `results/bodies/<case-id>/<timestamp>.txt`
 
-_README generated at 2026-04-13T13:30:49.544262Z by `generate_readme.py`._
+_README generated at 2026-04-13T13:44:27.783444Z by `generate_readme.py`._

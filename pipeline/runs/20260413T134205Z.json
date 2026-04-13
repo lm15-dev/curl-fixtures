@@ -1,0 +1,59 @@
+{
+  "args": {
+    "concurrency": 1,
+    "dry_run": false,
+    "max_attempts": 3,
+    "model": null,
+    "provider": null,
+    "retry_failed": false,
+    "task": "openai.tool_choice_auto"
+  },
+  "created_at": "2026-04-13T13:42:05Z",
+  "cwd": "/home/maxime/Projects/lm15-dev/curl-fixtures",
+  "run_file": "/home/maxime/Projects/lm15-dev/curl-fixtures/pipeline/runs/20260413T134205Z.json",
+  "run_id": "20260413T134205Z",
+  "tasks": [
+    {
+      "attempt_log_files": [
+        "pipeline/logs/openai/tool_choice_auto.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/openai/tool_choice_auto.json",
+      "covered_marked": true,
+      "description": "tool_choice: 'auto'",
+      "ended_at": "2026-04-13T13:42:36Z",
+      "feature": "tool_choice_auto",
+      "id": "openai.tool_choice_auto",
+      "last_error": null,
+      "lint": {
+        "errors": [],
+        "ok": true
+      },
+      "log_file": "pipeline/logs/openai/tool_choice_auto.log",
+      "provider": "openai",
+      "session_file": "pipeline/sessions/openai/tool_choice_auto.jsonl",
+      "started_at": "2026-04-13T13:42:05Z",
+      "status": "validated",
+      "validation": {
+        "case_result": {
+          "body_path": "results/bodies/openai.tool_choice_auto/2026-04-13T13-42-34Z.txt",
+          "case_id": "openai.tool_choice_auto",
+          "duration_seconds": 1.552,
+          "estimated_cost_usd": 4.4e-05,
+          "feature": "tool_choice_auto",
+          "http_code": 200,
+          "provider": "openai",
+          "result": "pass",
+          "semantic_errors": null,
+          "stderr": null,
+          "tested_at": "2026-04-13T13:42:34Z"
+        },
+        "returncode": 0,
+        "status": "validated",
+        "stderr": "",
+        "stdout": "  \u2705 openai.tool_choice_auto (HTTP 200, 1.552s)\n\n=== Summary ===\nPass: 1\nFail: 0\nSkip: 0\n",
+        "validated_at": "2026-04-13T13:42:36Z"
+      }
+    }
+  ]
+}

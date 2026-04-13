@@ -1,0 +1,36 @@
+{
+  "args": {
+    "concurrency": 2,
+    "dry_run": true,
+    "max_attempts": 3,
+    "model": null,
+    "provider": null,
+    "retry_failed": false,
+    "task": "openai.tool_choice_auto"
+  },
+  "created_at": "2026-04-13T13:41:56Z",
+  "cwd": "/home/maxime/Projects/lm15-dev/curl-fixtures",
+  "run_file": "/home/maxime/Projects/lm15-dev/curl-fixtures/pipeline/runs/20260413T134156Z.json",
+  "run_id": "20260413T134156Z",
+  "tasks": [
+    {
+      "attempt_log_files": [
+        "pipeline/logs/openai/tool_choice_auto.attempt1.log"
+      ],
+      "attempts": 1,
+      "case_file": "cases/openai/tool_choice_auto.json",
+      "description": "tool_choice: 'auto'",
+      "ended_at": "2026-04-13T13:41:56Z",
+      "feature": "tool_choice_auto",
+      "id": "openai.tool_choice_auto",
+      "last_error": null,
+      "lint": null,
+      "log_file": "pipeline/logs/openai/tool_choice_auto.log",
+      "provider": "openai",
+      "session_file": "pipeline/sessions/openai/tool_choice_auto.jsonl",
+      "started_at": "2026-04-13T13:41:56Z",
+      "status": "dry_run",
+      "validation": null
+    }
+  ]
+}
