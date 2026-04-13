@@ -65,7 +65,7 @@ openai:
     max_tool_calls:
       description: max_tool_calls limit
       status: covered
-      scope: provider
+      scope: lm15
     structured_output:
       description: text.format with json_schema response format
       status: covered
@@ -93,7 +93,7 @@ openai:
     web_search:
       description: Web search tool
       status: covered
-      scope: provider
+      scope: lm15
     file_search:
       description: File search / retrieval tool
       status: covered
@@ -101,7 +101,7 @@ openai:
     code_interpreter:
       description: Code interpreter tool
       status: covered
-      scope: provider
+      scope: lm15
     computer_use:
       description: Computer use tool
       status: covered
@@ -273,7 +273,7 @@ anthropic:
     container:
       description: Container for sandboxed execution
       status: covered
-      scope: provider
+      scope: lm15
     inference_geo:
       description: inference_geo region preference
       status: covered
@@ -377,11 +377,11 @@ gemini:
     google_search:
       description: Google Search grounding tool
       status: covered
-      scope: provider
+      scope: lm15
     code_execution:
       description: Code execution tool
       status: covered
-      scope: provider
+      scope: lm15
     cached_content:
       description: Use cachedContent for context caching
       status: covered

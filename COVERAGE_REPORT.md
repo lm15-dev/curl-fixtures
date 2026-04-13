@@ -1,6 +1,6 @@
 # lm15 Coverage Report
 
-_Generated at 2026-04-13T18:14:30Z by `coverage_report.py`._
+_Generated at 2026-04-13T18:45:08Z by `coverage_report.py`._
 
 ## Legend
 
@@ -33,16 +33,16 @@ _Generated at 2026-04-13T18:14:30Z by `coverage_report.py`._
 | tool_choice_none | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | tool_choice_specific | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | parallel_tool_calls | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| max_tool_calls | ✅ | ✅ | provider | — | — | — | — | — |
+| max_tool_calls | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | structured_output | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | structured_output_json_object | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | top_p | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | top_logprobs | ✅ | ✅ | provider | — | — | — | — | — |
 | reasoning | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | reasoning_encrypted | ✅ | ✅ | provider | — | — | — | — | — |
-| web_search | ✅ | ✅ | provider | — | — | — | — | — |
+| web_search | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | file_search | ✅ | ✅ | provider | — | — | — | — | — |
-| code_interpreter | ✅ | ✅ | provider | — | — | — | — | — |
+| code_interpreter | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | computer_use | ✅ | ✅ | provider | — | — | — | — | — |
 | previous_response_id | ✅ | ✅ | provider | — | — | — | — | — |
 | conversation | ✅ | ✅ | provider | — | — | — | — | — |
@@ -89,7 +89,7 @@ _Generated at 2026-04-13T18:14:30Z by `coverage_report.py`._
 | metadata | ✅ | ✅ | provider | — | — | — | — | — |
 | service_tier | ✅ | ✅ | provider | — | — | — | — | — |
 | output_config | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| container | ✅ | ✅ | provider | — | — | — | — | — |
+| container | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | inference_geo | ✅ | ✅ | provider | — | — | — | — | — |
 
 ## GEMINI (27 features)
@@ -119,8 +119,8 @@ _Generated at 2026-04-13T18:14:30Z by `coverage_report.py`._
 | tool_config_any | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | tool_config_none | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | safety_settings | ✅ | ✅ | provider | — | — | — | — | — |
-| google_search | ✅ | ✅ | provider | — | — | — | — | — |
-| code_execution | ✅ | ✅ | provider | — | — | — | — | — |
+| google_search | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| code_execution | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | cached_content | ✅ | ✅ | provider | — | — | — | — | — |
 | store | ✅ | ✅ | provider | — | — | — | — | — |
 
@@ -128,14 +128,14 @@ _Generated at 2026-04-13T18:14:30Z by `coverage_report.py`._
 
 | | Features | Fixtures | Live ✅ | lm15 scope | SDK tested | py | ts | go | rs | jl |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| openai | 41 | 41 | 41 | 19 | 19 | 19 | 19 | 19 | 19 | 19 |
-| anthropic | 27 | 27 | 27 | 21 | 21 | 21 | 21 | 21 | 21 | 21 |
-| gemini | 27 | 27 | 27 | 22 | 22 | 22 | 22 | 22 | 22 | 22 |
-| **Total** | **95** | **95** | **95** | **62** | **62** | **62** | **62** | **62** | **62** | **62** |
+| openai | 41 | 41 | 41 | 22 | 22 | 22 | 22 | 22 | 22 | 22 |
+| anthropic | 27 | 27 | 27 | 22 | 22 | 22 | 22 | 22 | 22 | 22 |
+| gemini | 27 | 27 | 27 | 24 | 24 | 24 | 24 | 24 | 24 | 24 |
+| **Total** | **95** | **95** | **95** | **68** | **68** | **68** | **68** | **68** | **68** | **68** |
 
 ### Coverage rates
 
-- **SDK vs lm15 scope:** 62/62 (100%)
+- **SDK vs lm15 scope:** 68/68 (100%)
 - **Fixture coverage:** 95/95 (100%)
 - **Live-tested:** 95/95 (100%)
 
