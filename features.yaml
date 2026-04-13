@@ -1,0 +1,344 @@
+# Feature matrix for curl fixtures.
+# Extracted from API reference docs. Each feature maps to one or more test cases in cases/.
+# Status: "covered" = has a fixture, "todo" = needs one, "skip" = not relevant for lm15
+#
+# Last updated: 2026-04-13
+
+openai:
+  endpoint: "POST https://api.openai.com/v1/responses"
+  doc: "api-references/openai/pages/responses--create.md"
+  features:
+    # --- Core ---
+    basic_text:
+      description: "Simple text prompt → text response"
+      status: covered
+    streaming:
+      description: "stream: true"
+      status: covered
+    system_prompt:
+      description: "instructions field (system prompt)"
+      status: covered
+    temperature:
+      description: "temperature + max_output_tokens"
+      status: covered
+    tools:
+      description: "Function calling with tools array"
+      status: covered
+
+    # --- Input types ---
+    image_url:
+      description: "Image input via URL (input_image with image_url)"
+      status: covered
+    image_file:
+      description: "Image input via file_id"
+      status: todo
+    file_input:
+      description: "File/PDF input via file object"
+      status: todo
+    multi_turn:
+      description: "Multiple user/assistant messages"
+      status: todo
+    multi_turn_tool_result:
+      description: "Conversation with tool call + tool result"
+      status: todo
+
+    # --- Tool configuration ---
+    tool_choice_auto:
+      description: "tool_choice: 'auto'"
+      status: todo
+    tool_choice_required:
+      description: "tool_choice: 'required'"
+      status: covered
+    tool_choice_none:
+      description: "tool_choice: 'none'"
+      status: covered
+    tool_choice_specific:
+      description: "tool_choice: {type: 'function', name: 'fn'}"
+      status: covered
+    parallel_tool_calls:
+      description: "parallel_tool_calls: true/false"
+      status: todo
+    max_tool_calls:
+      description: "max_tool_calls limit"
+      status: todo
+
+    # --- Output configuration ---
+    structured_output:
+      description: "text.format with json_schema response format"
+      status: covered
+    structured_output_json_object:
+      description: "text.format with json_object type"
+      status: covered
+    top_p:
+      description: "top_p sampling parameter"
+      status: covered
+    top_logprobs:
+      description: "top_logprobs for token probabilities"
+      status: todo
+
+    # --- Reasoning ---
+    reasoning:
+      description: "reasoning.effort parameter"
+      status: todo
+    reasoning_encrypted:
+      description: "reasoning with encrypted_content include"
+      status: todo
+
+    # --- Built-in tools ---
+    web_search:
+      description: "Web search tool"
+      status: todo
+    file_search:
+      description: "File search / retrieval tool"
+      status: todo
+    code_interpreter:
+      description: "Code interpreter tool"
+      status: todo
+    computer_use:
+      description: "Computer use tool"
+      status: todo
+
+    # --- Conversation / state ---
+    previous_response_id:
+      description: "Chain responses via previous_response_id"
+      status: todo
+    conversation:
+      description: "Conversation object for multi-turn"
+      status: todo
+    store:
+      description: "store: true/false for response storage"
+      status: todo
+
+    # --- Advanced ---
+    background:
+      description: "background: true for async processing"
+      status: todo
+    truncation:
+      description: "truncation: 'auto' or 'disabled'"
+      status: todo
+    service_tier:
+      description: "service_tier selection"
+      status: todo
+    metadata:
+      description: "Request metadata"
+      status: todo
+    prompt:
+      description: "Stored prompt reference"
+      status: todo
+    include:
+      description: "include array for additional output data"
+      status: todo
+    context_management:
+      description: "Context management / compaction configuration"
+      status: todo
+    prompt_cache_key:
+      description: "prompt_cache_key for caching"
+      status: todo
+    prompt_cache_retention:
+      description: "prompt_cache_retention duration"
+      status: todo
+    safety_identifier:
+      description: "safety_identifier for content filtering"
+      status: todo
+    stream_options:
+      description: "stream_options (include_obfuscation)"
+      status: todo
+    user:
+      description: "user identifier for abuse tracking"
+      status: todo
+
+anthropic:
+  endpoint: "POST https://api.anthropic.com/v1/messages"
+  doc: "api-references/anthropic/pages/messages--create.md"
+  features:
+    # --- Core ---
+    basic_text:
+      description: "Simple text prompt → text response"
+      status: covered
+    streaming:
+      description: "stream: true (SSE)"
+      status: covered
+    system_prompt:
+      description: "system field (string or content blocks)"
+      status: covered
+    temperature:
+      description: "temperature parameter"
+      status: covered
+    max_tokens:
+      description: "max_tokens (required field)"
+      status: covered  # always sent
+    tools:
+      description: "Function calling with tools array"
+      status: covered
+
+    # --- Input types ---
+    image_base64:
+      description: "Image input via base64 source"
+      status: todo
+    image_url:
+      description: "Image input via URL source"
+      status: covered
+    pdf_base64:
+      description: "PDF input via base64 document source"
+      status: todo
+    multi_turn:
+      description: "Multiple user/assistant messages"
+      status: todo
+    multi_turn_tool_result:
+      description: "Conversation with tool_use + tool_result blocks"
+      status: todo
+    system_content_blocks:
+      description: "System as array of TextBlockParam (with cache_control)"
+      status: todo
+
+    # --- Tool configuration ---
+    tool_choice_auto:
+      description: "tool_choice: {type: 'auto'}"
+      status: covered
+    tool_choice_any:
+      description: "tool_choice: {type: 'any'}"
+      status: covered
+    tool_choice_specific:
+      description: "tool_choice: {type: 'tool', name: 'fn'}"
+      status: covered
+    tool_choice_none:
+      description: "tool_choice: {type: 'none'}"
+      status: covered
+
+    # --- Output configuration ---
+    stop_sequences:
+      description: "Custom stop sequences"
+      status: todo
+    top_p:
+      description: "top_p (nucleus sampling)"
+      status: todo
+    top_k:
+      description: "top_k sampling"
+      status: todo
+
+    # --- Thinking ---
+    thinking:
+      description: "Extended thinking with thinking.type='enabled'"
+      status: covered
+    thinking_budget:
+      description: "Thinking with budget_tokens"
+      status: todo
+
+    # --- Advanced ---
+    cache_control:
+      description: "Prompt caching via cache_control on messages/system"
+      status: todo
+    metadata:
+      description: "Request metadata (user_id)"
+      status: todo
+    service_tier:
+      description: "service_tier selection"
+      status: todo
+    output_config:
+      description: "Output configuration (JSON mode etc)"
+      status: todo
+    container:
+      description: "Container for sandboxed execution"
+      status: todo
+    inference_geo:
+      description: "inference_geo region preference"
+      status: todo
+
+gemini:
+  endpoint: "POST https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
+  doc: "api-references/gemini/pages/generate-content.md"
+  features:
+    # --- Core ---
+    basic_text:
+      description: "Simple text prompt → text response"
+      status: covered
+    streaming:
+      description: "streamGenerateContent endpoint"
+      status: covered
+    system_prompt:
+      description: "systemInstruction field"
+      status: covered
+    tools:
+      description: "Function calling with tools/functionDeclarations"
+      status: covered
+
+    # --- Input types ---
+    image_inline:
+      description: "Image via inlineData (base64)"
+      status: covered
+    image_file_uri:
+      description: "Image via fileData (Google file URI)"
+      status: todo
+    audio_inline:
+      description: "Audio via inlineData"
+      status: todo
+    video_file:
+      description: "Video via fileData"
+      status: todo
+    pdf_inline:
+      description: "PDF via inlineData"
+      status: todo
+    multi_turn:
+      description: "Multi-turn conversation (multiple contents)"
+      status: todo
+    multi_turn_function_response:
+      description: "Conversation with functionCall + functionResponse"
+      status: todo
+
+    # --- Generation config ---
+    temperature:
+      description: "generationConfig.temperature"
+      status: covered
+    max_output_tokens:
+      description: "generationConfig.maxOutputTokens"
+      status: todo
+    top_p:
+      description: "generationConfig.topP"
+      status: todo
+    top_k:
+      description: "generationConfig.topK"
+      status: todo
+    stop_sequences:
+      description: "generationConfig.stopSequences"
+      status: todo
+    response_mime_type:
+      description: "generationConfig.responseMimeType (JSON mode)"
+      status: covered
+    response_schema:
+      description: "generationConfig.responseSchema (structured output)"
+      status: covered
+    thinking:
+      description: "generationConfig.thinkingConfig"
+      status: covered
+
+    # --- Tool configuration ---
+    tool_config_auto:
+      description: "toolConfig.functionCallingConfig.mode: AUTO"
+      status: todo
+    tool_config_any:
+      description: "toolConfig.functionCallingConfig.mode: ANY"
+      status: covered
+    tool_config_none:
+      description: "toolConfig.functionCallingConfig.mode: NONE"
+      status: todo
+
+    # --- Safety ---
+    safety_settings:
+      description: "Safety settings (harm categories + thresholds)"
+      status: covered
+
+    # --- Built-in tools ---
+    google_search:
+      description: "Google Search grounding tool"
+      status: todo
+    code_execution:
+      description: "Code execution tool"
+      status: todo
+
+    # --- Advanced ---
+    cached_content:
+      description: "Use cachedContent for context caching"
+      status: todo
+    store:
+      description: "Logging/storage configuration"
+      status: todo
