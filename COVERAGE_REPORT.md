@@ -1,6 +1,6 @@
 # lm15 Coverage Report
 
-_Generated at 2026-04-13T18:10:33Z by `coverage_report.py`._
+_Generated at 2026-04-13T18:14:30Z by `coverage_report.py`._
 
 ## Legend
 
@@ -32,7 +32,7 @@ _Generated at 2026-04-13T18:10:33Z by `coverage_report.py`._
 | tool_choice_required | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | tool_choice_none | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | tool_choice_specific | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| parallel_tool_calls | ✅ | ✅ | provider | — | — | — | — | — |
+| parallel_tool_calls | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | max_tool_calls | ✅ | ✅ | provider | — | — | — | — | — |
 | structured_output | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | structured_output_json_object | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
@@ -128,14 +128,14 @@ _Generated at 2026-04-13T18:10:33Z by `coverage_report.py`._
 
 | | Features | Fixtures | Live ✅ | lm15 scope | SDK tested | py | ts | go | rs | jl |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| openai | 41 | 41 | 41 | 18 | 18 | 18 | 18 | 18 | 18 | 18 |
+| openai | 41 | 41 | 41 | 19 | 19 | 19 | 19 | 19 | 19 | 19 |
 | anthropic | 27 | 27 | 27 | 21 | 21 | 21 | 21 | 21 | 21 | 21 |
 | gemini | 27 | 27 | 27 | 22 | 22 | 22 | 22 | 22 | 22 | 22 |
-| **Total** | **95** | **95** | **95** | **61** | **61** | **61** | **61** | **61** | **61** | **61** |
+| **Total** | **95** | **95** | **95** | **62** | **62** | **62** | **62** | **62** | **62** | **62** |
 
 ### Coverage rates
 
-- **SDK vs lm15 scope:** 61/61 (100%)
+- **SDK vs lm15 scope:** 62/62 (100%)
 - **Fixture coverage:** 95/95 (100%)
 - **Live-tested:** 95/95 (100%)
 

@@ -61,7 +61,7 @@ openai:
     parallel_tool_calls:
       description: 'parallel_tool_calls: true/false'
       status: covered
-      scope: provider
+      scope: lm15
     max_tool_calls:
       description: max_tool_calls limit
       status: covered
