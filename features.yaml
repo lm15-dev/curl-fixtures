@@ -270,6 +270,10 @@ anthropic:
       description: Output configuration (JSON mode etc)
       status: covered
       scope: lm15
+    web_search:
+      description: Web search via server-side tool
+      status: covered
+      scope: lm15
     container:
       description: Container for sandboxed execution
       status: covered

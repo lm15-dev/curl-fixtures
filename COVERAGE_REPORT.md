@@ -1,6 +1,6 @@
 # lm15 Coverage Report
 
-_Generated at 2026-04-13T18:45:08Z by `coverage_report.py`._
+_Generated at 2026-04-13T21:44:31Z by `coverage_report.py`._
 
 ## Legend
 
@@ -60,7 +60,7 @@ _Generated at 2026-04-13T18:45:08Z by `coverage_report.py`._
 | stream_options | ✅ | ✅ | provider | — | — | — | — | — |
 | user | ✅ | ✅ | provider | — | — | — | — | — |
 
-## ANTHROPIC (27 features)
+## ANTHROPIC (28 features)
 
 | Feature | Fixture | Live | Scope | py | ts | go | rs | jl |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
@@ -89,6 +89,7 @@ _Generated at 2026-04-13T18:45:08Z by `coverage_report.py`._
 | metadata | ✅ | ✅ | provider | — | — | — | — | — |
 | service_tier | ✅ | ✅ | provider | — | — | — | — | — |
 | output_config | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| web_search | ✅ | · | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | container | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | inference_geo | ✅ | ✅ | provider | — | — | — | — | — |
 
@@ -129,15 +130,15 @@ _Generated at 2026-04-13T18:45:08Z by `coverage_report.py`._
 | | Features | Fixtures | Live ✅ | lm15 scope | SDK tested | py | ts | go | rs | jl |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | openai | 41 | 41 | 41 | 22 | 22 | 22 | 22 | 22 | 22 | 22 |
-| anthropic | 27 | 27 | 27 | 22 | 22 | 22 | 22 | 22 | 22 | 22 |
+| anthropic | 28 | 28 | 27 | 23 | 23 | 23 | 23 | 23 | 23 | 23 |
 | gemini | 27 | 27 | 27 | 24 | 24 | 24 | 24 | 24 | 24 | 24 |
-| **Total** | **95** | **95** | **95** | **68** | **68** | **68** | **68** | **68** | **68** | **68** |
+| **Total** | **96** | **96** | **95** | **69** | **69** | **69** | **69** | **69** | **69** | **69** |
 
 ### Coverage rates
 
-- **SDK vs lm15 scope:** 68/68 (100%)
-- **Fixture coverage:** 95/95 (100%)
-- **Live-tested:** 95/95 (100%)
+- **SDK vs lm15 scope:** 69/69 (100%)
+- **Fixture coverage:** 96/96 (100%)
+- **Live-tested:** 95/96 (99%)
 
 ## How to close gaps
 
