@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-13T15:48:50Z",
+  "generated_at": "2026-04-13T16:31:03Z",
   "totals": {
     "features": 95,
     "fixtures": 95,
@@ -7,10 +7,10 @@
     "lm15_scope": 53,
     "sdk_tested": 53,
     "py": 53,
-    "ts": 12,
-    "go": 12,
-    "rs": 12,
-    "jl": 12
+    "ts": 53,
+    "go": 53,
+    "rs": 53,
+    "jl": 53
   },
   "providers": {
     "openai": {
@@ -20,10 +20,10 @@
       "lm15_scope": 16,
       "sdk_tested": 16,
       "py": 16,
-      "ts": 5,
-      "go": 5,
-      "rs": 5,
-      "jl": 5
+      "ts": 16,
+      "go": 16,
+      "rs": 16,
+      "jl": 16
     },
     "anthropic": {
       "features": 27,
@@ -32,10 +32,10 @@
       "lm15_scope": 19,
       "sdk_tested": 19,
       "py": 19,
-      "ts": 3,
-      "go": 3,
-      "rs": 3,
-      "jl": 3
+      "ts": 19,
+      "go": 19,
+      "rs": 19,
+      "jl": 19
     },
     "gemini": {
       "features": 27,
@@ -44,10 +44,10 @@
       "lm15_scope": 18,
       "sdk_tested": 18,
       "py": 18,
-      "ts": 4,
-      "go": 4,
-      "rs": 4,
-      "jl": 4
+      "ts": 18,
+      "go": 18,
+      "rs": 18,
+      "jl": 18
     }
   },
   "gaps": {}
