@@ -127,11 +127,42 @@ def infer_model(case: dict):
     return None
 
 
+def _extract_json_from_sse(raw_body: str, provider: str):
+    lines = [line for line in raw_body.splitlines() if line.startswith("data: ")]
+    payloads = []
+    for line in lines:
+        frag = line[6:]
+        if frag.strip() == "[DONE]":
+            continue
+        try:
+            payloads.append(json.loads(frag))
+        except Exception:
+            pass
+    if not payloads:
+        return None
+    if provider == "openai":
+        for p in reversed(payloads):
+            if p.get("type") == "response.completed":
+                return p.get("response")
+    if provider == "anthropic":
+        for p in reversed(payloads):
+            if p.get("type") == "message_delta" and p.get("usage"):
+                return {"usage": p.get("usage")}
+            if p.get("type") == "message_stop":
+                # no usage on stop itself usually
+                continue
+    if provider == "gemini":
+        return payloads[-1]
+    return payloads[-1]
+
+
 def extract_usage(provider: str, raw_body: str):
     try:
         data = json.loads(raw_body)
     except Exception:
-        return None
+        data = _extract_json_from_sse(raw_body, provider)
+        if data is None:
+            return None
 
     if provider == "openai":
         u = data.get("usage") or {}

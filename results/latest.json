@@ -145,281 +145,281 @@
       "tested_at": "2026-04-13T13:12:47Z"
     },
     "gemini.basic_text": {
-      "body_path": "results/bodies/gemini.basic_text/2026-04-13T13-18-47Z.txt",
+      "body_path": "results/bodies/gemini.basic_text/2026-04-13T13-22-18Z.txt",
       "case_id": "gemini.basic_text",
-      "duration_seconds": 0.963,
+      "duration_seconds": 0.904,
       "estimated_cost_usd": 1.78e-06,
       "feature": "basic_text",
       "http_code": 200,
       "provider": "gemini",
       "result": "pass",
       "stderr": null,
-      "tested_at": "2026-04-13T13:18:47Z"
+      "tested_at": "2026-04-13T13:22:18Z"
     },
     "gemini.image_inline": {
-      "body_path": "results/bodies/gemini.image_inline/2026-04-13T13-18-48Z.txt",
+      "body_path": "results/bodies/gemini.image_inline/2026-04-13T13-22-19Z.txt",
       "case_id": "gemini.image_inline",
-      "duration_seconds": 4.176,
-      "estimated_cost_usd": 2.741e-05,
+      "duration_seconds": 5.574,
+      "estimated_cost_usd": 2.812e-05,
       "feature": "image_inline",
       "http_code": 200,
       "provider": "gemini",
       "result": "pass",
       "stderr": null,
-      "tested_at": "2026-04-13T13:18:48Z"
+      "tested_at": "2026-04-13T13:22:19Z"
     },
     "gemini.response_mime_type": {
-      "body_path": "results/bodies/gemini.response_mime_type/2026-04-13T13-18-52Z.txt",
+      "body_path": "results/bodies/gemini.response_mime_type/2026-04-13T13-22-25Z.txt",
       "case_id": "gemini.response_mime_type",
-      "duration_seconds": 1.562,
-      "estimated_cost_usd": 7.439e-05,
+      "duration_seconds": 1.983,
+      "estimated_cost_usd": 0.00010279,
       "feature": "response_mime_type",
       "http_code": 200,
       "provider": "gemini",
       "result": "pass",
       "stderr": null,
-      "tested_at": "2026-04-13T13:18:52Z"
+      "tested_at": "2026-04-13T13:22:25Z"
     },
     "gemini.response_schema": {
-      "body_path": "results/bodies/gemini.response_schema/2026-04-13T13-18-54Z.txt",
+      "body_path": "results/bodies/gemini.response_schema/2026-04-13T13-22-27Z.txt",
       "case_id": "gemini.response_schema",
-      "duration_seconds": 2.847,
-      "estimated_cost_usd": 8.379e-05,
+      "duration_seconds": 2.558,
+      "estimated_cost_usd": 7.74e-05,
       "feature": "response_schema",
       "http_code": 200,
       "provider": "gemini",
       "result": "pass",
       "stderr": null,
-      "tested_at": "2026-04-13T13:18:54Z"
+      "tested_at": "2026-04-13T13:22:27Z"
     },
     "gemini.safety_settings": {
-      "body_path": "results/bodies/gemini.safety_settings/2026-04-13T13-18-57Z.txt",
+      "body_path": "results/bodies/gemini.safety_settings/2026-04-13T13-22-29Z.txt",
       "case_id": "gemini.safety_settings",
-      "duration_seconds": 5.789,
-      "estimated_cost_usd": 7.323e-05,
+      "duration_seconds": 6.144,
+      "estimated_cost_usd": 6.542e-05,
       "feature": "safety_settings",
       "http_code": 200,
       "provider": "gemini",
       "result": "pass",
       "stderr": null,
-      "tested_at": "2026-04-13T13:18:57Z"
+      "tested_at": "2026-04-13T13:22:29Z"
     },
     "gemini.streaming": {
-      "body_path": "results/bodies/gemini.streaming/2026-04-13T13-19-03Z.txt",
+      "body_path": "results/bodies/gemini.streaming/2026-04-13T13-22-35Z.txt",
       "case_id": "gemini.streaming",
-      "duration_seconds": 3.012,
-      "estimated_cost_usd": null,
+      "duration_seconds": 1.946,
+      "estimated_cost_usd": 6.66e-06,
       "feature": "streaming",
       "http_code": 200,
       "provider": "gemini",
       "result": "pass",
       "stderr": null,
-      "tested_at": "2026-04-13T13:19:03Z"
+      "tested_at": "2026-04-13T13:22:35Z"
     },
     "gemini.system_prompt": {
-      "body_path": "results/bodies/gemini.system_prompt/2026-04-13T13-19-06Z.txt",
+      "body_path": "results/bodies/gemini.system_prompt/2026-04-13T13-22-37Z.txt",
       "case_id": "gemini.system_prompt",
-      "duration_seconds": 1.221,
-      "estimated_cost_usd": 2.94e-06,
+      "duration_seconds": 1.33,
+      "estimated_cost_usd": 7.91e-06,
       "feature": "system_prompt",
       "http_code": 200,
       "provider": "gemini",
       "result": "pass",
       "stderr": null,
-      "tested_at": "2026-04-13T13:19:06Z"
+      "tested_at": "2026-04-13T13:22:37Z"
     },
     "gemini.temperature": {
-      "body_path": "results/bodies/gemini.temperature/2026-04-13T13-19-07Z.txt",
+      "body_path": "results/bodies/gemini.temperature/2026-04-13T13-22-39Z.txt",
       "case_id": "gemini.temperature",
-      "duration_seconds": 10.274,
-      "estimated_cost_usd": 4.98e-06,
+      "duration_seconds": 8.434,
+      "estimated_cost_usd": 5.69e-06,
       "feature": "temperature",
       "http_code": 200,
       "provider": "gemini",
       "result": "pass",
       "stderr": null,
-      "tested_at": "2026-04-13T13:19:07Z"
+      "tested_at": "2026-04-13T13:22:39Z"
     },
     "gemini.thinking": {
-      "body_path": "results/bodies/gemini.thinking/2026-04-13T13-19-17Z.txt",
+      "body_path": "results/bodies/gemini.thinking/2026-04-13T13-22-47Z.txt",
       "case_id": "gemini.thinking",
-      "duration_seconds": 3.813,
-      "estimated_cost_usd": 5.957e-05,
+      "duration_seconds": 4.365,
+      "estimated_cost_usd": 0.00023281,
       "feature": "thinking",
       "http_code": 200,
       "provider": "gemini",
       "result": "pass",
       "stderr": null,
-      "tested_at": "2026-04-13T13:19:17Z"
+      "tested_at": "2026-04-13T13:22:47Z"
     },
     "gemini.tool_config_any": {
-      "body_path": "results/bodies/gemini.tool_config_any/2026-04-13T13-19-21Z.txt",
+      "body_path": "results/bodies/gemini.tool_config_any/2026-04-13T13-22-52Z.txt",
       "case_id": "gemini.tool_config_any",
-      "duration_seconds": 1.492,
+      "duration_seconds": 1.332,
       "estimated_cost_usd": 2.103e-05,
       "feature": "tool_config_any",
       "http_code": 200,
       "provider": "gemini",
       "result": "pass",
       "stderr": null,
-      "tested_at": "2026-04-13T13:19:21Z"
+      "tested_at": "2026-04-13T13:22:52Z"
     },
     "gemini.tools": {
-      "body_path": "results/bodies/gemini.tools/2026-04-13T13-19-22Z.txt",
+      "body_path": "results/bodies/gemini.tools/2026-04-13T13-22-53Z.txt",
       "case_id": "gemini.tools",
-      "duration_seconds": 1.215,
+      "duration_seconds": 1.227,
       "estimated_cost_usd": 1.488e-05,
       "feature": "tools",
       "http_code": 200,
       "provider": "gemini",
       "result": "pass",
       "stderr": null,
-      "tested_at": "2026-04-13T13:19:22Z"
+      "tested_at": "2026-04-13T13:22:53Z"
     },
     "openai.basic_text": {
-      "body_path": "results/bodies/openai.basic_text/2026-04-13T13-18-31Z.txt",
+      "body_path": "results/bodies/openai.basic_text/2026-04-13T13-22-01Z.txt",
       "case_id": "openai.basic_text",
-      "duration_seconds": 0.838,
+      "duration_seconds": 1.324,
       "estimated_cost_usd": 2e-05,
       "feature": "basic_text",
       "http_code": 200,
       "provider": "openai",
       "result": "pass",
       "stderr": null,
-      "tested_at": "2026-04-13T13:18:31Z"
+      "tested_at": "2026-04-13T13:22:01Z"
     },
     "openai.image_url": {
-      "body_path": "results/bodies/openai.image_url/2026-04-13T13-18-32Z.txt",
+      "body_path": "results/bodies/openai.image_url/2026-04-13T13-22-03Z.txt",
       "case_id": "openai.image_url",
-      "duration_seconds": 1.758,
-      "estimated_cost_usd": 9.12e-05,
+      "duration_seconds": 2.355,
+      "estimated_cost_usd": 8.8e-05,
       "feature": "image_url",
       "http_code": 200,
       "provider": "openai",
       "result": "pass",
       "stderr": null,
-      "tested_at": "2026-04-13T13:18:32Z"
+      "tested_at": "2026-04-13T13:22:03Z"
     },
     "openai.streaming": {
-      "body_path": "results/bodies/openai.streaming/2026-04-13T13-18-34Z.txt",
+      "body_path": "results/bodies/openai.streaming/2026-04-13T13-22-05Z.txt",
       "case_id": "openai.streaming",
-      "duration_seconds": 0.934,
-      "estimated_cost_usd": null,
+      "duration_seconds": 2.968,
+      "estimated_cost_usd": 1.96e-05,
       "feature": "streaming",
       "http_code": 200,
       "provider": "openai",
       "result": "pass",
       "stderr": null,
-      "tested_at": "2026-04-13T13:18:34Z"
+      "tested_at": "2026-04-13T13:22:05Z"
     },
     "openai.structured_output": {
-      "body_path": "results/bodies/openai.structured_output/2026-04-13T13-18-35Z.txt",
+      "body_path": "results/bodies/openai.structured_output/2026-04-13T13-22-08Z.txt",
       "case_id": "openai.structured_output",
-      "duration_seconds": 1.583,
+      "duration_seconds": 1.535,
       "estimated_cost_usd": 0.0001428,
       "feature": "structured_output",
       "http_code": 200,
       "provider": "openai",
       "result": "pass",
       "stderr": null,
-      "tested_at": "2026-04-13T13:18:35Z"
+      "tested_at": "2026-04-13T13:22:08Z"
     },
     "openai.structured_output_json_object": {
-      "body_path": "results/bodies/openai.structured_output_json_object/2026-04-13T13-18-37Z.txt",
+      "body_path": "results/bodies/openai.structured_output_json_object/2026-04-13T13-22-10Z.txt",
       "case_id": "openai.structured_output_json_object",
-      "duration_seconds": 1.979,
-      "estimated_cost_usd": 0.000176,
+      "duration_seconds": 2.252,
+      "estimated_cost_usd": 0.0001616,
       "feature": "structured_output_json_object",
       "http_code": 200,
       "provider": "openai",
       "result": "pass",
       "stderr": null,
-      "tested_at": "2026-04-13T13:18:37Z"
+      "tested_at": "2026-04-13T13:22:10Z"
     },
     "openai.system_prompt": {
-      "body_path": "results/bodies/openai.system_prompt/2026-04-13T13-18-39Z.txt",
+      "body_path": "results/bodies/openai.system_prompt/2026-04-13T13-22-12Z.txt",
       "case_id": "openai.system_prompt",
-      "duration_seconds": 2.028,
-      "estimated_cost_usd": 0.000104,
+      "duration_seconds": 1.536,
+      "estimated_cost_usd": 0.0001088,
       "feature": "system_prompt",
       "http_code": 200,
       "provider": "openai",
       "result": "pass",
       "stderr": null,
-      "tested_at": "2026-04-13T13:18:39Z"
+      "tested_at": "2026-04-13T13:22:12Z"
     },
     "openai.temperature": {
-      "body_path": "results/bodies/openai.temperature/2026-04-13T13-18-41Z.txt",
+      "body_path": "results/bodies/openai.temperature/2026-04-13T13-22-14Z.txt",
       "case_id": "openai.temperature",
-      "duration_seconds": 1.024,
-      "estimated_cost_usd": 3.68e-05,
+      "duration_seconds": 0.77,
+      "estimated_cost_usd": 3.84e-05,
       "feature": "temperature",
       "http_code": 200,
       "provider": "openai",
       "result": "pass",
       "stderr": null,
-      "tested_at": "2026-04-13T13:18:41Z"
+      "tested_at": "2026-04-13T13:22:14Z"
     },
     "openai.tool_choice_none": {
-      "body_path": "results/bodies/openai.tool_choice_none/2026-04-13T13-18-42Z.txt",
+      "body_path": "results/bodies/openai.tool_choice_none/2026-04-13T13-22-14Z.txt",
       "case_id": "openai.tool_choice_none",
-      "duration_seconds": 0.742,
+      "duration_seconds": 0.664,
       "estimated_cost_usd": 3.48e-05,
       "feature": "tool_choice_none",
       "http_code": 200,
       "provider": "openai",
       "result": "pass",
       "stderr": null,
-      "tested_at": "2026-04-13T13:18:42Z"
+      "tested_at": "2026-04-13T13:22:14Z"
     },
     "openai.tool_choice_required": {
-      "body_path": "results/bodies/openai.tool_choice_required/2026-04-13T13-18-42Z.txt",
+      "body_path": "results/bodies/openai.tool_choice_required/2026-04-13T13-22-15Z.txt",
       "case_id": "openai.tool_choice_required",
-      "duration_seconds": 0.799,
+      "duration_seconds": 0.62,
       "estimated_cost_usd": 3.48e-05,
       "feature": "tool_choice_required",
       "http_code": 200,
       "provider": "openai",
       "result": "pass",
       "stderr": null,
-      "tested_at": "2026-04-13T13:18:42Z"
+      "tested_at": "2026-04-13T13:22:15Z"
     },
     "openai.tool_choice_specific": {
-      "body_path": "results/bodies/openai.tool_choice_specific/2026-04-13T13-18-43Z.txt",
+      "body_path": "results/bodies/openai.tool_choice_specific/2026-04-13T13-22-16Z.txt",
       "case_id": "openai.tool_choice_specific",
-      "duration_seconds": 0.737,
+      "duration_seconds": 0.811,
       "estimated_cost_usd": 3.28e-05,
       "feature": "tool_choice_specific",
       "http_code": 200,
       "provider": "openai",
       "result": "pass",
       "stderr": null,
-      "tested_at": "2026-04-13T13:18:43Z"
+      "tested_at": "2026-04-13T13:22:16Z"
     },
     "openai.tools": {
-      "body_path": "results/bodies/openai.tools/2026-04-13T13-18-44Z.txt",
+      "body_path": "results/bodies/openai.tools/2026-04-13T13-22-16Z.txt",
       "case_id": "openai.tools",
-      "duration_seconds": 0.995,
+      "duration_seconds": 0.819,
       "estimated_cost_usd": 4.4e-05,
       "feature": "tools",
       "http_code": 200,
       "provider": "openai",
       "result": "pass",
       "stderr": null,
-      "tested_at": "2026-04-13T13:18:44Z"
+      "tested_at": "2026-04-13T13:22:16Z"
     },
     "openai.top_p": {
-      "body_path": "results/bodies/openai.top_p/2026-04-13T13-18-45Z.txt",
+      "body_path": "results/bodies/openai.top_p/2026-04-13T13-22-17Z.txt",
       "case_id": "openai.top_p",
-      "duration_seconds": 1.853,
+      "duration_seconds": 0.676,
       "estimated_cost_usd": 2e-05,
       "feature": "top_p",
       "http_code": 200,
       "provider": "openai",
       "result": "pass",
       "stderr": null,
-      "tested_at": "2026-04-13T13:18:45Z"
+      "tested_at": "2026-04-13T13:22:17Z"
     }
   },
-  "generated_at": "2026-04-13T13:19:24Z"
+  "generated_at": "2026-04-13T13:22:54Z"
 }

@@ -70,6 +70,7 @@ def provider_summary(provider, pdata, latest):
     covered = sum(1 for x in features.values() if x['status'] == 'covered')
     todo = sum(1 for x in features.values() if x['status'] == 'todo')
     passed = failed = skipped = tested = 0
+    total_cost = 0.0
     for feature in features:
         r = latest.get(f'{provider}.{feature}')
         if not r:
@@ -81,7 +82,10 @@ def provider_summary(provider, pdata, latest):
             failed += 1
         elif r['result'] == 'skipped':
             skipped += 1
-    return total, covered, todo, tested, passed, failed, skipped
+        c = r.get('estimated_cost_usd')
+        if isinstance(c, (int, float)):
+            total_cost += c
+    return total, covered, todo, tested, passed, failed, skipped, total_cost
 
 
 def make_readme(data, latest):
@@ -120,11 +124,11 @@ def make_readme(data, latest):
     lines.append('')
     lines.append('## Provider summary')
     lines.append('')
-    lines.append('| Provider | Total features | Done | Todo | Last tested cases | Pass | Fail | Skipped |')
-    lines.append('|---|---:|---:|---:|---:|---:|---:|---:|')
+    lines.append('| Provider | Total features | Done | Todo | Last tested cases | Pass | Fail | Skipped | Cost to run covered tests USD |')
+    lines.append('|---|---:|---:|---:|---:|---:|---:|---:|---:|')
     for provider, pdata in data.items():
-        total, covered, todo, tested, passed, failed, skipped = provider_summary(provider, pdata, latest)
-        lines.append(f'| {provider} | {total} | {covered} | {todo} | {tested} | {passed} | {failed} | {skipped} |')
+        total, covered, todo, tested, passed, failed, skipped, total_cost = provider_summary(provider, pdata, latest)
+        lines.append(f'| {provider} | {total} | {covered} | {todo} | {tested} | {passed} | {failed} | {skipped} | {total_cost:.8f} |')
     lines.append('')
     lines.append('## Fixture matrix')
     lines.append('')
