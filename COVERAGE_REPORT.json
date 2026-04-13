@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-04-13T15:12:08Z",
+  "generated_at": "2026-04-13T15:48:50Z",
   "totals": {
     "features": 95,
     "fixtures": 95,
     "live": 95,
     "lm15_scope": 53,
-    "sdk_tested": 44,
-    "py": 44,
+    "sdk_tested": 53,
+    "py": 53,
     "ts": 12,
     "go": 12,
     "rs": 12,
@@ -18,8 +18,8 @@
       "fixtures": 41,
       "live": 41,
       "lm15_scope": 16,
-      "sdk_tested": 13,
-      "py": 13,
+      "sdk_tested": 16,
+      "py": 16,
       "ts": 5,
       "go": 5,
       "rs": 5,
@@ -30,8 +30,8 @@
       "fixtures": 27,
       "live": 27,
       "lm15_scope": 19,
-      "sdk_tested": 16,
-      "py": 16,
+      "sdk_tested": 19,
+      "py": 19,
       "ts": 3,
       "go": 3,
       "rs": 3,
@@ -42,65 +42,13 @@
       "fixtures": 27,
       "live": 27,
       "lm15_scope": 18,
-      "sdk_tested": 15,
-      "py": 15,
+      "sdk_tested": 18,
+      "py": 18,
       "ts": 4,
       "go": 4,
       "rs": 4,
       "jl": 4
     }
   },
-  "gaps": {
-    "openai": [
-      {
-        "feature": "image_url",
-        "id": "openai.image_url",
-        "live": true
-      },
-      {
-        "feature": "multi_turn",
-        "id": "openai.multi_turn",
-        "live": true
-      },
-      {
-        "feature": "multi_turn_tool_result",
-        "id": "openai.multi_turn_tool_result",
-        "live": true
-      }
-    ],
-    "anthropic": [
-      {
-        "feature": "image_url",
-        "id": "anthropic.image_url",
-        "live": true
-      },
-      {
-        "feature": "multi_turn",
-        "id": "anthropic.multi_turn",
-        "live": true
-      },
-      {
-        "feature": "multi_turn_tool_result",
-        "id": "anthropic.multi_turn_tool_result",
-        "live": true
-      }
-    ],
-    "gemini": [
-      {
-        "feature": "image_inline",
-        "id": "gemini.image_inline",
-        "live": true
-      },
-      {
-        "feature": "multi_turn",
-        "id": "gemini.multi_turn",
-        "live": true
-      },
-      {
-        "feature": "multi_turn_function_response",
-        "id": "gemini.multi_turn_function_response",
-        "live": true
-      }
-    ]
-  }
+  "gaps": {}
 }

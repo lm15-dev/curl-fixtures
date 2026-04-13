@@ -15,15 +15,30 @@
       "input": [
         {
           "role": "user",
-          "content": "What is 2 + 2? Reply with one word."
+          "content": [
+            {
+              "type": "input_text",
+              "text": "What is 2 + 2? Reply with one word."
+            }
+          ]
         },
         {
           "role": "assistant",
-          "content": "four"
+          "content": [
+            {
+              "type": "input_text",
+              "text": "four"
+            }
+          ]
         },
         {
           "role": "user",
-          "content": "Repeat your previous answer in uppercase."
+          "content": [
+            {
+              "type": "input_text",
+              "text": "Repeat your previous answer in uppercase."
+            }
+          ]
         }
       ],
       "stream": false

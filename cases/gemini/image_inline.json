@@ -19,8 +19,8 @@
               "text": "Describe this image in a few words. It is a website icon."
             },
             {
-              "inline_data": {
-                "mime_type": "image/png",
+              "inlineData": {
+                "mimeType": "image/png",
                 "data": "iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAQklEQVR4nGP8//8/Ay0BE01NH7Vg1AKqABacMoyMJBuGLUsN/SAatWDUglELRi0YtYAaAHeFQ6UG2dAPolELBt4CAIoVBz94d1SyAAAAAElFTkSuQmCC"
               }
             }
