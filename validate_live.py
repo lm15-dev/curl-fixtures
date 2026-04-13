@@ -13,6 +13,7 @@ import os
 import subprocess
 import sys
 import time
+import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -28,6 +29,10 @@ KEY_MAP = {
     "anthropic": "ANTHROPIC_API_KEY",
     "gemini": "GEMINI_API_KEY",
 }
+
+_COST_INDEX = None
+_ADDITIVE_CACHE_PROVIDERS = {"anthropic"}
+_SEPARATE_REASONING_PROVIDERS = {"gemini", "google"}
 
 
 def now_iso() -> str:
@@ -89,9 +94,132 @@ def run_curl(case: dict, api_key: str, timeout: int = 45):
     }
 
 
-def estimate_cost_usd(provider: str, case: dict, raw_body: str):
-    # Placeholder. Can be upgraded later with provider pricing tables + token parsing.
+def fetch_models_dev(timeout: float = 20.0):
+    req = urllib.request.Request("https://models.dev/api.json", headers={"User-Agent": "lm15"})
+    with urllib.request.urlopen(req, timeout=timeout) as r:
+        data = json.loads(r.read())
+    out = {}
+    providers = data.get("providers") or data
+    for provider_id, provider_payload in providers.items():
+        if not isinstance(provider_payload, dict) or "models" not in provider_payload:
+            continue
+        for model_id, m in (provider_payload.get("models") or {}).items():
+            if isinstance(m, dict) and m.get("cost"):
+                out[model_id] = {"provider": provider_id, "raw": m}
+    return out
+
+
+def get_cost_index():
+    global _COST_INDEX
+    if _COST_INDEX is None:
+        _COST_INDEX = fetch_models_dev()
+    return _COST_INDEX
+
+
+def infer_model(case: dict):
+    body = case.get("request", {}).get("body", {})
+    if isinstance(body, dict) and body.get("model"):
+        return body["model"]
+    url = case.get("request", {}).get("url", "")
+    if "/models/" in url:
+        frag = url.split("/models/", 1)[1]
+        return frag.split(":", 1)[0]
     return None
+
+
+def extract_usage(provider: str, raw_body: str):
+    try:
+        data = json.loads(raw_body)
+    except Exception:
+        return None
+
+    if provider == "openai":
+        u = data.get("usage") or {}
+        u_in = u.get("input_tokens_details") or {}
+        u_out = u.get("output_tokens_details") or {}
+        return {
+            "input_tokens": u.get("input_tokens", 0),
+            "output_tokens": u.get("output_tokens", 0),
+            "total_tokens": u.get("total_tokens", 0),
+            "reasoning_tokens": u_out.get("reasoning_tokens"),
+            "cache_read_tokens": u_in.get("cached_tokens"),
+            "input_audio_tokens": u_in.get("audio_tokens"),
+            "output_audio_tokens": u_out.get("audio_tokens"),
+        }
+    if provider == "anthropic":
+        u = data.get("usage") or {}
+        return {
+            "input_tokens": u.get("input_tokens", 0),
+            "output_tokens": u.get("output_tokens", 0),
+            "total_tokens": (u.get("input_tokens", 0) or 0) + (u.get("output_tokens", 0) or 0),
+            "cache_read_tokens": u.get("cache_read_input_tokens"),
+            "cache_write_tokens": u.get("cache_creation_input_tokens"),
+        }
+    if provider == "gemini":
+        u = data.get("usageMetadata") or {}
+        return {
+            "input_tokens": u.get("promptTokenCount", 0),
+            "output_tokens": u.get("candidatesTokenCount", 0),
+            "total_tokens": u.get("totalTokenCount", 0),
+            "cache_read_tokens": u.get("cachedContentTokenCount"),
+            "reasoning_tokens": u.get("thoughtsTokenCount"),
+        }
+    return None
+
+
+def estimate_cost_from_usage(usage: dict, spec: dict, provider: str):
+    cost = ((spec.get("raw") or {}).get("cost") or {})
+    def per_token(rate):
+        return (rate or 0) / 1_000_000
+    r_input = per_token(cost.get("input"))
+    r_output = per_token(cost.get("output"))
+    r_cache_read = per_token(cost.get("cache_read"))
+    r_cache_write = per_token(cost.get("cache_write"))
+    r_reasoning = per_token(cost.get("reasoning"))
+    r_input_audio = per_token(cost.get("input_audio"))
+    r_output_audio = per_token(cost.get("output_audio"))
+
+    cache_read = usage.get("cache_read_tokens") or 0
+    cache_write = usage.get("cache_write_tokens") or 0
+    reasoning = usage.get("reasoning_tokens") or 0
+    input_audio = usage.get("input_audio_tokens") or 0
+    output_audio = usage.get("output_audio_tokens") or 0
+
+    if provider in _ADDITIVE_CACHE_PROVIDERS:
+        text_input = (usage.get("input_tokens") or 0) - input_audio
+    else:
+        text_input = (usage.get("input_tokens") or 0) - cache_read - cache_write - input_audio
+    text_input = max(text_input, 0)
+
+    if provider in _SEPARATE_REASONING_PROVIDERS:
+        text_output = (usage.get("output_tokens") or 0) - output_audio
+    else:
+        text_output = (usage.get("output_tokens") or 0) - reasoning - output_audio
+    text_output = max(text_output, 0)
+
+    total = (
+        text_input * r_input +
+        text_output * r_output +
+        cache_read * r_cache_read +
+        cache_write * r_cache_write +
+        reasoning * r_reasoning +
+        input_audio * r_input_audio +
+        output_audio * r_output_audio
+    )
+    return round(total, 8)
+
+
+def estimate_cost_usd(provider: str, case: dict, raw_body: str):
+    usage = extract_usage(provider, raw_body)
+    if not usage:
+        return None
+    model = infer_model(case)
+    if not model:
+        return None
+    spec = get_cost_index().get(model)
+    if not spec:
+        return None
+    return estimate_cost_from_usage(usage, spec, provider)
 
 
 def save_body(case_id: str, tested_at: str, raw_body: str) -> str | None:
