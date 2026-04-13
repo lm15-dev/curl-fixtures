@@ -33,7 +33,7 @@ openai:
     file_input:
       description: File/PDF input via file object
       status: covered
-      scope: provider
+      scope: lm15
     multi_turn:
       description: Multiple user/assistant messages
       status: covered
@@ -197,7 +197,7 @@ anthropic:
     image_base64:
       description: Image input via base64 source
       status: covered
-      scope: provider
+      scope: lm15
     image_url:
       description: Image input via URL source
       status: covered
@@ -205,7 +205,7 @@ anthropic:
     pdf_base64:
       description: PDF input via base64 document source
       status: covered
-      scope: provider
+      scope: lm15
     multi_turn:
       description: Multiple user/assistant messages
       status: covered
@@ -305,19 +305,19 @@ gemini:
     image_file_uri:
       description: Image via fileData (Google file URI)
       status: covered
-      scope: provider
+      scope: lm15
     audio_inline:
       description: Audio via inlineData
       status: covered
-      scope: provider
+      scope: lm15
     video_file:
       description: Video via fileData
       status: covered
-      scope: provider
+      scope: lm15
     pdf_inline:
       description: PDF via inlineData
       status: covered
-      scope: provider
+      scope: lm15
     multi_turn:
       description: Multi-turn conversation (multiple contents)
       status: covered

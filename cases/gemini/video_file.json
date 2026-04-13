@@ -19,9 +19,9 @@
               "text": "Describe this video in one short sentence."
             },
             {
-              "file_data": {
-                "mime_type": "video/mp4",
-                "file_uri": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+              "fileData": {
+                "mimeType": "video/mp4",
+                "fileUri": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
               }
             }
           ]
