@@ -1,8 +1,3 @@
-# Rate limits
-
-> [!IMPORTANT]
-> We have updated our [Terms of Service](https://ai.google.dev/gemini-api/terms).
-
 Rate limits regulate the number of requests you can make to the Gemini API
 within a given timeframe. These limits help maintain fair usage, protect against
 abuse, and help maintain system performance for all users.
@@ -32,6 +27,32 @@ conceptually similar to TPM. Other models might have a token per day limit (TPD)
 
 Rate limits are more restricted for experimental and preview models.
 
+### Spend-based rate limits
+
+In addition to requests per minute (RPM) and tokens per minute (TPM) limits, the
+Gemini API enforces spend-based rate limits to protect against unexpected
+charges. Whether these limits apply to your account depends on your billing
+history and [usage tier](https://ai.google.dev/gemini-api/docs/rate-limits#usage-tiers).
+
+The following table shows the spend-based rate limits for each
+[usage tier](https://ai.google.dev/gemini-api/docs/rate-limits#usage-tiers). These limits are evaluated on a rolling 10-minute
+window. Whether these limits apply to your account depends on your billing
+history and account standing.
+
+| Usage tier | Spend rate limit (per 10 minutes) |
+|---|---|
+| **Free** | N/A |
+| **Tier 1** | $10 |
+| **Tier 2** | $200 |
+| **Tier 3** | $200 |
+
+If you hit a spend-based rate limit, the API returns a `429 RESOURCE_EXHAUSTED`
+error. To resolve this:
+
+- **Wait and retry** after a short period.
+- **Reduce the rate of expensive requests**, for example by using smaller context windows or shorter outputs.
+- If you consistently hit this limit during normal usage, [request a rate limit increase](https://ai.google.dev/gemini-api/docs/rate-limits#request-rate-limit-increase).
+
 ## Usage tiers
 
 Rate limits are tied to the project's usage tier. As your API usage and spending
@@ -42,10 +63,10 @@ The qualifications for Tiers 2 and 3 are based on the total cumulative spending
 on Google Cloud services (including, but not limited to, the Gemini API) for the
 billing account linked to your project.
 
-| Usage tier | Qualification | [Billing tier cap](https://ai.google.dev/gemini-api/docs/rate-limits#spend-caps) |
+| Usage tier | Qualification | [Billing tier cap](https://ai.google.dev/gemini-api/docs/billing#tier-spend-caps) |
 |---|---|---|
 | **Free** | [Active project](https://ai.google.dev/gemini-api/docs/api-key#google-cloud-projects) or free trial | N/A |
-| **Tier 1** | [Set up and link an active billing account](https://ai.google.dev/gemini-api/docs/rate-limits#setup-billing) | $250 |
+| **Tier 1** | [Set up and link an active billing account](https://ai.google.dev/gemini-api/docs/billing#setup-billing) | $250 |
 | **Tier 2** | Paid $100 + 3 days from first successful payment | $2,000 |
 | **Tier 3** | Paid $1,000 + 30 days from first successful payment | $20,000 - $100,000+ |
 
@@ -88,20 +109,25 @@ limits, separate from the non-batch API calls.
 | Text-out models |||||
 |---|---|---|---|---|
 | Gemini 3.1 Pro Preview | 5,000,000 |
-| Gemini 3.1 Flash-Lite Preview | 10,000,000 |
-| Gemini 3 Flash Preview | 3,000,000 |
+| Gemini 3.5 Flash-Lite | 10,000,000 |
+| Gemini 3.7 Flash | 3,000,000 |
+| Gemini 3.1 Flash Lite | 10,000,000 |
+| Gemini 3.1 Flash Lite Preview | 10,000,000 |
+| Gemini 3.6 Flash | 3,000,000 |
+| Gemini 3.5 Flash | 3,000,000 |
 | Gemini 2.5 Pro | 5,000,000 |
 | Gemini 2.5 Pro TTS | 25,000 |
 | Gemini 2.5 Flash | 3,000,000 |
 | Gemini 2.5 Flash Preview | 3,000,000 |
 | Gemini 2.5 Flash Image Preview | 3,000,000 |
 | Gemini 2.5 Flash TTS | 100,000 |
-| Gemini 2.5 Flash-Lite | 10,000,000 |
-| Gemini 2.5 Flash-Lite Preview | 10,000,000 |
+| Gemini 2.5 Flash Lite | 10,000,000 |
+| Gemini 2.5 Flash Lite Preview | 10,000,000 |
 | Gemini 2.0 Flash | 10,000,000 |
 | Gemini 2.0 Flash Image | 3,000,000 |
-| Gemini 2.0 Flash-Lite | 10,000,000 |
+| Gemini 2.0 Flash Lite | 10,000,000 |
 | Gemini 3.1 Flash Image Preview 🍌 | 1,000,000 |
+| Gemini 3.1 Flash Lite Image 🍌 | 2,000,000 |
 | Gemini 3 Pro Image Preview 🍌 | 2,000,000 |
 | Gemini Embedding | 500,000 |
 
@@ -111,20 +137,24 @@ limits, separate from the non-batch API calls.
 | Text-out models |||||
 |---|---|---|---|---|
 | Gemini 3.1 Pro Preview | 500,000,000 |
-| Gemini 3.1 Flash-Lite Preview | 500,000,000 |
-| Gemini 3.1 Flash Preview | 400,000,000 |
+| Gemini 3.5 Flash-Lite | 500,000,000 |
+| Gemini 3.1 Flash Lite | 500,000,000 |
+| Gemini 3.1 Flash Lite Preview | 500,000,000 |
+| Gemini 3.6 Flash | 400,000,000 |
+| Gemini 3.5 Flash | 400,000,000 |
 | Gemini 2.5 Pro | 500,000,000 |
 | Gemini 2.5 Pro TTS | 100,000 |
 | Gemini 2.5 Flash | 400,000,000 |
 | Gemini 2.5 Flash Preview | 400,000,000 |
 | Gemini 2.5 Flash Image Preview | 400,000,000 |
 | Gemini 2.5 Flash TTS | 100,000 |
-| Gemini 2.5 Flash-Lite | 500,000,000 |
-| Gemini 2.5 Flash-Lite Preview | 500,000,000 |
+| Gemini 2.5 Flash Lite | 500,000,000 |
+| Gemini 2.5 Flash Lite Preview | 500,000,000 |
 | Gemini 2.0 Flash | 1,000,000,000 |
 | Gemini 2.0 Flash Image | 400,000,000 |
-| Gemini 2.0 Flash-Lite | 1,000,000,000 |
+| Gemini 2.0 Flash Lite | 1,000,000,000 |
 | Gemini 3.1 Flash Image Preview 🍌 | 250,000,000 |
+| Gemini 3.1 Flash Lite Image 🍌 | 270,000,000 |
 | Gemini 3 Pro Image Preview 🍌 | 270,000,000 |
 | Gemini Embedding | 5,000,000 |
 
@@ -134,20 +164,24 @@ limits, separate from the non-batch API calls.
 | Text-out models |||||
 |---|---|---|---|---|
 | Gemini 3.1 Pro Preview | 1,000,000,000 |
-| Gemini 3.1 Flash-Lite Preview | 1,000,000,000 |
-| Gemini 3.1 Flash Preview | 1,000,000,000 |
+| Gemini 3.5 Flash-Lite | 1,000,000,000 |
+| Gemini 3.1 Flash Lite | 1,000,000,000 |
+| Gemini 3.1 Flash Lite Preview | 1,000,000,000 |
+| Gemini 3.6 Flash | 1,000,000,000 |
+| Gemini 3.5 Flash | 1,000,000,000 |
 | Gemini 2.5 Pro | 1,000,000,000 |
 | Gemini 2.5 Pro TTS | 1,000,000 |
 | Gemini 2.5 Flash | 1,000,000,000 |
 | Gemini 2.5 Flash Preview | 1,000,000,000 |
 | Gemini 2.5 Flash Image Preview | 1,000,000,000 |
 | Gemini 2.5 Flash TTS | 4,000,000 |
-| Gemini 2.5 Flash-Lite | 1,000,000,000 |
-| Gemini 2.5 Flash-Lite Preview | 1,000,000,000 |
+| Gemini 2.5 Flash Lite | 1,000,000,000 |
+| Gemini 2.5 Flash Lite Preview | 1,000,000,000 |
 | Gemini 2.0 Flash | 5,000,000,000 |
 | Gemini 2.0 Flash Image | 1,000,000,000 |
-| Gemini 2.0 Flash-Lite | 5,000,000,000 |
+| Gemini 2.0 Flash Lite | 5,000,000,000 |
 | Gemini 3.1 Flash Image Preview 🍌 | 750,000,000 |
+| Gemini 3.1 Flash Lite Image 🍌 | 1,000,000,000 |
 | Gemini 3 Pro Image Preview 🍌 | 1,000,000,000 |
 | Gemini Embedding | 10,000,000 |
 

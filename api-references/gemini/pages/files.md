@@ -1,6 +1,393 @@
-# Using files
-
 The Gemini API supports uploading media files separately from the prompt input, allowing your media to be reused across multiple requests and multiple prompts. For more details, check out the [Prompting with media](https://ai.google.dev/gemini-api/docs/prompting_with_media) guide.
+
+## REST Resource: files
+
+- [Resource: File](https://ai.google.dev/api/files#File)
+  - [JSON representation](https://ai.google.dev/api/files#File.SCHEMA_REPRESENTATION)
+- [VideoFileMetadata](https://ai.google.dev/api/files#VideoFileMetadata)
+  - [JSON representation](https://ai.google.dev/api/files#VideoFileMetadata.SCHEMA_REPRESENTATION)
+- [State](https://ai.google.dev/api/files#State)
+- [Source](https://ai.google.dev/api/files#Source)
+- [Methods](https://ai.google.dev/api/files#METHODS_SUMMARY)
+
+## Resource: File
+
+A file uploaded to the API.
+Fields `name` `string` Immutable. Identifier. The `File` resource name. The ID (name excluding the "files/" prefix) can contain up to 40 characters that are lowercase alphanumeric or dashes (-). The ID cannot start or end with a dash. If the name is empty on create, a unique name will be generated. Example: `files/123-456`
+`displayName` `string` Optional. The human-readable display name for the `File`. The display name must be no more than 512 characters in length, including spaces. Example: "Welcome Image"
+`mimeType` `string` Output only. MIME type of the file.
+`sizeBytes` `string (https://developers.google.com/discovery/v1/type-format format)` Output only. Size of the file in bytes.
+`createTime` ``string (`https://protobuf.dev/reference/protobuf/google.protobuf#timestamp` format)`` Output only. The timestamp of when the `File` was created.
+
+Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"`, `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"`.
+`updateTime` ``string (`https://protobuf.dev/reference/protobuf/google.protobuf#timestamp` format)`` Output only. The timestamp of when the `File` was last updated.
+
+Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"`, `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"`.
+`expirationTime` ``string (`https://protobuf.dev/reference/protobuf/google.protobuf#timestamp` format)`` Output only. The timestamp of when the `File` will be deleted. Only set if the `File` is scheduled to expire.
+
+Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"`, `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"`.
+`sha256Hash` `string (https://developers.google.com/discovery/v1/type-format format)` Output only. SHA-256 hash of the uploaded bytes.
+
+A base64-encoded string.
+`uri` `string` Output only. The uri of the `File`.
+`downloadUri` `string` Output only. The download uri of the `File`.
+`state` ``enum (`https://ai.google.dev/api/files#State`)`` Output only. Processing state of the File.
+`source` ``enum (`https://ai.google.dev/api/files#Source`)`` Source of the File.
+`error` ``object (`https://ai.google.dev/api/files#v1beta.Status`)`` Output only. Error status if File processing failed.
+`metadata` `Union type` Metadata for the File. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response: `videoMetadata` ``object (`https://ai.google.dev/api/files#VideoFileMetadata`)`` Output only. Metadata for a video.
+End of mutually exclusive fields.
+
+| JSON representation |
+|---|
+| ``` { "name": string, "displayName": string, "mimeType": string, "sizeBytes": string, "createTime": string, "updateTime": string, "expirationTime": string, "sha256Hash": string, "uri": string, "downloadUri": string, "state": enum (`https://ai.google.dev/api/files#State`), "source": enum (`https://ai.google.dev/api/files#Source`), "error": { object (`https://ai.google.dev/api/files#v1beta.Status`) }, // metadata "videoMetadata": { object (`https://ai.google.dev/api/files#VideoFileMetadata`) } // Union type } ``` |
+
+## VideoFileMetadata
+
+Metadata for a video `File`.
+Fields `videoDuration` ``string (`https://protobuf.dev/reference/protobuf/google.protobuf#duration` format)`` Duration of the video.
+
+A duration in seconds with up to nine fractional digits, ending with '`s`'. Example: `"3.5s"`.
+
+| JSON representation |
+|---|
+| ``` { "videoDuration": string } ``` |
+
+## State
+
+States for the lifecycle of a File.
+
+| Enums ||
+|---|---|
+| `STATE_UNSPECIFIED` | The default value. This value is used if the state is omitted. |
+| `PROCESSING` | File is being processed and cannot be used for inference yet. |
+| `ACTIVE` | File is processed and available for inference. |
+| `FAILED` | File failed processing. |
+
+## Source
+
+| Enums ||
+|---|---|
+| `SOURCE_UNSPECIFIED` | Used if source is not specified. |
+| `UPLOADED` | Indicates the file is uploaded by the user. |
+| `GENERATED` | Indicates the file is generated by Google. |
+| `REGISTERED` | Indicates the file is a registered, i.e. a Google Cloud Storage file. |
+
+## Method: files.get
+
+- [Endpoint](https://ai.google.dev/api/files#body.HTTP_TEMPLATE)
+- [Path parameters](https://ai.google.dev/api/files#body.PATH_PARAMETERS)
+- [Request body](https://ai.google.dev/api/files#body.request_body)
+- [Response body](https://ai.google.dev/api/files#body.response_body)
+- [Authorization scopes](https://ai.google.dev/api/files#body.aspect)
+- [Example request](https://ai.google.dev/api/files#body.codeSnippets)
+  - [Basic](https://ai.google.dev/api/files#body.codeSnippets.group)
+
+Gets the metadata for the given `File`.
+
+### Endpoint
+
+get `https://generativelanguage.googleapis.com/v1beta/{name=files/*}`   
+
+### Path parameters
+
+`name` `string` Required. The name of the `File` to get. Example: `files/abc-123` It takes the form `files/{file}`.
+
+### Request body
+
+The request body must be empty.
+
+### Example request
+
+### Python
+
+    from google import genai
+
+    client = genai.Client()
+    myfile = client.files.upload(file=media / "poem.txt")
+    file_name = myfile.name
+    print(file_name)  # "files/*"
+
+    myfile = client.files.get(name=file_name)
+    print(myfile)
+
+### Node.js
+
+    // Make sure to include the following import:
+    // import {GoogleGenAI} from '@google/genai';
+    const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+    const myfile = await ai.files.upload({
+      file: path.join(media, "poem.txt"),
+    });
+    const fileName = myfile.name;
+    console.log(fileName);
+
+    const fetchedFile = await ai.files.get({ name: fileName });
+    console.log(fetchedFile);
+
+### Go
+
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, &genai.ClientConfig{
+    	APIKey:  os.Getenv("GEMINI_API_KEY"),
+    	Backend: genai.BackendGeminiAPI,
+    })
+    if err != nil {
+    	log.Fatal(err)
+    }
+    myfile, err := client.Files.UploadFromPath(
+    	ctx,
+    	filepath.Join(getMedia(), "poem.txt"), 
+    	&genai.UploadFileConfig{
+    		MIMEType: "text/plain",
+    	},
+    )
+    if err != nil {
+    	log.Fatal(err)
+    }
+    fileName := myfile.Name
+    fmt.Println(fileName)
+    file, err := client.Files.Get(ctx, fileName, nil)
+    if err != nil {
+    	log.Fatal(err)
+    }
+    fmt.Println(file)
+
+### Shell
+
+    name=$(jq ".file.name" file_info.json)
+    # Get the file of interest to check state
+    curl https://generativelanguage.googleapis.com/v1beta/files/$name > file_info.json
+    # Print some information about the file you got
+    name=$(jq ".file.name" file_info.json)
+    echo name=$name
+    file_uri=$(jq ".file.uri" file_info.json)
+    echo file_uri=$file_uripan>.sh
+
+### Response body
+
+If successful, the response body contains an instance of `https://ai.google.dev/api/files#File`.
+
+## Method: files.list
+
+- [Endpoint](https://ai.google.dev/api/files#body.HTTP_TEMPLATE)
+- [Query parameters](https://ai.google.dev/api/files#body.QUERY_PARAMETERS)
+- [Request body](https://ai.google.dev/api/files#body.request_body)
+- [Response body](https://ai.google.dev/api/files#body.response_body)
+  - [JSON representation](https://ai.google.dev/api/files#body.ListFilesResponse.SCHEMA_REPRESENTATION)
+- [Authorization scopes](https://ai.google.dev/api/files#body.aspect)
+- [Example request](https://ai.google.dev/api/files#body.codeSnippets)
+  - [Basic](https://ai.google.dev/api/files#body.codeSnippets.group)
+
+Lists the metadata for `File`s owned by the requesting project.
+
+### Endpoint
+
+get `https://generativelanguage.googleapis.com/v1beta/files`   
+
+### Query parameters
+
+`pageSize` `integer` Optional. Maximum number of `File`s to return per page. If unspecified, defaults to 10. Maximum `pageSize` is 100.
+`pageToken` `string` Optional. A page token from a previous `files.list` call.
+
+### Request body
+
+The request body must be empty.
+
+### Example request
+
+### Python
+
+    from google import genai
+
+    client = genai.Client()
+    print("My files:")
+    for f in client.files.list():
+        print("  ", f.name)
+
+### Node.js
+
+    // Make sure to include the following import:
+    // import {GoogleGenAI} from '@google/genai';
+    const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+    console.log("My files:");
+    // Using the pager style to list files
+    const pager = await ai.files.list({ config: { pageSize: 10 } });
+    let page = pager.page;
+    const names = [];
+    while (true) {
+      for (const f of page) {
+        console.log("  ", f.name);
+        names.push(f.name);
+      }
+      if (!pager.hasNextPage()) break;
+      page = await pager.nextPage();
+    }
+
+### Go
+
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, &genai.ClientConfig{
+    	APIKey:  os.Getenv("GEMINI_API_KEY"),
+    	Backend: genai.BackendGeminiAPI,
+    })
+    if err != nil {
+    	log.Fatal(err)
+    }
+    fmt.Println("My files:")
+    page, err := client.Files.List(ctx, nil)
+    if err != nil {
+    	log.Fatal(err)
+    }
+    for _, f := range page.Items {
+    	fmt.Println("  ", f.Name)
+    }
+
+### Shell
+
+    echo "My files: "
+
+    curl "https://generativelanguage.googleapis.com/v1beta/files?key=$GEMINI_API_KEY"
+
+### Response body
+
+Response for `files.list`.
+
+If successful, the response body contains data with the following structure:
+Fields `files[]` ``object (`https://ai.google.dev/api/files#File`)`` The list of `File`s.
+`nextPageToken` `string` A token that can be sent as a `pageToken` into a subsequent `files.list` call.
+
+| JSON representation |
+|---|
+| ``` { "files": [ { object (`https://ai.google.dev/api/files#File`) } ], "nextPageToken": string } ``` |
+
+## Method: files.delete
+
+- [Endpoint](https://ai.google.dev/api/files#body.HTTP_TEMPLATE)
+- [Path parameters](https://ai.google.dev/api/files#body.PATH_PARAMETERS)
+- [Request body](https://ai.google.dev/api/files#body.request_body)
+- [Response body](https://ai.google.dev/api/files#body.response_body)
+- [Authorization scopes](https://ai.google.dev/api/files#body.aspect)
+- [Example request](https://ai.google.dev/api/files#body.codeSnippets)
+  - [Basic](https://ai.google.dev/api/files#body.codeSnippets.group)
+
+Deletes the `File`.
+
+### Endpoint
+
+delete `https://generativelanguage.googleapis.com/v1beta/{name=files/*}`   
+
+### Path parameters
+
+`name` `string` Required. The name of the `File` to delete. Example: `files/abc-123` It takes the form `files/{file}`.
+
+### Request body
+
+The request body must be empty.
+
+### Example request
+
+### Python
+
+    from google import genai
+
+    client = genai.Client()
+    myfile = client.files.upload(file=media / "poem.txt")
+
+    client.files.delete(name=myfile.name)
+
+    try:
+        result = client.models.generate_content(
+            model="gemini-3.7-flash", contents=[myfile, "Describe this file."]
+        )
+        print(result)
+    except genai.errors.ClientError:
+        pass
+
+### Node.js
+
+    // The Gen AI SDK for TypeScript and JavaScript is in preview.
+    // Some features have not been implemented.
+
+### Go
+
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, &genai.ClientConfig{
+    	APIKey:  os.Getenv("GEMINI_API_KEY"),
+    	Backend: genai.BackendGeminiAPI,
+    })
+    if err != nil {
+    	log.Fatal(err)
+    }
+    myfile, err := client.Files.UploadFromPath(
+    	ctx, 
+    	filepath.Join(getMedia(), "poem.txt"), 
+    	&genai.UploadFileConfig{
+    		MIMEType: "text/plain",
+    	},
+    )
+    if err != nil {
+    	log.Fatal(err)
+    }
+    // Delete the file.
+    _, err = client.Files.Delete(ctx, myfile.Name, nil)
+    if err != nil {
+    	log.Fatal(err)
+    }
+    // Attempt to use the deleted file.
+    parts := []*genai.Part{
+    	genai.NewPartFromURI(myfile.URI, myfile.MIMEType,),
+    	genai.NewPartFromText("Describe this file."),
+    }
+
+    contents := []*genai.Content{
+    	genai.NewContentFromParts(parts, genai.RoleUser),
+    }
+
+    _, err = client.Models.GenerateContent(ctx, "gemini-3.7-flash", contents, nil)
+    // Expect an error when using a deleted file.
+    if err != nil {
+    	return nil
+    }
+    return fmt.Errorf("expected an error when using deleted file")
+
+### Shell
+
+    curl --request "DELETE" https://generativelanguage.googleapis.com/v1beta/files/$name?key=$GEMINI_API_KEYpan>.sh
+
+### Response body
+
+If successful, the response body is an empty JSON object.
+
+## Method: files.register
+
+- [Endpoint](https://ai.google.dev/api/files#body.HTTP_TEMPLATE)
+- [Request body](https://ai.google.dev/api/files#body.request_body)
+  - [JSON representation](https://ai.google.dev/api/files#body.request_body.SCHEMA_REPRESENTATION)
+- [Response body](https://ai.google.dev/api/files#body.response_body)
+  - [JSON representation](https://ai.google.dev/api/files#body.RegisterFilesResponse.SCHEMA_REPRESENTATION)
+- [Authorization scopes](https://ai.google.dev/api/files#body.aspect)
+
+Registers a Google Cloud Storage files with FileService. The user is expected to provide Google Cloud Storage URIs and will receive a File resource for each URI in return. Note that the files are not copied, just registered with File API. If one file fails to register, the whole request fails.
+
+### Endpoint
+
+post `https://generativelanguage.googleapis.com/v1beta/files:register`   
+
+### Request body
+
+The request body contains data with the following structure:
+Fields `uris[]` `string` Required. The Google Cloud Storage URIs to register. Example: `gs://bucket/object`.
+
+### Response body
+
+Response for `files.register`.
+
+If successful, the response body contains data with the following structure:
+Fields `files[]` ``object (`https://ai.google.dev/api/files#File`)`` The registered files to be used when calling GenerateContent.
+
+| JSON representation |
+|---|
+| ``` { "files": [ { object (`https://ai.google.dev/api/files#File`) } ] } ``` |
 
 ## Method: media.upload
 
@@ -9,6 +396,7 @@ The Gemini API supports uploading media files separately from the prompt input, 
   - [JSON representation](https://ai.google.dev/api/files#body.request_body.SCHEMA_REPRESENTATION)
 - [Response body](https://ai.google.dev/api/files#body.response_body)
   - [JSON representation](https://ai.google.dev/api/files#body.CreateFileResponse.SCHEMA_REPRESENTATION)
+- [Authorization scopes](https://ai.google.dev/api/files#body.aspect)
 - [Example request](https://ai.google.dev/api/files#body.codeSnippets)
   - [Image](https://ai.google.dev/api/files#body.codeSnippets.group)
   - [Audio](https://ai.google.dev/api/files#body.codeSnippets.group_1)
@@ -43,14 +431,14 @@ Fields `file` ``object (`https://ai.google.dev/api/files#File`)`` Optional. Meta
     print(f"{myfile=}")
 
     result = client.models.generate_content(
-        model="gemini-2.0-flash",
+        model="gemini-3.7-flash",
         contents=[
             myfile,
             "\n\n",
             "Can you tell me about the instruments in this photo?",
         ],
     )
-    print(f"{result.text=}")https://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/python/files.py#L40-L54
+    print(f"{result.text=}")
 
 ### Node.js
 
@@ -64,14 +452,14 @@ Fields `file` ``object (`https://ai.google.dev/api/files#File`)`` Optional. Meta
     console.log("Uploaded file:", myfile);
 
     const result = await ai.models.generateContent({
-      model: "gemini-2.0-flash",
+      model: "gemini-3.7-flash",
       contents: createUserContent([
         createPartFromUri(myfile.uri, myfile.mimeType),
         "\n\n",
         "Can you tell me about the instruments in this photo?",
       ]),
     });
-    console.log("result.text=", result.text);https://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/javascript/files.js#L59-L76
+    console.log("result.text=", result.text);
 
 ### Go
 
@@ -105,12 +493,12 @@ Fields `file` ``object (`https://ai.google.dev/api/files#File`)`` Optional. Meta
     	genai.NewContentFromParts(parts, genai.RoleUser),
     }
 
-    response, err := client.Models.GenerateContent(ctx, "gemini-2.0-flash", contents, nil)
+    response, err := client.Models.GenerateContent(ctx, "gemini-3.7-flash", contents, nil)
     if err != nil {
     	log.Fatal(err)
     }
     text := response.Text()
-    fmt.Printf("result.text=%s\n", text)https://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/go/files.go#L59-L94
+    fmt.Printf("result.text=%s\n", text)
 
 ### Shell
 
@@ -162,7 +550,7 @@ Fields `file` ``object (`https://ai.google.dev/api/files#File`)`` Optional. Meta
     cat response.json
     echo
 
-    jq ".candidates[].content.parts[].text" response.jsonhttps://github.com/google-gemini/deprecated-generative-ai-python/blob/7a7cc5474ddaa0255a4410e05361028a24400abd/samples/rest/files.sh#L84-L133
+    jq ".candidates[].content.parts[].text" response.json
 
 ### Audio
 
@@ -175,9 +563,9 @@ Fields `file` ``object (`https://ai.google.dev/api/files#File`)`` Optional. Meta
     print(f"{myfile=}")
 
     result = client.models.generate_content(
-        model="gemini-2.0-flash", contents=[myfile, "Describe this audio clip"]
+        model="gemini-3.7-flash", contents=[myfile, "Describe this audio clip"]
     )
-    print(f"{result.text=}")https://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/python/files.py#L59-L68
+    print(f"{result.text=}")
 
 ### Node.js
 
@@ -191,13 +579,13 @@ Fields `file` ``object (`https://ai.google.dev/api/files#File`)`` Optional. Meta
     console.log("Uploaded file:", myfile);
 
     const result = await ai.models.generateContent({
-      model: "gemini-2.0-flash",
+      model: "gemini-3.7-flash",
       contents: createUserContent([
         createPartFromUri(myfile.uri, myfile.mimeType),
         "Describe this audio clip",
       ]),
     });
-    console.log("result.text=", result.text);https://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/javascript/files.js#L83-L99
+    console.log("result.text=", result.text);
 
 ### Go
 
@@ -230,12 +618,12 @@ Fields `file` ``object (`https://ai.google.dev/api/files#File`)`` Optional. Meta
     	genai.NewContentFromParts(parts, genai.RoleUser),
     }
 
-    response, err := client.Models.GenerateContent(ctx, "gemini-2.0-flash", contents, nil)
+    response, err := client.Models.GenerateContent(ctx, "gemini-3.7-flash", contents, nil)
     if err != nil {
     	log.Fatal(err)
     }
     text := response.Text()
-    fmt.Printf("result.text=%s\n", text)https://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/go/files.go#L101-L135
+    fmt.Printf("result.text=%s\n", text)
 
 ### Shell
 
@@ -284,7 +672,7 @@ Fields `file` ``object (`https://ai.google.dev/api/files#File`)`` Optional. Meta
     cat response.json
     echo
 
-    jq ".candidates[].content.parts[].text" response.jsonhttps://github.com/google-gemini/deprecated-generative-ai-python/blob/7a7cc5474ddaa0255a4410e05361028a24400abd/samples/rest/files.sh#L137-L183
+    jq ".candidates[].content.parts[].text" response.json
 
 ### Text
 
@@ -297,10 +685,10 @@ Fields `file` ``object (`https://ai.google.dev/api/files#File`)`` Optional. Meta
     print(f"{myfile=}")
 
     result = client.models.generate_content(
-        model="gemini-2.0-flash",
+        model="gemini-3.7-flash",
         contents=[myfile, "\n\n", "Can you add a few more lines to this poem?"],
     )
-    print(f"{result.text=}")https://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/python/files.py#L25-L35
+    print(f"{result.text=}")
 
 ### Node.js
 
@@ -313,14 +701,14 @@ Fields `file` ``object (`https://ai.google.dev/api/files#File`)`` Optional. Meta
     console.log("Uploaded file:", myfile);
 
     const result = await ai.models.generateContent({
-      model: "gemini-2.0-flash",
+      model: "gemini-3.7-flash",
       contents: createUserContent([
         createPartFromUri(myfile.uri, myfile.mimeType),
         "\n\n",
         "Can you add a few more lines to this poem?",
       ]),
     });
-    console.log("result.text=", result.text);https://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/javascript/files.js#L36-L52
+    console.log("result.text=", result.text);
 
 ### Go
 
@@ -355,12 +743,12 @@ Fields `file` ``object (`https://ai.google.dev/api/files#File`)`` Optional. Meta
     	genai.NewContentFromParts(parts, genai.RoleUser),
     }
 
-    response, err := client.Models.GenerateContent(ctx, "gemini-2.0-flash", contents, nil)
+    response, err := client.Models.GenerateContent(ctx, "gemini-3.7-flash", contents, nil)
     if err != nil {
     	log.Fatal(err)
     }
     text := response.Text()
-    fmt.Printf("result.text=%s\n", text)https://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/go/files.go#L16-L52
+    fmt.Printf("result.text=%s\n", text)
 
 ### Shell
 
@@ -421,7 +809,6 @@ Fields `file` ``object (`https://ai.google.dev/api/files#File`)`` Optional. Meta
     echo file_uri=$file_uri
 
     curl --request "DELETE" https://generativelanguage.googleapis.com/v1beta/files/$name?key=$GEMINI_API_KEY
-    https://github.com/google-gemini/deprecated-generative-ai-python/blob/7a7cc5474ddaa0255a4410e05361028a24400abd/samples/rest/files.sh#L16-L80
 
 ### Video
 
@@ -443,9 +830,9 @@ Fields `file` ``object (`https://ai.google.dev/api/files#File`)`` Optional. Meta
         myfile = client.files.get(name=myfile.name)
 
     result = client.models.generate_content(
-        model="gemini-2.0-flash", contents=[myfile, "Describe this video clip"]
+        model="gemini-3.7-flash", contents=[myfile, "Describe this video clip"]
     )
-    print(f"{result.text=}")https://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/python/files.py#L73-L91
+    print(f"{result.text=}")
 
 ### Node.js
 
@@ -467,13 +854,13 @@ Fields `file` ``object (`https://ai.google.dev/api/files#File`)`` Optional. Meta
     }
 
     const result = await ai.models.generateContent({
-      model: "gemini-2.0-flash",
+      model: "gemini-3.7-flash",
       contents: createUserContent([
         createPartFromUri(myfile.uri, myfile.mimeType),
         "Describe this video clip",
       ]),
     });
-    console.log("result.text=", result.text);https://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/javascript/files.js#L106-L130
+    console.log("result.text=", result.text);
 
 ### Go
 
@@ -518,12 +905,12 @@ Fields `file` ``object (`https://ai.google.dev/api/files#File`)`` Optional. Meta
     	genai.NewContentFromParts(parts, genai.RoleUser),
     }
 
-    response, err := client.Models.GenerateContent(ctx, "gemini-2.0-flash", contents, nil)
+    response, err := client.Models.GenerateContent(ctx, "gemini-3.7-flash", contents, nil)
     if err != nil {
     	log.Fatal(err)
     }
     text := response.Text()
-    fmt.Printf("result.text=%s\n", text)https://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/go/files.go#L142-L188
+    fmt.Printf("result.text=%s\n", text)
 
 ### Shell
 
@@ -583,7 +970,7 @@ Fields `file` ``object (`https://ai.google.dev/api/files#File`)`` Optional. Meta
     cat response.json
     echo
 
-    jq ".candidates[].content.parts[].text" response.jsonhttps://github.com/google-gemini/deprecated-generative-ai-python/blob/7a7cc5474ddaa0255a4410e05361028a24400abd/samples/rest/files.sh#L187-L244
+    jq ".candidates[].content.parts[].text" response.json
 
 ### PDF
 
@@ -594,10 +981,10 @@ Fields `file` ``object (`https://ai.google.dev/api/files#File`)`` Optional. Meta
     client = genai.Client()
     sample_pdf = client.files.upload(file=media / "test.pdf")
     response = client.models.generate_content(
-        model="gemini-2.0-flash",
+        model="gemini-3.7-flash",
         contents=["Give me a summary of this pdf file.", sample_pdf],
     )
-    print(response.text)https://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/python/files.py#L96-L104
+    print(response.text)
 
 ### Go
 
@@ -629,12 +1016,12 @@ Fields `file` ``object (`https://ai.google.dev/api/files#File`)`` Optional. Meta
     	genai.NewContentFromParts(parts, genai.RoleUser),
     }
 
-    response, err := client.Models.GenerateContent(ctx, "gemini-2.0-flash", contents, nil)
+    response, err := client.Models.GenerateContent(ctx, "gemini-3.7-flash", contents, nil)
     if err != nil {
     	log.Fatal(err)
     }
     text := response.Text()
-    fmt.Println(text)https://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/go/files.go#L195-L228
+    fmt.Println(text)
 
 ### Response body
 
@@ -646,391 +1033,6 @@ Fields `file` ``object (`https://ai.google.dev/api/files#File`)`` Metadata for t
 | JSON representation |
 |---|
 | ``` { "file": { object (`https://ai.google.dev/api/files#File`) } } ``` |
-
-## Method: files.get
-
-- [Endpoint](https://ai.google.dev/api/files#body.HTTP_TEMPLATE)
-- [Path parameters](https://ai.google.dev/api/files#body.PATH_PARAMETERS)
-- [Request body](https://ai.google.dev/api/files#body.request_body)
-- [Response body](https://ai.google.dev/api/files#body.response_body)
-- [Example request](https://ai.google.dev/api/files#body.codeSnippets)
-  - [Basic](https://ai.google.dev/api/files#body.codeSnippets.group)
-
-Gets the metadata for the given `File`.
-
-### Endpoint
-
-get `https://generativelanguage.googleapis.com/v1beta/{name=files/*}`   
-
-### Path parameters
-
-`name` `string` Required. The name of the `File` to get. Example: `files/abc-123` It takes the form `files/{file}`.
-
-### Request body
-
-The request body must be empty.
-
-### Example request
-
-### Python
-
-    from google import genai
-
-    client = genai.Client()
-    myfile = client.files.upload(file=media / "poem.txt")
-    file_name = myfile.name
-    print(file_name)  # "files/*"
-
-    myfile = client.files.get(name=file_name)
-    print(myfile)https://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/python/files.py#L137-L145
-
-### Node.js
-
-    // Make sure to include the following import:
-    // import {GoogleGenAI} from '@google/genai';
-    const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
-    const myfile = await ai.files.upload({
-      file: path.join(media, "poem.txt"),
-    });
-    const fileName = myfile.name;
-    console.log(fileName);
-
-    const fetchedFile = await ai.files.get({ name: fileName });
-    console.log(fetchedFile);https://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/javascript/files.js#L180-L190
-
-### Go
-
-    ctx := context.Background()
-    client, err := genai.NewClient(ctx, &genai.ClientConfig{
-    	APIKey:  os.Getenv("GEMINI_API_KEY"),
-    	Backend: genai.BackendGeminiAPI,
-    })
-    if err != nil {
-    	log.Fatal(err)
-    }
-    myfile, err := client.Files.UploadFromPath(
-    	ctx,
-    	filepath.Join(getMedia(), "poem.txt"), 
-    	&genai.UploadFileConfig{
-    		MIMEType: "text/plain",
-    	},
-    )
-    if err != nil {
-    	log.Fatal(err)
-    }
-    fileName := myfile.Name
-    fmt.Println(fileName)
-    file, err := client.Files.Get(ctx, fileName, nil)
-    if err != nil {
-    	log.Fatal(err)
-    }
-    fmt.Println(file)https://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/go/files.go#L298-L322
-
-### Shell
-
-    name=$(jq ".file.name" file_info.json)
-    # Get the file of interest to check state
-    curl https://generativelanguage.googleapis.com/v1beta/files/$name > file_info.json
-    # Print some information about the file you got
-    name=$(jq ".file.name" file_info.json)
-    echo name=$name
-    file_uri=$(jq ".file.uri" file_info.json)
-    echo file_uri=$file_urihttps://github.com/google-gemini/deprecated-generative-ai-python/blob/7a7cc5474ddaa0255a4410e05361028a24400abd/samples/rest/files.sh#L65-L73
-
-### Response body
-
-If successful, the response body contains an instance of `https://ai.google.dev/api/files#File`.
-
-## Method: files.list
-
-- [Endpoint](https://ai.google.dev/api/files#body.HTTP_TEMPLATE)
-- [Query parameters](https://ai.google.dev/api/files#body.QUERY_PARAMETERS)
-- [Request body](https://ai.google.dev/api/files#body.request_body)
-- [Response body](https://ai.google.dev/api/files#body.response_body)
-  - [JSON representation](https://ai.google.dev/api/files#body.ListFilesResponse.SCHEMA_REPRESENTATION)
-- [Example request](https://ai.google.dev/api/files#body.codeSnippets)
-  - [Basic](https://ai.google.dev/api/files#body.codeSnippets.group)
-
-Lists the metadata for `File`s owned by the requesting project.
-
-### Endpoint
-
-get `https://generativelanguage.googleapis.com/v1beta/files`   
-
-### Query parameters
-
-`pageSize` `integer` Optional. Maximum number of `File`s to return per page. If unspecified, defaults to 10. Maximum `pageSize` is 100.
-`pageToken` `string` Optional. A page token from a previous `files.list` call.
-
-### Request body
-
-The request body must be empty.
-
-### Example request
-
-### Python
-
-    from google import genai
-
-    client = genai.Client()
-    print("My files:")
-    for f in client.files.list():
-        print("  ", f.name)https://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/python/files.py#L127-L132
-
-### Node.js
-
-    // Make sure to include the following import:
-    // import {GoogleGenAI} from '@google/genai';
-    const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
-    console.log("My files:");
-    // Using the pager style to list files
-    const pager = await ai.files.list({ config: { pageSize: 10 } });
-    let page = pager.page;
-    const names = [];
-    while (true) {
-      for (const f of page) {
-        console.log("  ", f.name);
-        names.push(f.name);
-      }
-      if (!pager.hasNextPage()) break;
-      page = await pager.nextPage();
-    }https://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/javascript/files.js#L158-L173
-
-### Go
-
-    ctx := context.Background()
-    client, err := genai.NewClient(ctx, &genai.ClientConfig{
-    	APIKey:  os.Getenv("GEMINI_API_KEY"),
-    	Backend: genai.BackendGeminiAPI,
-    })
-    if err != nil {
-    	log.Fatal(err)
-    }
-    fmt.Println("My files:")
-    page, err := client.Files.List(ctx, nil)
-    if err != nil {
-    	log.Fatal(err)
-    }
-    for _, f := range page.Items {
-    	fmt.Println("  ", f.Name)
-    }https://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/go/files.go#L276-L291
-
-### Shell
-
-    echo "My files: "
-
-    curl "https://generativelanguage.googleapis.com/v1beta/files?key=$GEMINI_API_KEY"https://github.com/google-gemini/deprecated-generative-ai-python/blob/7a7cc5474ddaa0255a4410e05361028a24400abd/samples/rest/files.sh#L296-L299
-
-### Response body
-
-Response for `files.list`.
-
-If successful, the response body contains data with the following structure:
-Fields `files[]` ``object (`https://ai.google.dev/api/files#File`)`` The list of `File`s.
-`nextPageToken` `string` A token that can be sent as a `pageToken` into a subsequent `files.list` call.
-
-| JSON representation |
-|---|
-| ``` { "files": [ { object (`https://ai.google.dev/api/files#File`) } ], "nextPageToken": string } ``` |
-
-## Method: files.delete
-
-- [Endpoint](https://ai.google.dev/api/files#body.HTTP_TEMPLATE)
-- [Path parameters](https://ai.google.dev/api/files#body.PATH_PARAMETERS)
-- [Request body](https://ai.google.dev/api/files#body.request_body)
-- [Response body](https://ai.google.dev/api/files#body.response_body)
-- [Example request](https://ai.google.dev/api/files#body.codeSnippets)
-  - [Basic](https://ai.google.dev/api/files#body.codeSnippets.group)
-
-Deletes the `File`.
-
-### Endpoint
-
-delete `https://generativelanguage.googleapis.com/v1beta/{name=files/*}`   
-
-### Path parameters
-
-`name` `string` Required. The name of the `File` to delete. Example: `files/abc-123` It takes the form `files/{file}`.
-
-### Request body
-
-The request body must be empty.
-
-### Example request
-
-### Python
-
-    from google import genai
-
-    client = genai.Client()
-    myfile = client.files.upload(file=media / "poem.txt")
-
-    client.files.delete(name=myfile.name)
-
-    try:
-        result = client.models.generate_content(
-            model="gemini-2.0-flash", contents=[myfile, "Describe this file."]
-        )
-        print(result)
-    except genai.errors.ClientError:
-        passhttps://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/python/files.py#L150-L163
-
-### Node.js
-
-    // The Gen AI SDK for TypeScript and JavaScript is in preview.
-    // Some features have not been implemented.https://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/javascript/README.md#L20-L21
-
-### Go
-
-    ctx := context.Background()
-    client, err := genai.NewClient(ctx, &genai.ClientConfig{
-    	APIKey:  os.Getenv("GEMINI_API_KEY"),
-    	Backend: genai.BackendGeminiAPI,
-    })
-    if err != nil {
-    	log.Fatal(err)
-    }
-    myfile, err := client.Files.UploadFromPath(
-    	ctx, 
-    	filepath.Join(getMedia(), "poem.txt"), 
-    	&genai.UploadFileConfig{
-    		MIMEType: "text/plain",
-    	},
-    )
-    if err != nil {
-    	log.Fatal(err)
-    }
-    // Delete the file.
-    _, err = client.Files.Delete(ctx, myfile.Name, nil)
-    if err != nil {
-    	log.Fatal(err)
-    }
-    // Attempt to use the deleted file.
-    parts := []*genai.Part{
-    	genai.NewPartFromURI(myfile.URI, myfile.MIMEType,),
-    	genai.NewPartFromText("Describe this file."),
-    }
-
-    contents := []*genai.Content{
-    	genai.NewContentFromParts(parts, genai.RoleUser),
-    }
-
-    _, err = client.Models.GenerateContent(ctx, "gemini-2.0-flash", contents, nil)
-    // Expect an error when using a deleted file.
-    if err != nil {
-    	return nil
-    }
-    return fmt.Errorf("expected an error when using deleted file")https://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/go/files.go#L329-L367
-
-### Shell
-
-    curl --request "DELETE" https://generativelanguage.googleapis.com/v1beta/files/$name?key=$GEMINI_API_KEYhttps://github.com/google-gemini/deprecated-generative-ai-python/blob/7a7cc5474ddaa0255a4410e05361028a24400abd/samples/rest/files.sh#L77-L78
-
-### Response body
-
-If successful, the response body is an empty JSON object.
-
-## Method: files.register
-
-- [Endpoint](https://ai.google.dev/api/files#body.HTTP_TEMPLATE)
-- [Request body](https://ai.google.dev/api/files#body.request_body)
-  - [JSON representation](https://ai.google.dev/api/files#body.request_body.SCHEMA_REPRESENTATION)
-- [Response body](https://ai.google.dev/api/files#body.response_body)
-  - [JSON representation](https://ai.google.dev/api/files#body.RegisterFilesResponse.SCHEMA_REPRESENTATION)
-- [Authorization scopes](https://ai.google.dev/api/files#body.aspect)
-
-Registers a Google Cloud Storage files with FileService. The user is expected to provide Google Cloud Storage URIs and will receive a File resource for each URI in return. Note that the files are not copied, just registered with File API. If one file fails to register, the whole request fails.
-
-### Endpoint
-
-post `https://generativelanguage.googleapis.com/v1beta/files:register`   
-
-### Request body
-
-The request body contains data with the following structure:
-Fields `uris[]` `string` Required. The Google Cloud Storage URIs to register. Example: `gs://bucket/object`.
-
-### Response body
-
-Response for `files.register`.
-
-If successful, the response body contains data with the following structure:
-Fields `files[]` ``object (`https://ai.google.dev/api/files#File`)`` The registered files to be used when calling GenerateContent.
-
-| JSON representation |
-|---|
-| ``` { "files": [ { object (`https://ai.google.dev/api/files#File`) } ] } ``` |
-
-## REST Resource: files
-
-- [Resource: File](https://ai.google.dev/api/files#File)
-  - [JSON representation](https://ai.google.dev/api/files#File.SCHEMA_REPRESENTATION)
-- [VideoFileMetadata](https://ai.google.dev/api/files#VideoFileMetadata)
-  - [JSON representation](https://ai.google.dev/api/files#VideoFileMetadata.SCHEMA_REPRESENTATION)
-- [State](https://ai.google.dev/api/files#State)
-- [Source](https://ai.google.dev/api/files#Source)
-- [Methods](https://ai.google.dev/api/files#METHODS_SUMMARY)
-
-## Resource: File
-
-A file uploaded to the API. Next ID: 15
-Fields `name` `string` Immutable. Identifier. The `File` resource name. The ID (name excluding the "files/" prefix) can contain up to 40 characters that are lowercase alphanumeric or dashes (-). The ID cannot start or end with a dash. If the name is empty on create, a unique name will be generated. Example: `files/123-456`
-`displayName` `string` Optional. The human-readable display name for the `File`. The display name must be no more than 512 characters in length, including spaces. Example: "Welcome Image"
-`mimeType` `string` Output only. MIME type of the file.
-`sizeBytes` `string (https://developers.google.com/discovery/v1/type-format format)` Output only. Size of the file in bytes.
-`createTime` ``string (`https://protobuf.dev/reference/protobuf/google.protobuf#timestamp` format)`` Output only. The timestamp of when the `File` was created.
-
-Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"`, `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"`.
-`updateTime` ``string (`https://protobuf.dev/reference/protobuf/google.protobuf#timestamp` format)`` Output only. The timestamp of when the `File` was last updated.
-
-Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"`, `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"`.
-`expirationTime` ``string (`https://protobuf.dev/reference/protobuf/google.protobuf#timestamp` format)`` Output only. The timestamp of when the `File` will be deleted. Only set if the `File` is scheduled to expire.
-
-Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"`, `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"`.
-`sha256Hash` `string (https://developers.google.com/discovery/v1/type-format format)` Output only. SHA-256 hash of the uploaded bytes.
-
-A base64-encoded string.
-`uri` `string` Output only. The uri of the `File`.
-`downloadUri` `string` Output only. The download uri of the `File`.
-`state` ``enum (`https://ai.google.dev/api/files#State`)`` Output only. Processing state of the File.
-`source` ``enum (`https://ai.google.dev/api/files#Source`)`` Source of the File.
-`error` ``object (`https://ai.google.dev/api/files#v1beta.Status`)`` Output only. Error status if File processing failed.
-`metadata` `Union type` Metadata for the File. `metadata` can be only one of the following: `videoMetadata` ``object (`https://ai.google.dev/api/files#VideoFileMetadata`)`` Output only. Metadata for a video.
-
-| JSON representation |
-|---|
-| ``` { "name": string, "displayName": string, "mimeType": string, "sizeBytes": string, "createTime": string, "updateTime": string, "expirationTime": string, "sha256Hash": string, "uri": string, "downloadUri": string, "state": enum (`https://ai.google.dev/api/files#State`), "source": enum (`https://ai.google.dev/api/files#Source`), "error": { object (`https://ai.google.dev/api/files#v1beta.Status`) }, // metadata "videoMetadata": { object (`https://ai.google.dev/api/files#VideoFileMetadata`) } // Union type } ``` |
-
-## VideoFileMetadata
-
-Metadata for a video `File`.
-Fields `videoDuration` ``string (`https://protobuf.dev/reference/protobuf/google.protobuf#duration` format)`` Duration of the video.
-
-A duration in seconds with up to nine fractional digits, ending with '`s`'. Example: `"3.5s"`.
-
-| JSON representation |
-|---|
-| ``` { "videoDuration": string } ``` |
-
-## State
-
-States for the lifecycle of a File.
-
-| Enums ||
-|---|---|
-| `STATE_UNSPECIFIED` | The default value. This value is used if the state is omitted. |
-| `PROCESSING` | File is being processed and cannot be used for inference yet. |
-| `ACTIVE` | File is processed and available for inference. |
-| `FAILED` | File failed processing. |
-
-## Source
-
-| Enums ||
-|---|---|
-| `SOURCE_UNSPECIFIED` | Used if source is not specified. |
-| `UPLOADED` | Indicates the file is uploaded by the user. |
-| `GENERATED` | Indicates the file is generated by Google. |
-| `REGISTERED` | Indicates the file is a registered, i.e. a Google Cloud Storage file. |
 
 ## Status
 

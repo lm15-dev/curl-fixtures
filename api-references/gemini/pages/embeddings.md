@@ -1,4 +1,4 @@
-# Embeddings are a numerical representation of text input that open up a number of unique use cases, such as clustering, similarity measurement and information retrieval. For an introduction, check out the [Embeddings guide](https://ai.google.dev/gemini-api/docs/embeddings).
+Embeddings are a numerical representation of text input that open up a number of unique use cases, such as clustering, similarity measurement and information retrieval. For an introduction, check out the [Embeddings guide](https://ai.google.dev/gemini-api/docs/embeddings).
 
 Unlike generative AI models that create new content, the Gemini Embedding model is only intended to transform the format of your input data into a numerical representation. While Google is responsible for providing an embedding model that transforms the format of your input data to the numerical-format requested, users retain full responsibility for the data they input and the resulting embeddings. By using the Gemini Embedding model you confirm that you have the necessary rights to any content that you upload. Do not generate content that infringes on others' intellectual property or privacy rights. Your use of this service is subject to our [Prohibited Use Policy](https://policies.google.com/terms/generative-ai/use-policy) and [Google's Terms of Service](https://ai.google.dev/gemini-api/terms).
 
@@ -30,12 +30,16 @@ Format: `models/{model}` It takes the form `models/{model}`.
 ### Request body
 
 The request body contains data with the following structure:
-Fields `content` ``object (`https://ai.google.dev/api/caching#Content`)`` Required. The content to embed. Only the `parts.text` fields will be counted.
-`taskType` ``enum (`https://ai.google.dev/api/embeddings#v1beta.TaskType`)`` Optional. Optional task type for which the embeddings will be used. Not supported on earlier models (`models/embedding-001`).
-`title` `string` Optional. An optional title for the text. Only applicable when TaskType is `RETRIEVAL_DOCUMENT`.
+Fields `content` ``object (`https://ai.google.dev/api/generate-content#v1beta.Content`)`` Required. The content to embed. Only the `parts.text` fields will be counted.
+`taskType
+(deprecated)` ``enum (`https://ai.google.dev/api/embeddings#v1beta.TaskType`)`` Optional. Deprecated: Please use EmbedContentConfig.task_type instead. Optional task type for which the embeddings will be used. Not supported on earlier models (`models/embedding-001`).
+`title
+(deprecated)` `string` Optional. Deprecated: Please use EmbedContentConfig.title instead. An optional title for the text. Only applicable when TaskType is `RETRIEVAL_DOCUMENT`.
 
 Note: Specifying a `title` for `RETRIEVAL_DOCUMENT` provides better quality embeddings for retrieval.
-`outputDimensionality` `integer` Optional. Optional reduced dimension for the output embedding. If set, excessive values in the output embedding are truncated from the end. Supported by newer models since 2024 only. You cannot set this value if using the earlier model (`models/embedding-001`).
+`outputDimensionality
+(deprecated)` `integer` Optional. Deprecated: Please use EmbedContentConfig.output_dimensionality instead. Optional reduced dimension for the output embedding. If set, excessive values in the output embedding are truncated from the end. Supported by newer models since 2024 only. You cannot set this value if using the earlier model (`models/embedding-001`).
+`embedContentConfig` ``object (`https://ai.google.dev/api/embeddings#v1beta.EmbedContentConfig`)`` Optional. Configuration for the models.embedContent request.
 
 ### Example request
 
@@ -51,7 +55,7 @@ Note: Specifying a `title` for `RETRIEVAL_DOCUMENT` provides better quality embe
         contents=text,
         config=types.EmbedContentConfig(output_dimensionality=10),
     )
-    print(result.embeddings)https://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/python/embed.py#L22-L32
+    print(result.embeddings)
 
 ### Node.js
 
@@ -64,7 +68,7 @@ Note: Specifying a `title` for `RETRIEVAL_DOCUMENT` provides better quality embe
       contents: text,
       config: { outputDimensionality: 10 },
     });
-    console.log(result.embeddings);https://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/javascript/embed.js#L22-L31
+    console.log(result.embeddings);
 
 ### Go
 
@@ -94,7 +98,7 @@ Note: Specifying a `title` for `RETRIEVAL_DOCUMENT` provides better quality embe
     if err != nil {
     	log.Fatal(err)
     }
-    fmt.Println(string(embeddings))https://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/go/embed.go#L15-L41
+    fmt.Println(string(embeddings))
 
 ### Shell
 
@@ -105,7 +109,7 @@ Note: Specifying a `title` for `RETRIEVAL_DOCUMENT` provides better quality embe
          "content": {
          "parts":[{
          "text": "What is the meaning of life?"}]}
-        }'https://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/rest/embed.sh#L4-L12
+        }'
 
 ### Response body
 
@@ -160,7 +164,7 @@ Fields `requests[]` ``object (`https://ai.google.dev/api/batch-api#EmbedContentR
         contents=texts,
         config=types.EmbedContentConfig(output_dimensionality=10),
     )
-    print(result.embeddings)https://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/python/embed.py#L37-L51
+    print(result.embeddings)
 
 ### Node.js
 
@@ -177,7 +181,7 @@ Fields `requests[]` ``object (`https://ai.google.dev/api/batch-api#EmbedContentR
       contents: texts,
       config: { outputDimensionality: 10 },
     });
-    console.log(result.embeddings);https://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/javascript/embed.js#L38-L51
+    console.log(result.embeddings);
 
 ### Go
 
@@ -208,7 +212,7 @@ Fields `requests[]` ``object (`https://ai.google.dev/api/batch-api#EmbedContentR
     if err != nil {
     	log.Fatal(err)
     }
-    fmt.Println(string(embeddings))https://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/go/embed.go#L48-L75
+    fmt.Println(string(embeddings))
 
 ### Shell
 
@@ -229,7 +233,7 @@ Fields `requests[]` ``object (`https://ai.google.dev/api/batch-api#EmbedContentR
           "model": "models/gemini-embedding-001",
           "content": {
           "parts":[{
-            "text": "How does the brain work?"}]}, }, ]}' 2> /dev/null | grep -C 5 valueshttps://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/rest/embed.sh#L16-L34
+            "text": "How does the brain work?"}]}, }, ]}' 2> /dev/null | grep -C 5 values
 
 ### Response body
 
@@ -237,10 +241,11 @@ The response to a `BatchEmbedContentsRequest`.
 
 If successful, the response body contains data with the following structure:
 Fields `embeddings[]` ``object (`https://ai.google.dev/api/embeddings#v1beta.ContentEmbedding`)`` Output only. The embeddings for each request, in the same order as provided in the batch request.
+`usageMetadata` ``object (`https://ai.google.dev/api/embeddings#v1beta.EmbeddingUsageMetadata`)`` Output only. The usage metadata for the request.
 
 | JSON representation |
 |---|
-| ``` { "embeddings": [ { object (`https://ai.google.dev/api/embeddings#v1beta.ContentEmbedding`) } ] } ``` |
+| ``` { "embeddings": [ { object (`https://ai.google.dev/api/embeddings#v1beta.ContentEmbedding`) } ], "usageMetadata": { object (`https://ai.google.dev/api/embeddings#v1beta.EmbeddingUsageMetadata`) } } ``` |
 
 ## Method: models.asyncBatchEmbedContent
 
@@ -287,6 +292,7 @@ Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 
 `batch.batchStats` ``object (`https://ai.google.dev/api/embeddings#EmbedContentBatchStats`)`` Output only. Stats about the batch.
 `batch.state` ``enum (`https://ai.google.dev/api/batch-api#v1beta.BatchState`)`` Output only. The state of the batch.
 `batch.priority` `string (https://developers.google.com/discovery/v1/type-format format)` Optional. The priority of the batch. Batches with a higher priority value will be processed before batches with a lower priority value. Negative values are allowed. Default is 0.
+`batch.webhookConfig.uris[]` `string` Optional. If set, these webhook URIs will be used for webhook events instead of the registered webhooks.
 
 ### Response body
 
@@ -298,17 +304,18 @@ If successful, the response body contains an instance of `https://ai.google.dev/
 
 The response to an `EmbedContentRequest`.
 Fields `embedding` ``object (`https://ai.google.dev/api/embeddings#v1beta.ContentEmbedding`)`` Output only. The embedding generated from the input content.
+`usageMetadata` ``object (`https://ai.google.dev/api/embeddings#v1beta.EmbeddingUsageMetadata`)`` Output only. The usage metadata for the request.
 
 | JSON representation |
 |---|
-| ``` { "embedding": { object (`https://ai.google.dev/api/embeddings#v1beta.ContentEmbedding`) } } ``` |
+| ``` { "embedding": { object (`https://ai.google.dev/api/embeddings#v1beta.ContentEmbedding`) }, "usageMetadata": { object (`https://ai.google.dev/api/embeddings#v1beta.EmbeddingUsageMetadata`) } } ``` |
 
 ## ContentEmbedding
 
 - [JSON representation](https://ai.google.dev/api/embeddings#SCHEMA_REPRESENTATION)
 
 A list of floats representing an embedding.
-Fields `values[]` `number` The embedding values.
+Fields `values[]` `number` The embedding values. This is for 3P users only and will not be populated for 1P calls.
 `shape[]` `integer` This field stores the soft tokens tensor frame shape (e.g. \[1, 1, 256, 2048\]).
 
 | JSON representation |
@@ -379,8 +386,9 @@ Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 
 ## InputEmbedContentConfig
 
 Configures the input to the batch request.
-Fields `source` `Union type` Required. The source of the input. `source` can be only one of the following: `fileName` `string` The name of the `File` containing the input requests.
+Fields `source` `Union type` Required. The source of the input. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response: `fileName` `string` The name of the `File` containing the input requests.
 `requests` ``object (`https://ai.google.dev/api/embeddings#InlinedEmbedContentRequests`)`` The requests to be processed in the batch.
+End of mutually exclusive fields.
 
 | JSON representation |
 |---|
@@ -408,8 +416,9 @@ Fields `request` ``object (`https://ai.google.dev/api/batch-api#EmbedContentRequ
 ## EmbedContentBatchOutput
 
 The output of a batch request. This is returned in the `AsyncBatchEmbedContentResponse` or the `EmbedContentBatch.output` field.
-Fields `output` `Union type` The output of the batch request. `output` can be only one of the following: `responsesFile` `string` Output only. The file ID of the file containing the responses. The file will be a JSONL file with a single response per line. The responses will be `EmbedContentResponse` messages formatted as JSON. The responses will be written in the same order as the input requests.
+Fields `output` `Union type` The output of the batch request. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response: `responsesFile` `string` Output only. The file ID of the file containing the responses. The file will be a JSONL file with a single response per line. The responses will be `EmbedContentResponse` messages formatted as JSON. The responses will be written in the same order as the input requests.
 `inlinedResponses` ``object (`https://ai.google.dev/api/embeddings#InlinedEmbedContentResponses`)`` Output only. The responses to the requests in the batch. Returned when the batch was built using inlined requests. The responses will be in the same order as the input requests.
+End of mutually exclusive fields.
 
 | JSON representation |
 |---|
@@ -428,8 +437,9 @@ Fields `inlinedResponses[]` ``object (`https://ai.google.dev/api/embeddings#Inli
 
 The response to a single request in the batch.
 Fields `metadata` ``object (`https://protobuf.dev/reference/protobuf/google.protobuf#struct` format)`` Output only. The metadata associated with the request.
-`output` `Union type` The output of the request. `output` can be only one of the following: `error` ``object (`https://ai.google.dev/api/files#v1beta.Status`)`` Output only. The error encountered while processing the request.
+`output` `Union type` The output of the request. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response: `error` ``object (`https://ai.google.dev/api/files#v1beta.Status`)`` Output only. The error encountered while processing the request.
 `response` ``object (`https://ai.google.dev/api/embeddings#v1beta.EmbedContentResponse`)`` Output only. The response to the request.
+End of mutually exclusive fields.
 
 | JSON representation |
 |---|
@@ -446,3 +456,31 @@ Fields `requestCount` `string (https://developers.google.com/discovery/v1/type-f
 | JSON representation |
 |---|
 | ``` { "requestCount": string, "successfulRequestCount": string, "failedRequestCount": string, "pendingRequestCount": string } ``` |
+
+## EmbedContentConfig
+
+- [JSON representation](https://ai.google.dev/api/embeddings#SCHEMA_REPRESENTATION)
+
+Configurations for the EmbedContent request.
+Fields `title` `string` Optional. The title for the text.
+`taskType` ``enum (`https://ai.google.dev/api/embeddings#v1beta.TaskType`)`` Optional. The task type of the embedding.
+`autoTruncate` `boolean` Optional. Whether to silently truncate the input content if it's longer than the maximum sequence length.
+`outputDimensionality` `integer` Optional. Reduced dimension for the output embedding. If set, excessive values in the output embedding are truncated from the end.
+`documentOcr` `boolean` Optional. Whether to enable OCR for document content.
+`audioTrackExtraction` `boolean` Optional. Whether to extract audio from video content.
+
+| JSON representation |
+|---|
+| ``` { "title": string, "taskType": enum (`https://ai.google.dev/api/embeddings#v1beta.TaskType`), "autoTruncate": boolean, "outputDimensionality": integer, "documentOcr": boolean, "audioTrackExtraction": boolean } ``` |
+
+## EmbeddingUsageMetadata
+
+- [JSON representation](https://ai.google.dev/api/embeddings#SCHEMA_REPRESENTATION)
+
+Metadata on the usage of the embedding request.
+Fields `promptTokenCount` `integer` Output only. Number of tokens in the prompt.
+`promptTokenDetails[]` ``object (`https://ai.google.dev/api/generate-content#v1beta.ModalityTokenCount`)`` Output only. List of modalities that were processed in the request input.
+
+| JSON representation |
+|---|
+| ``` { "promptTokenCount": integer, "promptTokenDetails": [ { object (`https://ai.google.dev/api/generate-content#v1beta.ModalityTokenCount`) } ] } ``` |

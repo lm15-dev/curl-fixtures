@@ -30,7 +30,7 @@ chunk objects if the request is streamed.
   supported, like [text](/docs/guides/text-generation),
   [images](/docs/guides/vision), and [audio](/docs/guides/audio).
 
-  - `ChatCompletionDeveloperMessageParam = object { content, role, name }`
+  - `ChatCompletionDeveloperMessageParam object { content, role, name }`
 
     Developer-provided instructions that the model should follow, regardless of
     messages sent by the user. With o1 models and newer, `developer` messages
@@ -58,6 +58,16 @@ chunk objects if the request is streamed.
 
           - `"text"`
 
+        - `prompt_cache_breakpoint: optional object { mode }`
+
+          Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a token block.
+
+          - `mode: "explicit"`
+
+            The breakpoint mode. Always `explicit`.
+
+            - `"explicit"`
+
     - `role: "developer"`
 
       The role of the messages author, in this case `developer`.
@@ -68,7 +78,7 @@ chunk objects if the request is streamed.
 
       An optional name for the participant. Provides the model information to differentiate between participants of the same role.
 
-  - `ChatCompletionSystemMessageParam = object { content, role, name }`
+  - `ChatCompletionSystemMessageParam object { content, role, name }`
 
     Developer-provided instructions that the model should follow, regardless of
     messages sent by the user. With o1 models and newer, use `developer` messages
@@ -94,7 +104,9 @@ chunk objects if the request is streamed.
 
           The type of the content part.
 
-          - `"text"`
+        - `prompt_cache_breakpoint: optional object { mode }`
+
+          Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a token block.
 
     - `role: "system"`
 
@@ -106,7 +118,7 @@ chunk objects if the request is streamed.
 
       An optional name for the participant. Provides the model information to differentiate between participants of the same role.
 
-  - `ChatCompletionUserMessageParam = object { content, role, name }`
+  - `ChatCompletionUserMessageParam object { content, role, name }`
 
     Messages sent by an end user, containing prompts or additional context
     information.
@@ -123,7 +135,7 @@ chunk objects if the request is streamed.
 
         An array of content parts with a defined type. Supported options differ based on the [model](/docs/models) being used to generate the response. Can contain text, image, or audio inputs.
 
-        - `ChatCompletionContentPartText = object { text, type }`
+        - `ChatCompletionContentPartText object { text, type, prompt_cache_breakpoint }`
 
           Learn about [text inputs](/docs/guides/text-generation).
 
@@ -135,9 +147,11 @@ chunk objects if the request is streamed.
 
             The type of the content part.
 
-            - `"text"`
+          - `prompt_cache_breakpoint: optional object { mode }`
 
-        - `ChatCompletionContentPartImage = object { image_url, type }`
+            Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a token block.
+
+        - `ChatCompletionContentPartImage object { image_url, type, prompt_cache_breakpoint }`
 
           Learn about [image inputs](/docs/guides/vision).
 
@@ -163,7 +177,17 @@ chunk objects if the request is streamed.
 
             - `"image_url"`
 
-        - `ChatCompletionContentPartInputAudio = object { input_audio, type }`
+          - `prompt_cache_breakpoint: optional object { mode }`
+
+            Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a token block.
+
+            - `mode: "explicit"`
+
+              The breakpoint mode. Always `explicit`.
+
+              - `"explicit"`
+
+        - `ChatCompletionContentPartInputAudio object { input_audio, type, prompt_cache_breakpoint }`
 
           Learn about [audio inputs](/docs/guides/audio).
 
@@ -187,7 +211,17 @@ chunk objects if the request is streamed.
 
             - `"input_audio"`
 
-        - `FileContentPart = object { file, type }`
+          - `prompt_cache_breakpoint: optional object { mode }`
+
+            Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a token block.
+
+            - `mode: "explicit"`
+
+              The breakpoint mode. Always `explicit`.
+
+              - `"explicit"`
+
+        - `FileContentPart object { file, type, prompt_cache_breakpoint }`
 
           Learn about [file inputs](/docs/guides/text) for text generation.
 
@@ -213,6 +247,16 @@ chunk objects if the request is streamed.
 
             - `"file"`
 
+          - `prompt_cache_breakpoint: optional object { mode }`
+
+            Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a token block.
+
+            - `mode: "explicit"`
+
+              The breakpoint mode. Always `explicit`.
+
+              - `"explicit"`
+
     - `role: "user"`
 
       The role of the messages author, in this case `user`.
@@ -223,7 +267,7 @@ chunk objects if the request is streamed.
 
       An optional name for the participant. Provides the model information to differentiate between participants of the same role.
 
-  - `ChatCompletionAssistantMessageParam = object { role, audio, content, 4 more }`
+  - `ChatCompletionAssistantMessageParam object { role, audio, content, 4 more }`
 
     Messages sent by the model in response to user messages.
 
@@ -233,7 +277,7 @@ chunk objects if the request is streamed.
 
       - `"assistant"`
 
-    - `audio: optional object { id }`
+    - `audio: optional object { id }  or null`
 
       Data about a previous audio response from the model.
       [Learn more](/docs/guides/audio).
@@ -242,7 +286,7 @@ chunk objects if the request is streamed.
 
         Unique identifier for a previous audio response from the model.
 
-    - `content: optional string or array of ChatCompletionContentPartText or ChatCompletionContentPartRefusal`
+    - `content: optional string or array of ChatCompletionContentPartText or ChatCompletionContentPartRefusal or null`
 
       The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified.
 
@@ -254,21 +298,11 @@ chunk objects if the request is streamed.
 
         An array of content parts with a defined type. Can be one or more of type `text`, or exactly one of type `refusal`.
 
-        - `ChatCompletionContentPartText = object { text, type }`
+        - `ChatCompletionContentPartText object { text, type, prompt_cache_breakpoint }`
 
           Learn about [text inputs](/docs/guides/text-generation).
 
-          - `text: string`
-
-            The text content.
-
-          - `type: "text"`
-
-            The type of the content part.
-
-            - `"text"`
-
-        - `ChatCompletionContentPartRefusal = object { refusal, type }`
+        - `ChatCompletionContentPartRefusal object { refusal, type }`
 
           - `refusal: string`
 
@@ -280,7 +314,7 @@ chunk objects if the request is streamed.
 
             - `"refusal"`
 
-    - `function_call: optional object { arguments, name }`
+    - `function_call: optional object { arguments, name }  or null`
 
       Deprecated and replaced by `tool_calls`. The name and arguments of a function that should be called, as generated by the model.
 
@@ -296,7 +330,7 @@ chunk objects if the request is streamed.
 
       An optional name for the participant. Provides the model information to differentiate between participants of the same role.
 
-    - `refusal: optional string`
+    - `refusal: optional string or null`
 
       The refusal message by the assistant.
 
@@ -304,7 +338,7 @@ chunk objects if the request is streamed.
 
       The tool calls generated by the model, such as function calls.
 
-      - `ChatCompletionMessageFunctionToolCall = object { id, function, type }`
+      - `ChatCompletionMessageFunctionToolCall object { id, function, type }`
 
         A call to a function tool created by the model.
 
@@ -330,7 +364,7 @@ chunk objects if the request is streamed.
 
           - `"function"`
 
-      - `ChatCompletionMessageCustomToolCall = object { id, custom, type }`
+      - `ChatCompletionMessageCustomToolCall object { id, custom, type }`
 
         A call to a custom tool created by the model.
 
@@ -356,7 +390,7 @@ chunk objects if the request is streamed.
 
           - `"custom"`
 
-  - `ChatCompletionToolMessageParam = object { content, role, tool_call_id }`
+  - `ChatCompletionToolMessageParam object { content, role, tool_call_id }`
 
     - `content: string or array of ChatCompletionContentPartText`
 
@@ -378,7 +412,9 @@ chunk objects if the request is streamed.
 
           The type of the content part.
 
-          - `"text"`
+        - `prompt_cache_breakpoint: optional object { mode }`
+
+          Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a token block.
 
     - `role: "tool"`
 
@@ -390,9 +426,9 @@ chunk objects if the request is streamed.
 
       Tool call that this message is responding to.
 
-  - `ChatCompletionFunctionMessageParam = object { content, name, role }`
+  - `ChatCompletionFunctionMessageParam object { content, name, role }`
 
-    - `content: string`
+    - `content: string or null`
 
       The contents of the function message.
 
@@ -406,21 +442,31 @@ chunk objects if the request is streamed.
 
       - `"function"`
 
-- `model: string or "gpt-5.4" or "gpt-5.4-mini" or "gpt-5.4-nano" or 75 more`
+- `model: string or "gpt-5.6-sol" or "gpt-5.6-terra" or "gpt-5.6-luna" or 80 more`
 
-  Model ID used to generate the response, like `gpt-4o` or `o3`. OpenAI
+  Model ID used to generate the response, like `gpt-5.6-sol` or `o3`. OpenAI
   offers a wide range of models with different capabilities, performance
   characteristics, and price points. Refer to the [model guide](/docs/models)
   to browse and compare available models.
 
   - `string`
 
-  - `"gpt-5.4" or "gpt-5.4-mini" or "gpt-5.4-nano" or 75 more`
+  - `"gpt-5.6-sol" or "gpt-5.6-terra" or "gpt-5.6-luna" or 80 more`
 
-    Model ID used to generate the response, like `gpt-4o` or `o3`. OpenAI
+    Model ID used to generate the response, like `gpt-5.6-sol` or `o3`. OpenAI
     offers a wide range of models with different capabilities, performance
     characteristics, and price points. Refer to the [model guide](/docs/models)
     to browse and compare available models.
+
+    - `"gpt-5.6-sol"`
+
+    - `"gpt-5.6-terra"`
+
+    - `"gpt-5.6-luna"`
+
+    - `"gpt-5.5"`
+
+    - `"gpt-5.5-2026-04-23"`
 
     - `"gpt-5.4"`
 
@@ -578,7 +624,7 @@ chunk objects if the request is streamed.
 
     - `"gpt-3.5-turbo-16k-0613"`
 
-- `audio: optional ChatCompletionAudioParam`
+- `audio: optional ChatCompletionAudioParam or null`
 
   Parameters for audio output. Required when audio output is requested with
   `modalities: ["audio"]`. [Learn more](/docs/guides/audio).
@@ -631,7 +677,7 @@ chunk objects if the request is streamed.
 
       - `"cedar"`
 
-    - `ID = object { id }`
+    - `ID object { id }`
 
       Custom voice reference.
 
@@ -639,7 +685,7 @@ chunk objects if the request is streamed.
 
         The custom voice ID, e.g. `voice_1234`.
 
-- `frequency_penalty: optional number`
+- `frequency_penalty: optional number or null`
 
   Number between -2.0 and 2.0. Positive values penalize new tokens based on
   their existing frequency in the text so far, decreasing the model's
@@ -671,7 +717,7 @@ chunk objects if the request is streamed.
 
     - `"auto"`
 
-  - `ChatCompletionFunctionCallOption = object { name }`
+  - `ChatCompletionFunctionCallOption object { name }`
 
     Specifying a particular function via `{"name": "my_function"}` forces the model to call that function.
 
@@ -699,7 +745,7 @@ chunk objects if the request is streamed.
 
     Omitting `parameters` defines a function with an empty parameter list.
 
-- `logit_bias: optional map[number]`
+- `logit_bias: optional map[number] or null`
 
   Modify the likelihood of specified tokens appearing in the completion.
 
@@ -710,17 +756,17 @@ chunk objects if the request is streamed.
   decrease or increase likelihood of selection; values like -100 or 100
   should result in a ban or exclusive selection of the relevant token.
 
-- `logprobs: optional boolean`
+- `logprobs: optional boolean or null`
 
   Whether to return log probabilities of the output tokens or not. If true,
   returns the log probabilities of each output token returned in the
   `content` of `message`.
 
-- `max_completion_tokens: optional number`
+- `max_completion_tokens: optional number or null`
 
   An upper bound for the number of tokens that can be generated for a completion, including visible output tokens and [reasoning tokens](/docs/guides/reasoning).
 
-- `max_tokens: optional number`
+- `max_tokens: optional number or null`
 
   The maximum number of [tokens](/tokenizer) that can be generated in the
   chat completion. This value can be used to control
@@ -729,7 +775,7 @@ chunk objects if the request is streamed.
   This value is now deprecated in favor of `max_completion_tokens`, and is
   not compatible with [o-series models](/docs/guides/reasoning).
 
-- `metadata: optional Metadata`
+- `metadata: optional Metadata or null`
 
   Set of 16 key-value pairs that can be attached to an object. This can be
   useful for storing additional information about the object in a structured
@@ -738,7 +784,7 @@ chunk objects if the request is streamed.
   Keys are strings with a maximum length of 64 characters. Values are strings
   with a maximum length of 512 characters.
 
-- `modalities: optional array of "text" or "audio"`
+- `modalities: optional array of "text" or "audio" or null`
 
   Output types that you would like the model to generate.
   Most models are capable of generating text, which is the default:
@@ -755,7 +801,39 @@ chunk objects if the request is streamed.
 
   - `"audio"`
 
-- `n: optional number`
+- `moderation: optional object { model, policy }  or null`
+
+  Configuration for running moderation on the request input and generated output.
+
+  - `model: string`
+
+    The moderation model to use for moderated completions, e.g. 'omni-moderation-latest'.
+
+  - `policy: optional object { input, output }  or null`
+
+    The policy to apply to moderated response input and output.
+
+    - `input: optional object { mode }  or null`
+
+      The moderation policy for the response input.
+
+      - `mode: "score" or "block"`
+
+        - `"score"`
+
+        - `"block"`
+
+    - `output: optional object { mode }  or null`
+
+      The moderation policy for the response output.
+
+      - `mode: "score" or "block"`
+
+        - `"score"`
+
+        - `"block"`
+
+- `n: optional number or null`
 
   How many chat completion choices to generate for each input message. Note that you will be charged based on the number of generated tokens across all of the choices. Keep `n` as `1` to minimize costs.
 
@@ -763,7 +841,7 @@ chunk objects if the request is streamed.
 
   Whether to enable [parallel function calling](/docs/guides/function-calling#configuring-parallel-function-calling) during tool use.
 
-- `prediction: optional ChatCompletionPredictionContent`
+- `prediction: optional ChatCompletionPredictionContent or null`
 
   Static predicted output content, such as the content of a text file that is
   being regenerated.
@@ -791,7 +869,9 @@ chunk objects if the request is streamed.
 
         The type of the content part.
 
-        - `"text"`
+      - `prompt_cache_breakpoint: optional object { mode }`
+
+        Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a token block.
 
   - `type: "content"`
 
@@ -800,36 +880,62 @@ chunk objects if the request is streamed.
 
     - `"content"`
 
-- `presence_penalty: optional number`
+- `presence_penalty: optional number or null`
 
   Number between -2.0 and 2.0. Positive values penalize new tokens based on
   whether they appear in the text so far, increasing the model's likelihood
   to talk about new topics.
 
-- `prompt_cache_key: optional string`
+- `prompt_cache_key: optional string or null`
 
   Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the `user` field. [Learn more](/docs/guides/prompt-caching).
 
-- `prompt_cache_retention: optional "in-memory" or "24h"`
+- `prompt_cache_options: optional object { mode, ttl }`
+
+  Options for prompt caching. Supported for `gpt-5.6` and later models. By default, OpenAI automatically chooses one implicit cache breakpoint. You can add explicit breakpoints to content blocks with `prompt_cache_breakpoint`. Each request can write up to four breakpoints. For cache matching, OpenAI considers up to the latest 80 breakpoints in the conversation, without a content-block lookback limit. Set `mode` to `explicit` to disable the implicit breakpoint. The `ttl` defaults to `30m`, which is currently the only supported value. See the [prompt caching guide](/docs/guides/prompt-caching) for current details.
+
+  - `mode: optional "implicit" or "explicit"`
+
+    Controls whether OpenAI automatically creates an implicit cache breakpoint. Defaults to `implicit`. With `implicit`, OpenAI creates one implicit breakpoint and writes up to the latest three explicit breakpoints in the request. With `explicit`, OpenAI does not create an implicit breakpoint and writes up to the latest four explicit breakpoints. If there are no explicit breakpoints, the request does not use prompt caching.
+
+    - `"implicit"`
+
+    - `"explicit"`
+
+  - `ttl: optional "30m"`
+
+    The minimum lifetime applied to every implicit and explicit cache breakpoint written by the request. Defaults to `30m`, which is currently the only supported value. The backend may retain cache entries for longer.
+
+    - `"30m"`
+
+- `prompt_cache_retention: optional "in_memory" or "24h" or null`
+
+  Deprecated. Use `prompt_cache_options.ttl` instead.
 
   The retention policy for the prompt cache. Set to `24h` to enable extended prompt caching, which keeps cached prefixes active for longer, up to a maximum of 24 hours. [Learn more](/docs/guides/prompt-caching#prompt-cache-retention).
+  This field expresses a maximum retention policy, while
+  `prompt_cache_options.ttl` expresses a minimum cache lifetime. The two
+  fields are independent and do not interact.
+  For `gpt-5.5`, `gpt-5.5-pro`, and future models, only `24h` is supported.
 
-  - `"in-memory"`
+  For older models that support both `in_memory` and `24h`, the default depends on your organization's data retention policy:
+
+  - Organizations without ZDR enabled default to `24h`.
+  - Organizations with ZDR enabled default to `in_memory` when `prompt_cache_retention` is not specified.
+
+  - `"in_memory"`
 
   - `"24h"`
 
-- `reasoning_effort: optional ReasoningEffort`
+- `reasoning_effort: optional ReasoningEffort or null`
 
-  Constrains effort on reasoning for
-  [reasoning models](https://platform.openai.com/docs/guides/reasoning).
-  Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing
-  reasoning effort can result in faster responses and fewer tokens used
-  on reasoning in a response.
-
-  - `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.
-  - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
-  - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
-  - `xhigh` is supported for all models after `gpt-5.1-codex-max`.
+  Constrains effort on reasoning for reasoning models. Currently supported
+  values are `none`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`.
+  Reducing reasoning effort can result in faster responses and fewer tokens
+  used on reasoning in a response. Not all reasoning models support every
+  value. See the
+  [reasoning guide](https://platform.openai.com/docs/guides/reasoning)
+  for model-specific support.
 
   - `"none"`
 
@@ -842,6 +948,8 @@ chunk objects if the request is streamed.
   - `"high"`
 
   - `"xhigh"`
+
+  - `"max"`
 
 - `response_format: optional ResponseFormatText or ResponseFormatJSONSchema or ResponseFormatJSONObject`
 
@@ -856,7 +964,7 @@ chunk objects if the request is streamed.
   ensures the message the model generates is valid JSON. Using `json_schema`
   is preferred for models that support it.
 
-  - `ResponseFormatText = object { type }`
+  - `ResponseFormatText object { type }`
 
     Default response format. Used to generate text responses.
 
@@ -866,7 +974,7 @@ chunk objects if the request is streamed.
 
       - `"text"`
 
-  - `ResponseFormatJSONSchema = object { json_schema, type }`
+  - `ResponseFormatJSONSchema object { json_schema, type }`
 
     JSON Schema response format. Used to generate structured JSON responses.
     Learn more about [Structured Outputs](/docs/guides/structured-outputs).
@@ -890,7 +998,7 @@ chunk objects if the request is streamed.
         The schema for the response format, described as a JSON Schema object.
         Learn how to build JSON schemas [here](https://json-schema.org/).
 
-      - `strict: optional boolean`
+      - `strict: optional boolean or null`
 
         Whether to enable strict schema adherence when generating the output.
         If set to true, the model will always follow the exact schema defined
@@ -904,7 +1012,7 @@ chunk objects if the request is streamed.
 
       - `"json_schema"`
 
-  - `ResponseFormatJSONObject = object { type }`
+  - `ResponseFormatJSONObject object { type }`
 
     JSON object response format. An older method of generating JSON responses.
     Using `json_schema` is recommended for models that support it. Note that the
@@ -917,24 +1025,25 @@ chunk objects if the request is streamed.
 
       - `"json_object"`
 
-- `safety_identifier: optional string`
+- `safety_identifier: optional string or null`
 
   A stable identifier used to help detect users of your application that may be violating OpenAI's usage policies.
   The IDs should be a string that uniquely identifies each user, with a maximum length of 64 characters. We recommend hashing their username or email address, in order to avoid sending us any identifying information. [Learn more](/docs/guides/safety-best-practices#safety-identifiers).
 
-- `seed: optional number`
+- `seed: optional number or null`
 
   This feature is in Beta.
   If specified, our system will make a best effort to sample deterministically, such that repeated requests with the same `seed` and parameters should return the same result.
   Determinism is not guaranteed, and you should refer to the `system_fingerprint` response parameter to monitor changes in the backend.
 
-- `service_tier: optional "auto" or "default" or "flex" or 2 more`
+- `service_tier: optional "auto" or "default" or "flex" or 3 more or null`
 
   Specifies the processing type used for serving the request.
 
   - If set to 'auto', then the request will be processed with the service tier configured in the Project settings. Unless otherwise configured, the Project will use 'default'.
   - If set to 'default', then the request will be processed with the standard pricing and performance for the selected model.
-  - If set to '[flex](/docs/guides/flex-processing)' or '[priority](https://openai.com/api-priority-processing/)', then the request will be processed with the corresponding service tier.
+  - If set to '[flex](/docs/guides/flex-processing)', then the request will be processed with the Flex Processing service tier.
+  - To opt-in to [Fast mode](/api/docs/guides/fast-mode) at the request level, include the `service_tier=fast` or `service_tier=priority` parameter for Responses or Chat Completions. The response will show `service_tier=priority` regardless of if you specify `service_tier=fast` or `priority` in your request.
   - When not set, the default behavior is 'auto'.
 
   When the `service_tier` parameter is set, the response body will include the `service_tier` value based on the processing mode actually used to serve the request. This response value may be different from the value set in the parameter.
@@ -949,7 +1058,9 @@ chunk objects if the request is streamed.
 
   - `"priority"`
 
-- `stop: optional string or array of string`
+  - `"fast"`
+
+- `stop: optional string or array of string or null`
 
   Not supported with latest reasoning models `o3` and `o4-mini`.
 
@@ -960,7 +1071,7 @@ chunk objects if the request is streamed.
 
   - `array of string`
 
-- `store: optional boolean`
+- `store: optional boolean or null`
 
   Whether or not to store the output of this chat completion request for
   use in our [model distillation](/docs/guides/distillation) or
@@ -968,7 +1079,7 @@ chunk objects if the request is streamed.
 
   Supports text and image inputs. Note: image inputs over 8MB will be dropped.
 
-- `stream: optional boolean`
+- `stream: optional boolean or null`
 
   If set to true, the model response data will be streamed to the client
   as it is generated using [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format).
@@ -976,7 +1087,7 @@ chunk objects if the request is streamed.
   for more information, along with the [streaming responses](/docs/guides/streaming-responses)
   guide for more information on how to handle the streaming events.
 
-- `stream_options: optional ChatCompletionStreamOptions`
+- `stream_options: optional ChatCompletionStreamOptions or null`
 
   Options for streaming response. Only set this when you set `stream: true`.
 
@@ -1001,7 +1112,7 @@ chunk objects if the request is streamed.
     value. **NOTE:** If the stream is interrupted, you may not receive the
     final usage chunk which contains the total token usage for the request.
 
-- `temperature: optional number`
+- `temperature: optional number or null`
 
   What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
   We generally recommend altering this or `top_p` but not both.
@@ -1026,7 +1137,7 @@ chunk objects if the request is streamed.
 
     - `"required"`
 
-  - `ChatCompletionAllowedToolChoice = object { allowed_tools, type }`
+  - `ChatCompletionAllowedToolChoice object { allowed_tools, type }`
 
     Constrains the tools available to the model to a pre-defined set.
 
@@ -1066,7 +1177,7 @@ chunk objects if the request is streamed.
 
       - `"allowed_tools"`
 
-  - `ChatCompletionNamedToolChoice = object { function, type }`
+  - `ChatCompletionNamedToolChoice object { function, type }`
 
     Specifies a tool the model should use. Use to force the model to call a specific function.
 
@@ -1082,7 +1193,7 @@ chunk objects if the request is streamed.
 
       - `"function"`
 
-  - `ChatCompletionNamedToolChoiceCustom = object { custom, type }`
+  - `ChatCompletionNamedToolChoiceCustom object { custom, type }`
 
     Specifies a tool the model should use. Use to force the model to call a specific custom tool.
 
@@ -1104,7 +1215,7 @@ chunk objects if the request is streamed.
   [custom tools](/docs/guides/function-calling#custom-tools) or
   [function tools](/docs/guides/function-calling).
 
-  - `ChatCompletionFunctionTool = object { function, type }`
+  - `ChatCompletionFunctionTool object { function, type }`
 
     A function tool that can be used to generate a response.
 
@@ -1124,7 +1235,7 @@ chunk objects if the request is streamed.
 
         Omitting `parameters` defines a function with an empty parameter list.
 
-      - `strict: optional boolean`
+      - `strict: optional boolean or null`
 
         Whether to enable strict schema adherence when generating the function call. If set to true, the model will follow the exact schema defined in the `parameters` field. Only a subset of JSON Schema is supported when `strict` is `true`. Learn more about Structured Outputs in the [function calling guide](/docs/guides/function-calling).
 
@@ -1134,7 +1245,7 @@ chunk objects if the request is streamed.
 
       - `"function"`
 
-  - `ChatCompletionCustomTool = object { custom, type }`
+  - `ChatCompletionCustomTool object { custom, type }`
 
     A custom tool that processes input using a specified format.
 
@@ -1154,7 +1265,7 @@ chunk objects if the request is streamed.
 
         The input format for the custom tool. Default is unconstrained text.
 
-        - `TextFormat = object { type }`
+        - `Text object { type }`
 
           Unconstrained free-form text.
 
@@ -1164,7 +1275,7 @@ chunk objects if the request is streamed.
 
             - `"text"`
 
-        - `GrammarFormat = object { grammar, type }`
+        - `Grammar object { grammar, type }`
 
           A grammar defined by the user.
 
@@ -1196,13 +1307,15 @@ chunk objects if the request is streamed.
 
       - `"custom"`
 
-- `top_logprobs: optional number`
+- `top_logprobs: optional number or null`
 
-  An integer between 0 and 20 specifying the number of most likely tokens to
-  return at each token position, each with an associated log probability.
+  An integer between 0 and 20 specifying the maximum number of most likely
+  tokens to return at each token position, each with an associated log
+  probability. In some cases, the number of returned tokens may be fewer than
+  requested.
   `logprobs` must be set to `true` if this parameter is used.
 
-- `top_p: optional number`
+- `top_p: optional number or null`
 
   An alternative to sampling with temperature, called nucleus sampling,
   where the model considers the results of the tokens with top_p probability
@@ -1217,11 +1330,12 @@ chunk objects if the request is streamed.
   A stable identifier for your end-users.
   Used to boost cache hit rates by better bucketing similar requests and  to help OpenAI detect and prevent abuse. [Learn more](/docs/guides/safety-best-practices#safety-identifiers).
 
-- `verbosity: optional "low" or "medium" or "high"`
+- `verbosity: optional "low" or "medium" or "high" or null`
 
   Constrains the verbosity of the model's response. Lower values will result in
   more concise responses, while higher values will result in more verbose responses.
-  Currently supported values are `low`, `medium`, and `high`.
+  Currently supported values are `low`, `medium`, and `high`. The default is
+  `medium`.
 
   - `"low"`
 
@@ -1245,7 +1359,7 @@ chunk objects if the request is streamed.
 
     - `"high"`
 
-  - `user_location: optional object { approximate, type }`
+  - `user_location: optional object { approximate, type }  or null`
 
     Approximate location parameters for the search.
 
@@ -1280,7 +1394,7 @@ chunk objects if the request is streamed.
 
 ### Returns
 
-- `ChatCompletion = object { id, choices, created, 5 more }`
+- `ChatCompletion object { id, choices, created, 7 more }`
 
   Represents a chat completion response returned by model, based on the provided input.
 
@@ -1298,6 +1412,7 @@ chunk objects if the request is streamed.
       `length` if the maximum number of tokens specified in the request was reached,
       `content_filter` if content was omitted due to a flag from our content filters,
       `tool_calls` if the model called a tool, or `function_call` (deprecated) if the model called a function.
+      Read the [Model Spec](https://model-spec.openai.com/2025-12-18.html) for more.
 
       - `"stop"`
 
@@ -1313,11 +1428,11 @@ chunk objects if the request is streamed.
 
       The index of the choice in the list of choices.
 
-    - `logprobs: object { content, refusal }`
+    - `logprobs: object { content, refusal }  or null`
 
       Log probability information for the choice.
 
-      - `content: array of ChatCompletionTokenLogprob`
+      - `content: array of ChatCompletionTokenLogprob or null`
 
         A list of message content tokens with log probability information.
 
@@ -1325,7 +1440,7 @@ chunk objects if the request is streamed.
 
           The token.
 
-        - `bytes: array of number`
+        - `bytes: array of number or null`
 
           A list of integers representing the UTF-8 bytes representation of the token. Useful in instances where characters are represented by multiple tokens and their byte representations must be combined to generate the correct text representation. Can be `null` if there is no bytes representation for the token.
 
@@ -1335,13 +1450,13 @@ chunk objects if the request is streamed.
 
         - `top_logprobs: array of object { token, bytes, logprob }`
 
-          List of the most likely tokens and their log probability, at this token position. In rare cases, there may be fewer than the number of requested `top_logprobs` returned.
+          List of the most likely tokens and their log probability, at this token position. The number of entries may be fewer than the requested `top_logprobs`.
 
           - `token: string`
 
             The token.
 
-          - `bytes: array of number`
+          - `bytes: array of number or null`
 
             A list of integers representing the UTF-8 bytes representation of the token. Useful in instances where characters are represented by multiple tokens and their byte representations must be combined to generate the correct text representation. Can be `null` if there is no bytes representation for the token.
 
@@ -1349,7 +1464,7 @@ chunk objects if the request is streamed.
 
             The log probability of this token, if it is within the top 20 most likely tokens. Otherwise, the value `-9999.0` is used to signify that the token is very unlikely.
 
-      - `refusal: array of ChatCompletionTokenLogprob`
+      - `refusal: array of ChatCompletionTokenLogprob or null`
 
         A list of message refusal tokens with log probability information.
 
@@ -1357,7 +1472,7 @@ chunk objects if the request is streamed.
 
           The token.
 
-        - `bytes: array of number`
+        - `bytes: array of number or null`
 
           A list of integers representing the UTF-8 bytes representation of the token. Useful in instances where characters are represented by multiple tokens and their byte representations must be combined to generate the correct text representation. Can be `null` if there is no bytes representation for the token.
 
@@ -1367,29 +1482,17 @@ chunk objects if the request is streamed.
 
         - `top_logprobs: array of object { token, bytes, logprob }`
 
-          List of the most likely tokens and their log probability, at this token position. In rare cases, there may be fewer than the number of requested `top_logprobs` returned.
-
-          - `token: string`
-
-            The token.
-
-          - `bytes: array of number`
-
-            A list of integers representing the UTF-8 bytes representation of the token. Useful in instances where characters are represented by multiple tokens and their byte representations must be combined to generate the correct text representation. Can be `null` if there is no bytes representation for the token.
-
-          - `logprob: number`
-
-            The log probability of this token, if it is within the top 20 most likely tokens. Otherwise, the value `-9999.0` is used to signify that the token is very unlikely.
+          List of the most likely tokens and their log probability, at this token position. The number of entries may be fewer than the requested `top_logprobs`.
 
     - `message: ChatCompletionMessage`
 
       A chat completion message generated by the model.
 
-      - `content: string`
+      - `content: string or null`
 
         The contents of the message.
 
-      - `refusal: string`
+      - `refusal: string or null`
 
         The refusal message generated by the model.
 
@@ -1430,7 +1533,7 @@ chunk objects if the request is streamed.
 
             The URL of the web resource.
 
-      - `audio: optional ChatCompletionAudio`
+      - `audio: optional ChatCompletionAudio or null`
 
         If the audio output modality is requested, this object contains data
         about the audio response from the model. [Learn more](/docs/guides/audio).
@@ -1470,7 +1573,7 @@ chunk objects if the request is streamed.
 
         The tool calls generated by the model, such as function calls.
 
-        - `ChatCompletionMessageFunctionToolCall = object { id, function, type }`
+        - `ChatCompletionMessageFunctionToolCall object { id, function, type }`
 
           A call to a function tool created by the model.
 
@@ -1496,7 +1599,7 @@ chunk objects if the request is streamed.
 
             - `"function"`
 
-        - `ChatCompletionMessageCustomToolCall = object { id, custom, type }`
+        - `ChatCompletionMessageCustomToolCall object { id, custom, type }`
 
           A call to a custom tool created by the model.
 
@@ -1536,13 +1639,168 @@ chunk objects if the request is streamed.
 
     - `"chat.completion"`
 
-  - `service_tier: optional "auto" or "default" or "flex" or 2 more`
+  - `metadata: optional Metadata or null`
+
+    Set of 16 key-value pairs that can be attached to an object. This can be
+    useful for storing additional information about the object in a structured
+    format, and querying for objects via API or the dashboard.
+
+    Keys are strings with a maximum length of 64 characters. Values are strings
+    with a maximum length of 512 characters.
+
+  - `moderation: optional object { input, output }  or null`
+
+    Moderation results for the request input and generated output, if moderated
+    completions were requested.
+
+    - `input: object { model, results, type }  or object { code, message, type }`
+
+      Moderation for the request input.
+
+      - `ModerationResults object { model, results, type }`
+
+        Successful moderation results for the request input or generated output.
+
+        - `model: string`
+
+          The moderation model used to generate the results.
+
+        - `results: array of object { categories, category_applied_input_types, category_scores, 3 more }`
+
+          A list of moderation results.
+
+          - `categories: map[boolean]`
+
+            A dictionary of moderation categories to booleans, True if the input is flagged under this category.
+
+          - `category_applied_input_types: map[array of "text" or "image"]`
+
+            Which modalities of input are reflected by the score for each category.
+
+            - `"text"`
+
+            - `"image"`
+
+          - `category_scores: map[number]`
+
+            A dictionary of moderation categories to scores.
+
+          - `flagged: boolean`
+
+            A boolean indicating whether the content was flagged by any category.
+
+          - `model: string`
+
+            The moderation model that produced this result.
+
+          - `type: "moderation_result"`
+
+            The object type, which was always `moderation_result` for successful moderation results.
+
+            - `"moderation_result"`
+
+        - `type: "moderation_results"`
+
+          The object type, which is always `moderation_results`.
+
+          - `"moderation_results"`
+
+      - `Error object { code, message, type }`
+
+        An error produced while attempting moderation.
+
+        - `code: string`
+
+          The error code.
+
+        - `message: string`
+
+          The error message.
+
+        - `type: "error"`
+
+          The object type, which is always `error`.
+
+          - `"error"`
+
+    - `output: object { model, results, type }  or object { code, message, type }`
+
+      Moderation for the generated output.
+
+      - `ModerationResults object { model, results, type }`
+
+        Successful moderation results for the request input or generated output.
+
+        - `model: string`
+
+          The moderation model used to generate the results.
+
+        - `results: array of object { categories, category_applied_input_types, category_scores, 3 more }`
+
+          A list of moderation results.
+
+          - `categories: map[boolean]`
+
+            A dictionary of moderation categories to booleans, True if the input is flagged under this category.
+
+          - `category_applied_input_types: map[array of "text" or "image"]`
+
+            Which modalities of input are reflected by the score for each category.
+
+            - `"text"`
+
+            - `"image"`
+
+          - `category_scores: map[number]`
+
+            A dictionary of moderation categories to scores.
+
+          - `flagged: boolean`
+
+            A boolean indicating whether the content was flagged by any category.
+
+          - `model: string`
+
+            The moderation model that produced this result.
+
+          - `type: "moderation_result"`
+
+            The object type, which was always `moderation_result` for successful moderation results.
+
+            - `"moderation_result"`
+
+        - `type: "moderation_results"`
+
+          The object type, which is always `moderation_results`.
+
+          - `"moderation_results"`
+
+      - `Error object { code, message, type }`
+
+        An error produced while attempting moderation.
+
+        - `code: string`
+
+          The error code.
+
+        - `message: string`
+
+          The error message.
+
+        - `type: "error"`
+
+          The object type, which is always `error`.
+
+          - `"error"`
+
+  - `service_tier: optional "auto" or "default" or "flex" or 3 more or null`
 
     Specifies the processing type used for serving the request.
 
     - If set to 'auto', then the request will be processed with the service tier configured in the Project settings. Unless otherwise configured, the Project will use 'default'.
     - If set to 'default', then the request will be processed with the standard pricing and performance for the selected model.
-    - If set to '[flex](/docs/guides/flex-processing)' or '[priority](https://openai.com/api-priority-processing/)', then the request will be processed with the corresponding service tier.
+    - If set to '[flex](/docs/guides/flex-processing)', then the request will be processed with the Flex Processing service tier.
+    - To opt-in to [Fast mode](/api/docs/guides/fast-mode) at the request level, include the `service_tier=fast` or `service_tier=priority` parameter for Responses or Chat Completions. The response will show `service_tier=priority` regardless of if you specify `service_tier=fast` or `priority` in your request.
     - When not set, the default behavior is 'auto'.
 
     When the `service_tier` parameter is set, the response body will include the `service_tier` value based on the processing mode actually used to serve the request. This response value may be different from the value set in the parameter.
@@ -1556,6 +1814,8 @@ chunk objects if the request is streamed.
     - `"scale"`
 
     - `"priority"`
+
+    - `"fast"`
 
   - `system_fingerprint: optional string`
 
@@ -1579,7 +1839,7 @@ chunk objects if the request is streamed.
 
       Total number of tokens used in the request (prompt + completion).
 
-    - `completion_tokens_details: optional object { accepted_prediction_tokens, audio_tokens, reasoning_tokens, rejected_prediction_tokens }`
+    - `completion_tokens_details: optional object { accepted_prediction_tokens, audio_tokens, reasoning_tokens, 2 more }`
 
       Breakdown of tokens used in a completion.
 
@@ -1604,7 +1864,11 @@ chunk objects if the request is streamed.
         completion tokens for purposes of billing, output, and context window
         limits.
 
-    - `prompt_tokens_details: optional object { audio_tokens, cached_tokens }`
+      - `text_tokens: optional number`
+
+        Text output tokens generated by the model.
+
+    - `prompt_tokens_details: optional object { audio_tokens, cache_write_tokens, cached_tokens, 2 more }`
 
       Breakdown of tokens used in the prompt.
 
@@ -1612,9 +1876,21 @@ chunk objects if the request is streamed.
 
         Audio input tokens present in the prompt.
 
+      - `cache_write_tokens: optional number`
+
+        The unadjusted number of prompt tokens written to cache.
+
       - `cached_tokens: optional number`
 
         Cached tokens present in the prompt.
+
+      - `image_tokens: optional number`
+
+        Image input tokens present in the prompt.
+
+      - `text_tokens: optional number`
+
+        Text input tokens present in the prompt.
 
 ### Example
 
@@ -1629,7 +1905,7 @@ curl https://api.openai.com/v1/chat/completions \
               "role": "developer"
             }
           ],
-          "model": "gpt-5.4",
+          "model": "gpt-5.6-sol",
           "n": 1,
           "prompt_cache_key": "prompt-cache-key-1234",
           "safety_identifier": "safety-identifier-1234",
@@ -1697,7 +1973,7 @@ curl https://api.openai.com/v1/chat/completions \
               "end_index": 0,
               "start_index": 0,
               "title": "title",
-              "url": "url"
+              "url": "https://example.com"
             }
           }
         ],
@@ -1727,6 +2003,55 @@ curl https://api.openai.com/v1/chat/completions \
   "created": 0,
   "model": "model",
   "object": "chat.completion",
+  "metadata": {
+    "foo": "string"
+  },
+  "moderation": {
+    "input": {
+      "model": "model",
+      "results": [
+        {
+          "categories": {
+            "foo": true
+          },
+          "category_applied_input_types": {
+            "foo": [
+              "text"
+            ]
+          },
+          "category_scores": {
+            "foo": 0
+          },
+          "flagged": true,
+          "model": "model",
+          "type": "moderation_result"
+        }
+      ],
+      "type": "moderation_results"
+    },
+    "output": {
+      "model": "model",
+      "results": [
+        {
+          "categories": {
+            "foo": true
+          },
+          "category_applied_input_types": {
+            "foo": [
+              "text"
+            ]
+          },
+          "category_scores": {
+            "foo": 0
+          },
+          "flagged": true,
+          "model": "model",
+          "type": "moderation_result"
+        }
+      ],
+      "type": "moderation_results"
+    }
+  },
   "service_tier": "auto",
   "system_fingerprint": "system_fingerprint",
   "usage": {
@@ -1737,11 +2062,15 @@ curl https://api.openai.com/v1/chat/completions \
       "accepted_prediction_tokens": 0,
       "audio_tokens": 0,
       "reasoning_tokens": 0,
-      "rejected_prediction_tokens": 0
+      "rejected_prediction_tokens": 0,
+      "text_tokens": 0
     },
     "prompt_tokens_details": {
       "audio_tokens": 0,
-      "cached_tokens": 0
+      "cache_write_tokens": 0,
+      "cached_tokens": 0,
+      "image_tokens": 0,
+      "text_tokens": 0
     }
   }
 }
@@ -1754,7 +2083,7 @@ curl https://api.openai.com/v1/chat/completions \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $OPENAI_API_KEY" \
   -d '{
-    "model": "VAR_chat_model_id",
+    "model": "gpt-5.6-sol",
     "messages": [
       {
         "role": "developer",
@@ -1775,7 +2104,7 @@ curl https://api.openai.com/v1/chat/completions \
   "id": "chatcmpl-B9MBs8CjcvOU2jLn4n570S5qMJKcT",
   "object": "chat.completion",
   "created": 1741569952,
-  "model": "gpt-5.4",
+  "model": "gpt-5.6-sol",
   "choices": [
     {
       "index": 0,
@@ -1808,109 +2137,6 @@ curl https://api.openai.com/v1/chat/completions \
 }
 ```
 
-### Image input
-
-```http
-curl https://api.openai.com/v1/chat/completions \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer $OPENAI_API_KEY" \
-  -d '{
-    "model": "gpt-5.4",
-    "messages": [
-      {
-        "role": "user",
-        "content": [
-          {
-            "type": "text",
-            "text": "What is in this image?"
-          },
-          {
-            "type": "image_url",
-            "image_url": {
-              "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Gfp-wisconsin-madison-the-nature-boardwalk.jpg/2560px-Gfp-wisconsin-madison-the-nature-boardwalk.jpg"
-            }
-          }
-        ]
-      }
-    ],
-    "max_tokens": 300
-  }'
-```
-
-#### Response
-
-```json
-{
-  "id": "chatcmpl-B9MHDbslfkBeAs8l4bebGdFOJ6PeG",
-  "object": "chat.completion",
-  "created": 1741570283,
-  "model": "gpt-5.4",
-  "choices": [
-    {
-      "index": 0,
-      "message": {
-        "role": "assistant",
-        "content": "The image shows a wooden boardwalk path running through a lush green field or meadow. The sky is bright blue with some scattered clouds, giving the scene a serene and peaceful atmosphere. Trees and shrubs are visible in the background.",
-        "refusal": null,
-        "annotations": []
-      },
-      "logprobs": null,
-      "finish_reason": "stop"
-    }
-  ],
-  "usage": {
-    "prompt_tokens": 1117,
-    "completion_tokens": 46,
-    "total_tokens": 1163,
-    "prompt_tokens_details": {
-      "cached_tokens": 0,
-      "audio_tokens": 0
-    },
-    "completion_tokens_details": {
-      "reasoning_tokens": 0,
-      "audio_tokens": 0,
-      "accepted_prediction_tokens": 0,
-      "rejected_prediction_tokens": 0
-    }
-  },
-  "service_tier": "default"
-}
-```
-
-### Streaming
-
-```http
-curl https://api.openai.com/v1/chat/completions \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer $OPENAI_API_KEY" \
-  -d '{
-    "model": "VAR_chat_model_id",
-    "messages": [
-      {
-        "role": "developer",
-        "content": "You are a helpful assistant."
-      },
-      {
-        "role": "user",
-        "content": "Hello!"
-      }
-    ],
-    "stream": true
-  }'
-```
-
-#### Response
-
-```json
-{"id":"chatcmpl-123","object":"chat.completion.chunk","created":1694268190,"model":"gpt-4o-mini", "system_fingerprint": "fp_44709d6fcb", "choices":[{"index":0,"delta":{"role":"assistant","content":""},"logprobs":null,"finish_reason":null}]}
-
-{"id":"chatcmpl-123","object":"chat.completion.chunk","created":1694268190,"model":"gpt-4o-mini", "system_fingerprint": "fp_44709d6fcb", "choices":[{"index":0,"delta":{"content":"Hello"},"logprobs":null,"finish_reason":null}]}
-
-....
-
-{"id":"chatcmpl-123","object":"chat.completion.chunk","created":1694268190,"model":"gpt-4o-mini", "system_fingerprint": "fp_44709d6fcb", "choices":[{"index":0,"delta":{},"logprobs":null,"finish_reason":"stop"}]}
-```
-
 ### Functions
 
 ```http
@@ -1918,7 +2144,7 @@ curl https://api.openai.com/v1/chat/completions \
 -H "Content-Type: application/json" \
 -H "Authorization: Bearer $OPENAI_API_KEY" \
 -d '{
-  "model": "gpt-5.4",
+  "model": "gpt-5.6-sol",
   "messages": [
     {
       "role": "user",
@@ -1959,7 +2185,7 @@ curl https://api.openai.com/v1/chat/completions \
   "id": "chatcmpl-abc123",
   "object": "chat.completion",
   "created": 1699896916,
-  "model": "gpt-4o-mini",
+  "model": "gpt-5.6-sol",
   "choices": [
     {
       "index": 0,
@@ -1994,6 +2220,75 @@ curl https://api.openai.com/v1/chat/completions \
 }
 ```
 
+### Image input
+
+```http
+curl https://api.openai.com/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $OPENAI_API_KEY" \
+  -d '{
+    "model": "gpt-5.6-sol",
+    "messages": [
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "text",
+            "text": "What is in this image?"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Gfp-wisconsin-madison-the-nature-boardwalk.jpg/2560px-Gfp-wisconsin-madison-the-nature-boardwalk.jpg"
+            }
+          }
+        ]
+      }
+    ],
+    "max_tokens": 300
+  }'
+```
+
+#### Response
+
+```json
+{
+  "id": "chatcmpl-B9MHDbslfkBeAs8l4bebGdFOJ6PeG",
+  "object": "chat.completion",
+  "created": 1741570283,
+  "model": "gpt-5.6-sol",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "The image shows a wooden boardwalk path running through a lush green field or meadow. The sky is bright blue with some scattered clouds, giving the scene a serene and peaceful atmosphere. Trees and shrubs are visible in the background.",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 1117,
+    "completion_tokens": 46,
+    "total_tokens": 1163,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default"
+}
+```
+
 ### Logprobs
 
 ```http
@@ -2001,13 +2296,14 @@ curl https://api.openai.com/v1/chat/completions \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $OPENAI_API_KEY" \
   -d '{
-    "model": "VAR_chat_model_id",
+    "model": "gpt-5.6-sol",
     "messages": [
       {
         "role": "user",
         "content": "Hello!"
       }
     ],
+    "reasoning_effort": "none",
     "logprobs": true,
     "top_logprobs": 2
   }'
@@ -2020,7 +2316,7 @@ curl https://api.openai.com/v1/chat/completions \
   "id": "chatcmpl-123",
   "object": "chat.completion",
   "created": 1702685778,
-  "model": "gpt-4o-mini",
+  "model": "gpt-5.6-sol",
   "choices": [
     {
       "index": 0,
@@ -2205,4 +2501,38 @@ curl https://api.openai.com/v1/chat/completions \
   },
   "system_fingerprint": null
 }
+```
+
+### Streaming
+
+```http
+curl https://api.openai.com/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $OPENAI_API_KEY" \
+  -d '{
+    "model": "gpt-5.6-sol",
+    "messages": [
+      {
+        "role": "developer",
+        "content": "You are a helpful assistant."
+      },
+      {
+        "role": "user",
+        "content": "Hello!"
+      }
+    ],
+    "stream": true
+  }'
+```
+
+#### Response
+
+```json
+{"id":"chatcmpl-123","object":"chat.completion.chunk","created":1694268190,"model":"gpt-5.6-sol", "system_fingerprint": "fp_44709d6fcb", "choices":[{"index":0,"delta":{"role":"assistant","content":""},"logprobs":null,"finish_reason":null}]}
+
+{"id":"chatcmpl-123","object":"chat.completion.chunk","created":1694268190,"model":"gpt-5.6-sol", "system_fingerprint": "fp_44709d6fcb", "choices":[{"index":0,"delta":{"content":"Hello"},"logprobs":null,"finish_reason":null}]}
+
+....
+
+{"id":"chatcmpl-123","object":"chat.completion.chunk","created":1694268190,"model":"gpt-5.6-sol", "system_fingerprint": "fp_44709d6fcb", "choices":[{"index":0,"delta":{},"logprobs":null,"finish_reason":"stop"}]}
 ```

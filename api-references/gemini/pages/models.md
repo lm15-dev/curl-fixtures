@@ -1,5 +1,3 @@
-# Models
-
 The models endpoint provides a way for you to programmatically list the available models, and retrieve extended metadata such as supported functionality and context window sizing. Read more in [the Models guide](https://ai.google.dev/gemini-api/docs/models/gemini).
 
 ## Method: models.get
@@ -37,8 +35,8 @@ The request body must be empty.
     from google import genai
 
     client = genai.Client()
-    model_info = client.models.get(model="gemini-2.0-flash")
-    print(model_info)https://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/python/models.py#L41-L45
+    model_info = client.models.get(model="gemini-3.7-flash")
+    print(model_info)
 
 ### Go
 
@@ -51,16 +49,16 @@ The request body must be empty.
     	log.Fatal(err)
     }
 
-    modelInfo, err := client.Models.Get(ctx, "gemini-2.0-flash", nil)
+    modelInfo, err := client.Models.Get(ctx, "gemini-3.7-flash", nil)
     if err != nil {
     	log.Fatal(err)
     }
 
-    fmt.Println(modelInfo)https://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/go/models.go#L55-L69
+    fmt.Println(modelInfo)
 
 ### Shell
 
-    curl https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash?key=$GEMINI_API_KEYhttps://github.com/google-gemini/deprecated-generative-ai-python/blob/7a7cc5474ddaa0255a4410e05361028a24400abd/samples/rest/models.sh#L9-L10
+    curl https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash?key=$GEMINI_API_KEYpan>.sh
 
 ### Response body
 
@@ -116,7 +114,7 @@ The request body must be empty.
     for m in client.models.list():
         for action in m.supported_actions:
             if action == "embedContent":
-                print(m.name)https://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/python/models.py#L22-L36
+                print(m.name)
 
 ### Go
 
@@ -154,11 +152,11 @@ The request body must be empty.
     			break
     		}
     	}
-    }https://github.com/google-gemini/api-examples/blob/4ce9033e1d2f857db3f728d78399e3d7ded8ef05/go/models.go#L14-L48
+    }
 
 ### Shell
 
-    curl https://generativelanguage.googleapis.com/v1beta/models?key=$GEMINI_API_KEYhttps://github.com/google-gemini/deprecated-generative-ai-python/blob/7a7cc5474ddaa0255a4410e05361028a24400abd/samples/rest/models.sh#L4-L5
+    curl https://generativelanguage.googleapis.com/v1beta/models?key=$GEMINI_API_KEYpan>.sh
 
 ### Response body
 
@@ -286,6 +284,7 @@ post `https://generativelanguage.googleapis.com/v1beta/{model=models/*}:predictL
 The request body contains data with the following structure:
 Fields `instances[]` ``value (`https://protobuf.dev/reference/protobuf/google.protobuf#value` format)`` Required. The instances that are the input to the prediction call.
 `parameters` ``value (`https://protobuf.dev/reference/protobuf/google.protobuf#value` format)`` Optional. The parameters that govern the prediction call.
+`webhookConfig.uris[]` `string` Optional. If set, these webhook URIs will be used for webhook events instead of the registered webhooks.
 
 ### Response body
 

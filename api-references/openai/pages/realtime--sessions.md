@@ -76,7 +76,7 @@ Returns the created Realtime session object, plus an ephemeral key.
 
   The format of output audio. Options are `pcm16`, `g711_ulaw`, or `g711_alaw`.
 
-- `prompt: optional ResponsePrompt`
+- `prompt: optional ResponsePrompt or null`
 
   Reference to a prompt template and its variables.
   [Learn more](/docs/guides/text?api-mode=responses#reusable-prompts).
@@ -85,7 +85,7 @@ Returns the created Realtime session object, plus an ephemeral key.
 
     The unique identifier of the prompt template to use.
 
-  - `variables: optional map[string or ResponseInputText or ResponseInputImage or ResponseInputFile]`
+  - `variables: optional map[string or ResponseInputText or ResponseInputImage or ResponseInputFile] or null`
 
     Optional map of values to substitute in for variables in your
     prompt. The substitution values can either be strings, or other
@@ -93,7 +93,7 @@ Returns the created Realtime session object, plus an ephemeral key.
 
     - `string`
 
-    - `ResponseInputText = object { text, type }`
+    - `ResponseInputText object { text, type, prompt_cache_breakpoint }`
 
       A text input to the model.
 
@@ -107,11 +107,21 @@ Returns the created Realtime session object, plus an ephemeral key.
 
         - `"input_text"`
 
-    - `ResponseInputImage = object { detail, type, file_id, image_url }`
+      - `prompt_cache_breakpoint: optional object { mode }`
+
+        Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a token block.
+
+        - `mode: "explicit"`
+
+          The breakpoint mode. Always `explicit`.
+
+          - `"explicit"`
+
+    - `ResponseInputImage object { detail, type, file_id, 2 more }`
 
       An image input to the model. Learn about [image inputs](/docs/guides/vision).
 
-      - `detail: "low" or "high" or "auto" or "original"`
+      - `detail: ImageDetail`
 
         The detail level of the image to be sent to the model. One of `high`, `low`, `auto`, or `original`. Defaults to `auto`.
 
@@ -129,15 +139,25 @@ Returns the created Realtime session object, plus an ephemeral key.
 
         - `"input_image"`
 
-      - `file_id: optional string`
+      - `file_id: optional string or null`
 
         The ID of the file to be sent to the model.
 
-      - `image_url: optional string`
+      - `image_url: optional string or null`
 
         The URL of the image to be sent to the model. A fully qualified URL or base64 encoded image in a data URL.
 
-    - `ResponseInputFile = object { type, file_data, file_id, 2 more }`
+      - `prompt_cache_breakpoint: optional object { mode }`
+
+        Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a token block.
+
+        - `mode: "explicit"`
+
+          The breakpoint mode. Always `explicit`.
+
+          - `"explicit"`
+
+    - `ResponseInputFile object { type, detail, file_data, 4 more }`
 
       A file input to the model.
 
@@ -147,11 +167,21 @@ Returns the created Realtime session object, plus an ephemeral key.
 
         - `"input_file"`
 
+      - `detail: optional "auto" or "low" or "high"`
+
+        The detail level of the file to be sent to the model. Use `auto` to let the system select the detail level; for GPT-5.6 and later models, `auto` uses high-quality rendering, which may increase input token usage. Use `low` for lower-cost rendering, or `high` to render the file at higher quality. Defaults to `auto`.
+
+        - `"auto"`
+
+        - `"low"`
+
+        - `"high"`
+
       - `file_data: optional string`
 
         The content of the file to be sent to the model.
 
-      - `file_id: optional string`
+      - `file_id: optional string or null`
 
         The ID of the file to be sent to the model.
 
@@ -163,7 +193,17 @@ Returns the created Realtime session object, plus an ephemeral key.
 
         The name of the file to be sent to the model.
 
-  - `version: optional string`
+      - `prompt_cache_breakpoint: optional object { mode }`
+
+        Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a token block.
+
+        - `mode: "explicit"`
+
+          The breakpoint mode. Always `explicit`.
+
+          - `"explicit"`
+
+  - `version: optional string or null`
 
     Optional version of the prompt template.
 
@@ -220,7 +260,7 @@ Returns the created Realtime session object, plus an ephemeral key.
 
     - `"auto"`
 
-  - `TracingConfiguration = object { group_id, metadata, workflow_name }`
+  - `TracingConfiguration object { group_id, metadata, workflow_name }`
 
     Granular configuration for tracing.
 
@@ -257,7 +297,7 @@ Returns the created Realtime session object, plus an ephemeral key.
 
     - `"disabled"`
 
-  - `RetentionRatioTruncation = object { retention_ratio, type, token_limits }`
+  - `RetentionRatioTruncation object { retention_ratio, type, token_limits }`
 
     Retain a fraction of the conversation tokens when the conversation exceeds the input token limit. This allows you to amortize truncations across multiple turns, which can help improve cached token usage.
 
@@ -338,7 +378,7 @@ Returns the created Realtime session object, plus an ephemeral key.
 
     - `"cedar"`
 
-  - `ID = object { id }`
+  - `ID object { id }`
 
     Custom voice reference.
 
@@ -362,7 +402,7 @@ Returns the created Realtime session object, plus an ephemeral key.
 
       The PCM audio format. Only a 24kHz sample rate is supported.
 
-      - `PCMAudioFormat = object { rate, type }`
+      - `PCMAudio object { rate, type }`
 
         The PCM audio format. Only a 24kHz sample rate is supported.
 
@@ -378,7 +418,7 @@ Returns the created Realtime session object, plus an ephemeral key.
 
           - `"audio/pcm"`
 
-      - `PCMUAudioFormat = object { type }`
+      - `PCMUAudio object { type }`
 
         The G.711 μ-law format.
 
@@ -388,7 +428,7 @@ Returns the created Realtime session object, plus an ephemeral key.
 
           - `"audio/pcmu"`
 
-      - `PCMAAudioFormat = object { type }`
+      - `PCMAAudio object { type }`
 
         The G.711 A-law format.
 
@@ -410,27 +450,33 @@ Returns the created Realtime session object, plus an ephemeral key.
 
         - `"far_field"`
 
-    - `transcription: optional AudioTranscription`
+    - `transcription: optional object { language, languages, model, prompt }`
 
       Configuration for input audio transcription.
 
       - `language: optional string`
 
-        The language of the input audio. Supplying the input language in
-        [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) (e.g. `en`) format
-        will improve accuracy and latency.
+        The language of the input audio.
 
-      - `model: optional string or "whisper-1" or "gpt-4o-mini-transcribe" or "gpt-4o-mini-transcribe-2025-12-15" or 2 more`
+      - `languages: optional array of string`
 
-        The model to use for transcription. Current options are `whisper-1`, `gpt-4o-mini-transcribe`, `gpt-4o-mini-transcribe-2025-12-15`, `gpt-4o-transcribe`, and `gpt-4o-transcribe-diarize`. Use `gpt-4o-transcribe-diarize` when you need diarization with speaker labels.
+        The possible input audio languages configured for transcription, in [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) format.
+
+      - `model: optional string or "whisper-1" or "gpt-transcribe" or "gpt-live-transcribe" or 5 more`
+
+        The model used for transcription. Current options are `whisper-1`, `gpt-transcribe`, `gpt-live-transcribe`, `gpt-4o-mini-transcribe`, `gpt-4o-mini-transcribe-2025-12-15`, `gpt-4o-transcribe`, `gpt-4o-transcribe-diarize`, and `gpt-realtime-whisper`.
 
         - `string`
 
-        - `"whisper-1" or "gpt-4o-mini-transcribe" or "gpt-4o-mini-transcribe-2025-12-15" or 2 more`
+        - `"whisper-1" or "gpt-transcribe" or "gpt-live-transcribe" or 5 more`
 
-          The model to use for transcription. Current options are `whisper-1`, `gpt-4o-mini-transcribe`, `gpt-4o-mini-transcribe-2025-12-15`, `gpt-4o-transcribe`, and `gpt-4o-transcribe-diarize`. Use `gpt-4o-transcribe-diarize` when you need diarization with speaker labels.
+          The model used for transcription. Current options are `whisper-1`, `gpt-transcribe`, `gpt-live-transcribe`, `gpt-4o-mini-transcribe`, `gpt-4o-mini-transcribe-2025-12-15`, `gpt-4o-transcribe`, `gpt-4o-transcribe-diarize`, and `gpt-realtime-whisper`.
 
           - `"whisper-1"`
+
+          - `"gpt-transcribe"`
+
+          - `"gpt-live-transcribe"`
 
           - `"gpt-4o-mini-transcribe"`
 
@@ -440,12 +486,11 @@ Returns the created Realtime session object, plus an ephemeral key.
 
           - `"gpt-4o-transcribe-diarize"`
 
+          - `"gpt-realtime-whisper"`
+
       - `prompt: optional string`
 
-        An optional text to guide the model's style or continue a previous audio
-        segment.
-        For `whisper-1`, the [prompt is a list of keywords](/docs/guides/speech-to-text#prompting).
-        For `gpt-4o-transcribe` models (excluding `gpt-4o-transcribe-diarize`), the prompt is a free text string, for example "expect words related to technology".
+        The prompt configured for input audio transcription, when present.
 
     - `turn_detection: optional object { prefix_padding_ms, silence_duration_ms, threshold, type }`
 
@@ -466,42 +511,6 @@ Returns the created Realtime session object, plus an ephemeral key.
     - `format: optional RealtimeAudioFormats`
 
       The PCM audio format. Only a 24kHz sample rate is supported.
-
-      - `PCMAudioFormat = object { rate, type }`
-
-        The PCM audio format. Only a 24kHz sample rate is supported.
-
-        - `rate: optional 24000`
-
-          The sample rate of the audio. Always `24000`.
-
-          - `24000`
-
-        - `type: optional "audio/pcm"`
-
-          The audio format. Always `audio/pcm`.
-
-          - `"audio/pcm"`
-
-      - `PCMUAudioFormat = object { type }`
-
-        The G.711 μ-law format.
-
-        - `type: optional "audio/pcmu"`
-
-          The audio format. Always `audio/pcmu`.
-
-          - `"audio/pcmu"`
-
-      - `PCMAAudioFormat = object { type }`
-
-        The G.711 A-law format.
-
-        - `type: optional "audio/pcma"`
-
-          The audio format. Always `audio/pcma`.
-
-          - `"audio/pcma"`
 
     - `speed: optional number`
 
@@ -631,7 +640,7 @@ Returns the created Realtime session object, plus an ephemeral key.
 
     - `"auto"`
 
-  - `TracingConfiguration = object { group_id, metadata, workflow_name }`
+  - `TracingConfiguration object { group_id, metadata, workflow_name }`
 
     Granular configuration for tracing.
 
@@ -707,7 +716,10 @@ curl https://api.openai.com/v1/realtime/sessions \
       },
       "transcription": {
         "language": "language",
-        "model": "string",
+        "languages": [
+          "string"
+        ],
+        "model": "whisper-1",
         "prompt": "prompt"
       },
       "turn_detection": {
@@ -731,7 +743,7 @@ curl https://api.openai.com/v1/realtime/sessions \
     "item.input_audio_transcription.logprobs"
   ],
   "instructions": "instructions",
-  "max_output_tokens": 0,
+  "max_output_tokens": "inf",
   "model": "model",
   "object": "object",
   "output_modalities": [

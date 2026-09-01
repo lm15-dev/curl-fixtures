@@ -1,5 +1,3 @@
-# Troubleshooting guide
-
 Use this guide to help you diagnose and resolve common issues that arise when
 you call the Gemini API. You may encounter issues from either
 the Gemini API backend service or the client SDKs. Our client SDKs are
@@ -12,21 +10,24 @@ open sourced in the following repositories:
 If you encounter API key issues, verify that you have set up
 your API key correctly per the [API key setup guide](https://ai.google.dev/gemini-api/docs/api-key).
 
-## Gemini API backend service error codes
+## Error codes
 
-The following table lists common backend error codes you may encounter, along
-with explanations for their causes and troubleshooting steps:
+For a complete reference of all error codes, including HTTP status codes,
+generation blocked codes, and content error codes, see the
+[API errors](https://ai.google.dev/gemini-api/docs/api-errors) page.
 
-|---|---|---|---|---|
-| **HTTP Code** | **Status** | **Description** | **Example** | **Solution** |
-| 400 | INVALID_ARGUMENT | The request body is malformed. | There is a typo, or a missing required field in your request. | Check the [API reference](https://ai.google.dev/api) for request format, examples, and supported versions. Using features from a newer API version with an older endpoint can cause errors. |
-| 400 | FAILED_PRECONDITION | Gemini API free tier is not available in your country. Please enable billing on your project in Google AI Studio. | You are making a request in a region where the free tier is not supported, and you have not enabled billing on your project in Google AI Studio. | To use the Gemini API, you will need to setup a paid plan using [Google AI Studio](https://aistudio.google.com/app/apikey). |
-| 403 | PERMISSION_DENIED | Your API key doesn't have the required permissions. | You are using the wrong API key; you are trying to use a tuned model without going through [proper authentication](https://ai.google.dev/docs/model-tuning/tutorial?lang=python#set_up_authentication). | Check that your API key is set and has the right access. And make sure to go through proper authentication to use tuned models. |
-| 404 | NOT_FOUND | The requested resource wasn't found. | An image, audio, or video file referenced in your request was not found. | Check if all [parameters in your request are valid](https://ai.google.dev/docs/troubleshooting#check-api) for your API version. |
-| 429 | RESOURCE_EXHAUSTED | You've exceeded the rate limit. | You are sending too many requests per minute with the free tier Gemini API. | Verify that you're within the model's [rate limit](https://ai.google.dev/gemini-api/docs/rate-limits). [Request a quota increase](https://ai.google.dev/gemini-api/docs/rate-limits#request-rate-limit-increase) if needed. |
-| 500 | INTERNAL | An unexpected error occurred on Google's side. | Your input context is too long. | Reduce your input context or temporarily switch to another model (e.g. from Gemini 2.5 Pro to Gemini 2.5 Flash) and see if it works. Or wait a bit and retry your request. If the issue persists after retrying, please report it using the **Send feedback** button in Google AI Studio. |
-| 503 | UNAVAILABLE | The service may be temporarily overloaded or down. | The service is temporarily running out of capacity. | Temporarily switch to another model (e.g. from Gemini 2.5 Pro to Gemini 2.5 Flash) and see if it works. Or wait a bit and retry your request. If the issue persists after retrying, please report it using the **Send feedback** button in Google AI Studio. |
-| 504 | DEADLINE_EXCEEDED | The service is unable to finish processing within the deadline. | Your prompt (or context) is too large to be processed in time. | Set a larger 'timeout' in your client request to avoid this error. |
+## Retry strategy
+
+If you receive an error indicating that you should retry your request (such as a `429 RESOURCE_EXHAUSTED` or `503 UNAVAILABLE`), we recommend implementing an exponential backoff strategy. This means you wait a short time before the first retry, and then gradually increase the wait time between subsequent retries.
+
+The official client SDKs for the Gemini API, such as the [Python SDK](https://github.com/googleapis/python-genai), include automatic retry logic with exponential backoff by default for handling transient errors like timeouts, network issues, and rate limits (`429` and `5xx` status codes). For example, the Python SDK automatically retries transient errors up to four times with an initial delay of approximately 1 second and a maximum delay of 60 seconds.
+
+If you are making direct REST API requests or customizing your retry logic, follow these best practices to increase the likelihood of a successful request and prevent overwhelming the service:
+
+- **Use exponential backoff:** Wait a short time before the first retry (for example, 1 second), then increase the delay exponentially (for example, 2s, 4s, 8s).
+- **Add jitter:** Add random "jitter" to the delay to help prevent all clients from retrying at the exact same time.
+- **Retry on specific errors:** Only retry on transient errors (like `429`, `408`, or `5xx`). Do not retry on client errors (like `400` or `403`) as they indicate issues like invalid API keys or bad syntax.
+- **Set maximum retries:** Define a maximum number of retry attempts to prevent infinite loops.
 
 ## Check your API calls for model parameter errors
 
@@ -36,7 +37,7 @@ Verify that your model parameters are within the following values:
 | **Model parameter** | **Values (range)** |
 | Candidate count | 1-8 (integer) |
 | Temperature | 0.0-1.0 |
-| Max output tokens | Use `get_model` ([Python](https://ai.google.dev/api/python/google/generativeai/get_model)) to determine the maximum number of tokens for the model you are using. |
+| Max output tokens | Use the [models page](https://ai.google.dev/gemini-api/docs/models/gemini) to determine the maximum number of tokens for the model you are using. |
 | TopP | 0.0-1.0 |
 
 In addition to checking parameter values, make sure you're using the correct
@@ -74,7 +75,7 @@ means the model output may resemble certain data. To fix this, try to make
 prompt / context as unique as possible and use a higher temperature.
 
 > [!NOTE]
-> When using Gemini 3 models, we strongly recommend keeping the `temperature` at its default value of 1.0. Changing the temperature (setting it below 1.0) may lead to unexpected behavior, such as looping or degraded performance, particularly in complex mathematical or reasoning tasks.
+> The \`temperature\`, \`top_p\`, and \`top_k\` parameters control how the model generates responses. Although you can modify these parameters, we strongly recommend keeping them at their default values for Gemini 3.x models. Changing these parameters (for example, setting the temperature below 1.0) can cause unexpected behavior, such as looping or degraded performance, particularly in complex mathematical or reasoning tasks.
 
 ## Repetitive tokens issue
 

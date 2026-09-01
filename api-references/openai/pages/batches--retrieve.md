@@ -10,7 +10,7 @@ Retrieves a batch.
 
 ### Returns
 
-- `Batch = object { id, completion_window, created_at, 19 more }`
+- `Batch object { id, completion_window, created_at, 19 more }`
 
   - `id: string`
 
@@ -74,13 +74,13 @@ Retrieves a batch.
 
   - `errors: optional object { data, object }`
 
-    - `data: optional array of object { code, line, message, param }`
+    - `data: optional array of BatchError`
 
       - `code: optional string`
 
         An error code identifying the error type.
 
-      - `line: optional number`
+      - `line: optional number or null`
 
         The line number of the input file where the error occurred, if applicable.
 
@@ -88,7 +88,7 @@ Retrieves a batch.
 
         A human-readable message providing more details about the error.
 
-      - `param: optional string`
+      - `param: optional string or null`
 
         The name of the parameter that caused the error, if applicable.
 
@@ -116,7 +116,7 @@ Retrieves a batch.
 
     The Unix timestamp (in seconds) for when the batch started processing.
 
-  - `metadata: optional Metadata`
+  - `metadata: optional Metadata or null`
 
     Set of 16 key-value pairs that can be attached to an object. This can be
     useful for storing additional information about the object in a structured
@@ -127,7 +127,7 @@ Retrieves a batch.
 
   - `model: optional string`
 
-    Model ID used to process the batch, like `gpt-5-2025-08-07`. OpenAI
+    Model ID used to process the batch, like `gpt-5.6-sol`. OpenAI
     offers a wide range of models with different capabilities, performance
     characteristics, and price points. Refer to the [model
     guide](/docs/models) to browse and compare available models.
@@ -136,7 +136,7 @@ Retrieves a batch.
 
     The ID of the file containing the outputs of successfully executed requests.
 
-  - `request_counts: optional object { completed, failed, total }`
+  - `request_counts: optional BatchRequestCounts`
 
     The request counts for different statuses within the batch.
 

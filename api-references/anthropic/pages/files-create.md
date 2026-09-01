@@ -1,64 +1,26 @@
-## Upload
+# Upload File
 
-**post** `/v1/files`
+**POST** `/v1/files`
 
 Upload File
 
-### Header Parameters
+## Body parameters (form-data)
 
-- `"anthropic-beta": optional array of AnthropicBeta`
+- `file: string`
 
-  Optional header to specify the beta version(s) you want to use.
+  The file to upload
 
-  - `UnionMember0 = string`
+  format: binary
 
-  - `UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 18 more`
+- `expires_in_seconds: optional number`
 
-    - `"message-batches-2024-09-24"`
+  Seconds from upload until the file expires and its bytes become permanently unavailable. Must be between 3600 (one hour) and 7776000 (ninety days).
 
-    - `"prompt-caching-2024-07-31"`
+  minimum: 3600, maximum: 7776000
 
-    - `"computer-use-2024-10-22"`
+## Returns
 
-    - `"computer-use-2025-01-24"`
-
-    - `"pdfs-2024-09-25"`
-
-    - `"token-counting-2024-11-01"`
-
-    - `"token-efficient-tools-2025-02-19"`
-
-    - `"output-128k-2025-02-19"`
-
-    - `"files-api-2025-04-14"`
-
-    - `"mcp-client-2025-04-04"`
-
-    - `"mcp-client-2025-11-20"`
-
-    - `"dev-full-thinking-2025-05-14"`
-
-    - `"interleaved-thinking-2025-05-14"`
-
-    - `"code-execution-2025-05-22"`
-
-    - `"extended-cache-ttl-2025-04-11"`
-
-    - `"context-1m-2025-08-07"`
-
-    - `"context-management-2025-06-27"`
-
-    - `"model-context-window-exceeded-2025-08-26"`
-
-    - `"skills-2025-10-02"`
-
-    - `"fast-mode-2026-02-01"`
-
-    - `"output-300k-2026-03-24"`
-
-### Returns
-
-- `FileMetadata = object { id, created_at, filename, 5 more }`
+- `FileMetadata object`
 
   - `id: string`
 
@@ -70,17 +32,25 @@ Upload File
 
     RFC 3339 datetime string representing when the file was created.
 
+    format: date-time
+
   - `filename: string`
 
     Original filename of the uploaded file.
+
+    maxLength: 500, minLength: 1
 
   - `mime_type: string`
 
     MIME type of the file.
 
+    maxLength: 255, minLength: 1
+
   - `size_bytes: number`
 
     Size of the file in bytes.
+
+    minimum: 0
 
   - `type: "file"`
 
@@ -88,33 +58,39 @@ Upload File
 
     For files, this is always `"file"`.
 
-    - `"file"`
-
   - `downloadable: optional boolean`
 
     Whether the file can be downloaded.
 
-  - `scope: optional BetaFileScope`
+    default: false
 
-    The scope of this file, indicating the context in which it was created (e.g., a session).
+  - `expires_at: optional string or null`
 
-    - `id: string`
+    RFC 3339 datetime string representing when the file will expire and become unavailable for download. Null if the file does not expire. For files uploaded with `expires_in_seconds`, this is the upload time plus that value.
 
-      The ID of the scoping resource (e.g., the session ID).
+    format: date-time
 
-    - `type: "session"`
+## Example
 
-      The type of scope (e.g., `"session"`).
-
-      - `"session"`
-
-### Example
-
-```http
+```bash
 curl https://api.anthropic.com/v1/files \
     -H 'Content-Type: multipart/form-data' \
     -H 'anthropic-version: 2023-06-01' \
-    -H 'anthropic-beta: files-api-2025-04-14' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY" \
     -F 'file=@/path/to/file'
+```
+
+### Response (200)
+
+```json
+{
+  "id": "file_011CNha8iCJcU1wXNR6q4V8w",
+  "created_at": "2025-04-15T18:37:24.100435Z",
+  "filename": "document.pdf",
+  "mime_type": "application/pdf",
+  "size_bytes": 102400,
+  "type": "file",
+  "downloadable": false,
+  "expires_at": "2025-05-15T18:37:24.100435Z"
+}
 ```

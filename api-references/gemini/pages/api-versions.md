@@ -1,34 +1,57 @@
-# API versions explained
-
-> [!IMPORTANT]
-> We have updated our [Terms of Service](https://ai.google.dev/gemini-api/terms).
-
 This document provides a high-level overview of the differences between the `v1`
 and `v1beta` versions of the Gemini API.
 
-- **v1**: Stable version of the API. Features in the stable version are fully-supported over the lifetime of the major version. If there are any breaking changes, then the next major version of the API will be created and the existing version will be deprecated after a reasonable period of time. Non-breaking changes may be introduced to the API without changing the major version.
-- **v1beta** : This version includes early features that may be under development and are subject to breaking changes. There is also no guarantee that the features in the Beta version will move to the stable version. **If you require stability in your production environment and cannot risk breaking changes, you should not use this version in production.**
+- **v1** : Stable version of the API. Features in the stable version are fully supported over the lifetime of the major version. If there are any breaking changes, a new major version of the API will be created and the existing version will be deprecated after a reasonable period of time. Non-breaking changes may be introduced to the API without changing the major version. The **Interactions API** and its core features are generally available in `v1`.
+- **v1beta** : This version includes early features and capabilities that are actively being developed. While features in `v1beta` may be subject to changes as we refine them based on feedback, it lets you try new capabilities before they are promoted to stable.
+
+## Capability and feature support
+
+The following table details the availability of capabilities across `v1` (GA)
+and `v1beta` (Beta). Core API capabilities and tools apply to both
+the Interactions API and `generateContent` unless specified otherwise:
+
+> [!NOTE]
+> **Note:** All models are supported in both `v1` and `v1beta`. This table tracks the availability of features across the `v1` and `v1beta` **API versions** (endpoint routes and schema parameters).
 
 | Feature | v1 | v1beta |
 |---|---|---|
-| Generate Content - Text-only input | Yes | Yes |
-| Generate Content - Text-and-image input | Yes | Yes |
-| Generate Content - Text output | Yes | Yes |
-| Generate Content - Multi-turn conversations (chat) | Yes | Yes |
-| Generate Content - Function calls |   | Yes |
-| Generate Content - Streaming | Yes | Yes |
-| Embed Content - Text-only input | Yes | Yes |
-| Generate Answer |   | Yes |
-| Semantic retriever |   | Yes |
-| Interactions API |   | Yes |
+| **Core API capabilities** |   |   |
+| [Interactions API](https://ai.google.dev/gemini-api/docs/get-started) | Yes | Yes |
+| [Function Calling](https://ai.google.dev/gemini-api/docs/function-calling) | Yes | Yes |
+| [Structured Output](https://ai.google.dev/gemini-api/docs/structured-output) | Yes | Yes |
+| [Thinking / Reasoning](https://ai.google.dev/gemini-api/docs/thinking) | Yes | Yes |
+| [System Instructions](https://ai.google.dev/gemini-api/docs/system-instructions) | Yes | Yes |
+| [Audio Output (Speech Config)](https://ai.google.dev/gemini-api/docs/audio) |   | Yes |
+| [Service Tier (Priority / Flex)](https://ai.google.dev/gemini-api/docs/priority-inference) |   | Yes |
+| **Tools** |   |   |
+| [Code Execution Tool](https://ai.google.dev/gemini-api/docs/code-execution) | Yes | Yes |
+| [Google Search Grounding](https://ai.google.dev/gemini-api/docs/google-search) | Yes | Yes |
+| [Google Maps Grounding](https://ai.google.dev/gemini-api/docs/maps-grounding) | Yes | Yes |
+| [URL Context Tool](https://ai.google.dev/gemini-api/docs/url-context) | Yes | Yes |
+| [File Search Tool](https://ai.google.dev/gemini-api/docs/file-search) | Yes | Yes |
+| [Computer Use Tool](https://ai.google.dev/gemini-api/docs/computer-use) |   | Yes |
+| [MCP Servers Tool](https://ai.google.dev/gemini-api/docs/eap/remote_mcp) |   | Yes |
+| **Realtime APIs** |   |   |
+| [Live API (WebSockets)](https://ai.google.dev/gemini-api/docs/live-api) |   | Yes |
+| [Live Music API](https://ai.google.dev/gemini-api/docs/realtime-music-generation) |   | Yes |
+| [Ephemeral Tokens (Live API)](https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens) |   | Yes |
+| **Platform APIs** |   |   |
+| [Models API](https://ai.google.dev/gemini-api/docs/models) | Yes | Yes |
+| [Files Service Route](https://ai.google.dev/gemini-api/docs/files) | Yes | Yes |
+| [File Search Stores Route](https://ai.google.dev/gemini-api/docs/file-search) | Yes | Yes |
+| [Agents API](https://ai.google.dev/gemini-api/docs/agents) |   | Yes |
+| [Webhooks API](https://ai.google.dev/gemini-api/docs/webhooks) |   | Yes |
+| [Context Caching](https://ai.google.dev/gemini-api/docs/caching) |   | Yes |
 
 - Yes - Supported
-- No - Will never be supported
 
 ## Configure API version in an SDK
 
-The Gemini API SDK's default to `v1beta`, but you can opt to use other versions
+The Gemini API SDKs default to `v1beta`, but you can explicitly specify versions
 by setting the API version as shown in the following code sample:
+
+> [!NOTE]
+> **Note:** The GenAI SDKs use \`v1beta\` by default to enable access to preview features. You can configure the SDK to use the stable \`v1\` version (as shown below) which also supports the Interactions API.
 
 ### Python
 
@@ -36,12 +59,12 @@ by setting the API version as shown in the following code sample:
 
     client = genai.Client(http_options={'api_version': 'v1'})
 
-    response = client.models.generate_content(
-        model='gemini-3-flash-preview',
-        contents="Explain how AI works",
+    interaction = client.interactions.create(
+        model='gemini-3.7-flash',
+        input="Explain how AI works",
     )
 
-    print(response.text)
+    print(interaction.output_text)
 
 ### JavaScript
 
@@ -52,23 +75,41 @@ by setting the API version as shown in the following code sample:
     });
 
     async function main() {
-      const response = await ai.models.generateContent({
-        model: "gemini-3-flash-preview",
-        contents: "Explain how AI works",
+      const interaction = await ai.interactions.create({
+        model: "gemini-3.7-flash",
+        input: "Explain how AI works",
       });
-      console.log(response.text);
+      console.log(interaction.output_text);
     }
 
     await main();
 
+### Java
+
+    import com.google.genai.Client;
+    import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+    import com.google.genai.gaos.models.interactions.InteractionsInput;
+    import com.google.genai.gaos.models.interactions.Model;
+    import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+    import com.google.genai.types.HttpOptions;
+
+    Client client = Client.builder()
+        .httpOptions(HttpOptions.builder().apiVersion("v1").build())
+        .build();
+
+    CreateModelInteraction req = CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.6-flash"))
+        .input(InteractionsInput.of("Explain how AI works"))
+        .build();
+    var interaction = client.interactions.create(CreateInteractionRequestBody.of(req)).interaction().get();
+    System.out.println(interaction.outputText().orElse(""));
+
 ### REST
 
-    curl "https://generativelanguage.googleapis.com/v1/models/gemini-3-flash-preview:generateContent" \
-    -H "x-goog-api-key: $GEMINI_API_KEY" \
-    -H 'Content-Type: application/json' \
-    -X POST \
-    -d '{
-      "contents": [{
-        "parts":[{"text": "Explain how AI works."}]
-        }]
-       }'
+    curl -X POST "https://generativelanguage.googleapis.com/v1/interactions" \
+      -H "x-goog-api-key: $GEMINI_API_KEY" \
+      -H 'Content-Type: application/json' \
+      -d '{
+        "model": "gemini-3.7-flash",
+        "input": "Explain how AI works",
+      }'
