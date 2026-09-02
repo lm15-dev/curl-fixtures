@@ -11,10 +11,16 @@ Locally cached API reference docs for OpenAI, Anthropic, and Gemini. These serve
 | Provider | Pages | Key endpoint doc | Update |
 |----------|-------|-----------------|--------|
 | OpenAI | `openai/pages/` (39 files) | `responses--create.md` | `bash openai/update.sh` |
-| Anthropic | `anthropic/pages/` (26 files) | `messages--create.md` | `bash anthropic/update.sh` |
+| Anthropic | `anthropic/pages/` (25 files) | `messages--create.md` | `bash anthropic/update.sh` |
 | Gemini | `gemini/pages/` (14 files) | `generate-content.md` | `bash gemini/update.sh` |
 
 ## Updating all
+
+Each `update.sh` sources `fetch.sh`: a page is written only when the server
+answers 200 with a body. A dead URL keeps the cached copy, is printed, and
+makes the script exit 1. Never commit a page whose body is "Not Found";
+fix the URL in the script instead (17 pages rotted that way before the
+guard existed, 2026-09-02).
 
 ```bash
 cd curl-fixtures/api-references

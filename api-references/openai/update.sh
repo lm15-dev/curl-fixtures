@@ -2,6 +2,7 @@
 # Re-scrape OpenAI API docs from native .md / index.md endpoints
 set -e
 DIR="$(cd "$(dirname "$0")/pages" && pwd)"
+source "$(dirname "$0")/../fetch.sh"
 BASE="https://developers.openai.com"
 
 # Format: "filename=path"
@@ -10,18 +11,18 @@ MD_PAGES=(
   "overview.md=/api/reference/overview.md"
   "responses-overview.md=/api/reference/responses/overview.md"
   "chat-completions-overview.md=/api/reference/chat-completions/overview.md"
-  # Guides
-  "guide--error-codes.md=/docs/guides/error-codes.md"
-  "guide--rate-limits.md=/docs/guides/rate-limits.md"
-  "guide--latency.md=/docs/guides/latency-optimization.md"
-  "guide--production.md=/docs/guides/production-best-practices.md"
-  "guide--reasoning.md=/docs/guides/reasoning.md"
-  "guide--streaming.md=/docs/guides/streaming-responses.md"
-  "guide--function-calling.md=/docs/guides/function-calling.md"
-  "guide--structured-output.md=/docs/guides/structured-outputs.md"
-  "guide--text.md=/docs/guides/text.md"
-  "guide--audio.md=/docs/guides/audio.md"
-  "guide--embeddings.md=/docs/guides/embeddings.md"
+  # Guides (moved from /docs/guides/ to /api/docs/guides/ — the old paths 404 since 2026-09)
+  "guide--error-codes.md=/api/docs/guides/error-codes.md"
+  "guide--rate-limits.md=/api/docs/guides/rate-limits.md"
+  "guide--latency.md=/api/docs/guides/latency-optimization.md"
+  "guide--production.md=/api/docs/guides/production-best-practices.md"
+  "guide--reasoning.md=/api/docs/guides/reasoning.md"
+  "guide--streaming.md=/api/docs/guides/streaming-responses.md"
+  "guide--function-calling.md=/api/docs/guides/function-calling.md"
+  "guide--structured-output.md=/api/docs/guides/structured-outputs.md"
+  "guide--text.md=/api/docs/guides/text.md"
+  "guide--audio.md=/api/docs/guides/audio.md"
+  "guide--embeddings.md=/api/docs/guides/embeddings.md"
 )
 
 # Pages using /index.md suffix (Stainless-generated API reference)
@@ -62,28 +63,24 @@ INDEX_PAGES=(
 )
 
 for pair in "${MD_PAGES[@]}"; do
-  file="${pair%%=*}"
-  path="${pair#*=}"
-  echo -n "  ${file} ... "
-  curl -sL "${BASE}${path}" > "$DIR/$file"
-  echo "$(wc -l < "$DIR/$file") lines"
-  sleep 0.3
+  fetch_page "${pair%%=*}" "${BASE}${pair#*=}"
 done
 
 for pair in "${INDEX_PAGES[@]}"; do
-  file="${pair%%=*}"
-  path="${pair#*=}"
-  echo -n "  ${file} ... "
-  curl -sL "${BASE}${path}/index.md" > "$DIR/$file"
-  echo "$(wc -l < "$DIR/$file") lines"
-  sleep 0.3
+  fetch_page "${pair%%=*}" "${BASE}${pair#*=}/index.md"
 done
 
 # Streaming events page (jina fallback — JS-rendered, no native .md)
-echo -n "  chat--streaming.md (jina) ... "
+tmp="$(mktemp)"
 curl -sL "https://r.jina.ai/https://developers.openai.com/api/reference/resources/chat/subresources/completions/streaming-events" \
-  | awk '/^Markdown Content:/{found=1; next} found' > "$DIR/chat--streaming.md"
-echo "$(wc -l < "$DIR/chat--streaming.md") lines"
+  | awk '/^Markdown Content:/{found=1; next} found' > "$tmp"
+if [[ -s "$tmp" ]]; then
+  mv "$tmp" "$DIR/chat--streaming.md"
+  echo "  chat--streaming.md (jina) ... $(wc -l < "$DIR/chat--streaming.md") lines"
+else
+  rm -f "$tmp"
+  echo "  chat--streaming.md (jina) ... FAILED (empty)" >&2
+  FETCH_FAILURES=$((FETCH_FAILURES + 1))
+fi
 
-echo "---"
-echo "$(ls "$DIR"/*.md | wc -l) pages, $(du -sh "$DIR" | cut -f1)"
+fetch_summary

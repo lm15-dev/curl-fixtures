@@ -2,6 +2,7 @@
 # Re-scrape Gemini API docs from native .md.txt endpoints
 set -e
 DIR="$(cd "$(dirname "$0")/pages" && pwd)"
+source "$(dirname "$0")/../fetch.sh"
 
 declare -A PAGES=(
   ["generate-content.md"]="https://ai.google.dev/api/generate-content.md.txt"
@@ -15,18 +16,13 @@ declare -A PAGES=(
   ["interactions-api.md"]="https://ai.google.dev/api/interactions-api.md.txt"
   ["troubleshooting.md"]="https://ai.google.dev/gemini-api/docs/troubleshooting.md.txt"
   ["api-versions.md"]="https://ai.google.dev/gemini-api/docs/api-versions.md.txt"
-  ["models-gemini.md"]="https://ai.google.dev/gemini-api/docs/models/gemini.md.txt"
+  ["models-gemini.md"]="https://ai.google.dev/gemini-api/docs/models.md.txt"  # models/gemini 404s since 2026-09
   ["rate-limits.md"]="https://ai.google.dev/gemini-api/docs/rate-limits.md.txt"
   ["tokens-guide.md"]="https://ai.google.dev/gemini-api/docs/tokens.md.txt"
 )
 
 for file in "${!PAGES[@]}"; do
-  url="${PAGES[$file]}"
-  echo -n "  ${file} ... "
-  curl -sL "$url" > "$DIR/$file"
-  echo "$(wc -l < "$DIR/$file") lines"
-  sleep 0.3
+  fetch_page "$file" "${PAGES[$file]}"
 done
 
-echo "---"
-echo "$(ls "$DIR"/*.md | wc -l) pages, $(du -sh "$DIR" | cut -f1)"
+fetch_summary
