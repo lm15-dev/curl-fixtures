@@ -13,7 +13,8 @@ Writes:
 
 Usage:
     python3 curl-fixtures/coverage_report.py
-    python3 curl-fixtures/coverage_report.py --json   # also write machine-readable summary
+    python3 curl-fixtures/coverage_report.py --json             # also write machine-readable summary
+    python3 curl-fixtures/coverage_report.py --strict-offline   # CI-friendly offline report
 """
 
 import json
@@ -24,7 +25,7 @@ from pathlib import Path
 try:
     import yaml
 except ImportError:
-    print("pip install pyyaml", file=sys.stderr)
+    print("Missing PyYAML. Run: uv sync", file=sys.stderr)
     sys.exit(1)
 
 ROOT = Path(__file__).parent
@@ -34,6 +35,8 @@ SDKS = ["py", "ts", "go", "rs", "jl"]
 SDK_LABELS = {"py": "Python", "ts": "TypeScript", "go": "Go", "rs": "Rust", "jl": "Julia"}
 PROVIDERS = ["openai", "anthropic", "gemini"]
 WRITE_JSON = "--json" in sys.argv
+STRICT = "--strict" in sys.argv
+STRICT_OFFLINE = "--strict-offline" in sys.argv
 
 
 # ── Load data sources ────────────────────────────────────────────────────────
@@ -103,6 +106,31 @@ def load_sdk_results(fixtures):
     return fixture_sdk_match
 
 
+def is_stream_fixture(fixture):
+    request = fixture.get("request", {})
+    body = request.get("body", {}) if isinstance(request.get("body"), dict) else {}
+    url = str(request.get("url") or "")
+    return body.get("stream") is True or "streamGenerateContent" in url
+
+
+def load_response_results(fixtures):
+    """Return Python response/stream fixture coverage from offline artifacts."""
+    results = {}
+    bodies_root = ROOT / "results" / "bodies"
+    for fid, fixture in fixtures.items():
+        has_body = (bodies_root / fid).exists() and any((bodies_root / fid).glob("*.txt"))
+        has_expect = isinstance(fixture.get("expect_lm15"), dict)
+        is_stream = is_stream_fixture(fixture)
+        results[fid] = {
+            "has_body": has_body,
+            "has_expect": has_expect,
+            "is_stream": is_stream,
+            "response_py": bool(has_body and has_expect and not is_stream),
+            "stream_py": bool(has_body and has_expect and is_stream),
+        }
+    return results
+
+
 # ── Report generation ────────────────────────────────────────────────────────
 
 def generate_report():
@@ -110,6 +138,7 @@ def generate_report():
     fixtures = load_fixtures()
     live_results = load_live_results()
     sdk_results = load_sdk_results(fixtures)
+    response_results = load_response_results(fixtures)
 
     lines = []
     now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -125,7 +154,9 @@ def generate_report():
     lines.append("| Fixture | Curl fixture case file exists |")
     lines.append("| Live | Last live test against real API passed |")
     lines.append("| Scope | `lm15` = SDK should abstract; `provider` = provider-only feature |")
-    lines.append("| py/ts/go/rs/jl | SDK produces request body matching the fixture |")
+    lines.append("| py/ts/go/rs/jl request | SDK produces request body matching the fixture |")
+    lines.append("| py response | Python parses a saved complete provider response against `expect_lm15` |")
+    lines.append("| py stream | Python parses and materializes a saved SSE response against `expect_lm15` |")
     lines.append("| ✅ | Present / passing |")
     lines.append("| · | Missing (lm15 scope — gap to close) |")
     lines.append("| — | Not applicable (provider-only) |")
@@ -135,6 +166,7 @@ def generate_report():
     totals = {
         "features": 0, "fixtures": 0, "live": 0,
         "lm15_scope": 0, "sdk_tested": 0,
+        "py_response": 0, "py_stream": 0,
     }
     totals.update({s: 0 for s in SDKS})
     provider_stats = {}
@@ -146,14 +178,15 @@ def generate_report():
         pstats = {
             "features": 0, "fixtures": 0, "live": 0,
             "lm15_scope": 0, "sdk_tested": 0,
+            "py_response": 0, "py_stream": 0,
         }
         pstats.update({s: 0 for s in SDKS})
         gaps = []
 
         lines.append(f"## {provider.upper()} ({len(pfeatures)} features)")
         lines.append("")
-        lines.append("| Feature | Fixture | Live | Scope | py | ts | go | rs | jl |")
-        lines.append("|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|")
+        lines.append("| Feature | Fixture | Live | Scope | py request | ts request | go request | rs request | jl request | py response | py stream |")
+        lines.append("|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|")
 
         for fname, finfo in pfeatures.items():
             fid = f"{provider}.{fname}"
@@ -196,6 +229,26 @@ def generate_report():
                 else:
                     sdk_strs[s] = "·"
 
+            response_info = response_results.get(fid, {})
+            is_stream = bool(response_info.get("is_stream"))
+            if response_info.get("response_py"):
+                response_str = "✅"
+                pstats["py_response"] += 1
+                totals["py_response"] += 1
+            elif is_stream or not is_lm15:
+                response_str = "—"
+            else:
+                response_str = "·"
+
+            if response_info.get("stream_py"):
+                stream_str = "✅"
+                pstats["py_stream"] += 1
+                totals["py_stream"] += 1
+            elif (not is_stream) or not is_lm15:
+                stream_str = "—"
+            else:
+                stream_str = "·"
+
             if is_lm15 and any_sdk:
                 scope_str = "✅"
             elif is_lm15:
@@ -207,7 +260,8 @@ def generate_report():
             lines.append(
                 f"| {fname} | {'✅' if has_fixture else '·'} | {live_str} "
                 f"| {scope_str} | {sdk_strs['py']} | {sdk_strs['ts']} "
-                f"| {sdk_strs['go']} | {sdk_strs['rs']} | {sdk_strs['jl']} |"
+                f"| {sdk_strs['go']} | {sdk_strs['rs']} | {sdk_strs['jl']} "
+                f"| {response_str} | {stream_str} |"
             )
 
         lines.append("")
@@ -219,21 +273,23 @@ def generate_report():
 
     lines.append("## Summary")
     lines.append("")
-    lines.append("| | Features | Fixtures | Live ✅ | lm15 scope | SDK tested | py | ts | go | rs | jl |")
-    lines.append("|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|")
+    lines.append("| | Features | Fixtures | Live ✅ | lm15 scope | SDK tested | py req | ts req | go req | rs req | jl req | py response | py stream |")
+    lines.append("|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|")
     for provider in PROVIDERS:
         p = provider_stats[provider]
         lines.append(
             f"| {provider} | {p['features']} | {p['fixtures']} | {p['live']} "
             f"| {p['lm15_scope']} | {p['sdk_tested']} "
-            f"| {p['py']} | {p['ts']} | {p['go']} | {p['rs']} | {p['jl']} |"
+            f"| {p['py']} | {p['ts']} | {p['go']} | {p['rs']} | {p['jl']} "
+            f"| {p['py_response']} | {p['py_stream']} |"
         )
     lines.append(
         f"| **Total** | **{totals['features']}** | **{totals['fixtures']}** "
         f"| **{totals['live']}** | **{totals['lm15_scope']}** "
         f"| **{totals['sdk_tested']}** "
         f"| **{totals['py']}** | **{totals['ts']}** | **{totals['go']}** "
-        f"| **{totals['rs']}** | **{totals['jl']}** |"
+        f"| **{totals['rs']}** | **{totals['jl']}** "
+        f"| **{totals['py_response']}** | **{totals['py_stream']}** |"
     )
     lines.append("")
 
@@ -243,6 +299,20 @@ def generate_report():
     if totals["lm15_scope"] > 0:
         pct = totals["sdk_tested"] / totals["lm15_scope"] * 100
         lines.append(f"- **SDK vs lm15 scope:** {totals['sdk_tested']}/{totals['lm15_scope']} ({pct:.0f}%)")
+    response_expected = sum(
+        1 for fid, fixture in fixtures.items()
+        if fixture.get("expect_lm15") and not is_stream_fixture(fixture)
+    )
+    stream_expected = sum(
+        1 for fid, fixture in fixtures.items()
+        if fixture.get("expect_lm15") and is_stream_fixture(fixture)
+    )
+    if response_expected > 0:
+        pct = totals["py_response"] / response_expected * 100
+        lines.append(f"- **Python response parse fixtures:** {totals['py_response']}/{response_expected} ({pct:.0f}%)")
+    if stream_expected > 0:
+        pct = totals["py_stream"] / stream_expected * 100
+        lines.append(f"- **Python stream parse fixtures:** {totals['py_stream']}/{stream_expected} ({pct:.0f}%)")
     if totals["features"] > 0:
         pct = totals["fixtures"] / totals["features"] * 100
         lines.append(f"- **Fixture coverage:** {totals['fixtures']}/{totals['features']} ({pct:.0f}%)")
@@ -297,6 +367,8 @@ def generate_report():
         summary = {
             "generated_at": now,
             "totals": totals,
+            "response_expected": response_expected,
+            "stream_expected": stream_expected,
             "providers": provider_stats,
             "gaps": {
                 p: [{"feature": f, "id": fid, "live": lp}
@@ -313,6 +385,8 @@ def generate_report():
     print(f"Features: {totals['features']}  |  "
           f"lm15 scope: {totals['lm15_scope']}  |  "
           f"SDK tested: {totals['sdk_tested']}  |  "
+          f"py response: {totals['py_response']}  |  "
+          f"py stream: {totals['py_stream']}  |  "
           f"Gaps: {totals['lm15_scope'] - totals['sdk_tested']}")
 
     return totals["lm15_scope"] - totals["sdk_tested"]
@@ -320,7 +394,9 @@ def generate_report():
 
 if __name__ == "__main__":
     gaps = generate_report()
-    # Exit 0 always — this is a report, not a test
-    # Use --strict if you want CI to fail on gaps
-    if "--strict" in sys.argv and gaps > 0:
+    # Exit 0 by default — this is a report, not a test.  `--strict` keeps
+    # the historical behavior of failing on request-SDK gaps.  `--strict-offline`
+    # is accepted for CI jobs that want to assert this command stays offline;
+    # coverage gaps are still reported in the generated markdown.
+    if STRICT and gaps > 0:
         sys.exit(1)
