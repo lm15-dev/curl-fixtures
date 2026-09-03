@@ -14,7 +14,7 @@ from pathlib import Path
 try:
     import yaml
 except ImportError:
-    print("pip install pyyaml")
+    print("Missing PyYAML. Run: uv sync", file=sys.stderr)
     sys.exit(1)
 
 ROOT = Path(__file__).parent

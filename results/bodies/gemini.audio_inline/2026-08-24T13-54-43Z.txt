@@ -1,0 +1,35 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "A short, high-pitched electronic beep."
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 10,
+    "candidatesTokenCount": 9,
+    "totalTokenCount": 720,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 6
+      },
+      {
+        "modality": "AUDIO",
+        "tokenCount": 4
+      }
+    ],
+    "thoughtsTokenCount": 701,
+    "serviceTier": "standard"
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": "JE2Maq3ODd-jjMcPrqiIuQk"
+}

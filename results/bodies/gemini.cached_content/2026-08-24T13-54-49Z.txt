@@ -1,0 +1,11 @@
+{
+  "name": "cachedContents/jgd3mbu77usekspkhdrc9kz9d3nzy760p6qlyml1",
+  "model": "models/gemini-2.5-flash",
+  "createTime": "2026-08-24T13:54:50.125360Z",
+  "updateTime": "2026-08-24T13:54:50.125360Z",
+  "expireTime": "2026-08-24T13:59:49.814504096Z",
+  "displayName": "",
+  "usageMetadata": {
+    "totalTokenCount": 1450
+  }
+}

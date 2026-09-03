@@ -1,0 +1,39 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "functionCall": {
+              "name": "multiplyNumbers",
+              "args": {
+                "a": 57,
+                "b": 44
+              }
+            },
+            "thoughtSignature": "CssCARFNMg8u//aP+EPGM2yxfQGuGK1KMsdH41Lh6xooKgtIMMZNW78Lv2arTWFoH+F95UuMLb7zOea7/Ftnhtk19CJiIKkNeyGyN2hE1uYc1OagKzwHb6Ltolmc24Kc+rls45DxY1QcWmkmCqAYXR8lSFp6VHRh4ifVVisA7ffhZ85HtCt4nIxjdP8raZPawqLv0qoQRVkfbO/KYXPdAccCjLinTalv7gRL0Cm49xWjH9Ay458hqXKoQ8m4c+By36hBSWf64iQylzPjJAt47M6DdAYWrhd7mefftDeL4jqIHx1CQtsVQi9+9fgKg0Y+MSeuxvkyKfosxrsLUPD1KnknTCTUzyLDA6tqmkGJH5HK0RW2sQa9x2D7oj25IPkPW25dnaD8iGtPB4S5vfRHStTosNUV1C+8QuqE7qqMT3rB8zp/KIFWpBB/WwXSkQ=="
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0,
+      "finishMessage": "Model generated function call(s)."
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 68,
+    "candidatesTokenCount": 21,
+    "totalTokenCount": 162,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 68
+      }
+    ],
+    "thoughtsTokenCount": 73,
+    "serviceTier": "standard"
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": "XU2Mav3YCdqZ_uMP36_DiAM"
+}

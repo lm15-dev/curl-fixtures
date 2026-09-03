@@ -1,0 +1,41 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\n  \"title\": \"Deoxyribonucleic Acid (DNA)\",\n  \"summary\": \"DNA, or deoxyribonucleic acid, is the hereditary material in humans and almost all other organisms. It carries the genetic instructions used in the growth, development, functioning, and reproduction of all known organisms and many viruses. DNA is a double helix structure composed of two long strands of nucleotides twisted around each other, with each strand containing a backbone made of alternating sugar and phosphate groups, and attached bases (adenine, guanine, cytosine, and thymine).\"\n}"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0,
+      "citationMetadata": {
+        "citationSources": [
+          {
+            "startIndex": 58,
+            "endIndex": 265,
+            "uri": "https://greenlight.com/learning-center/fun-facts/are-you-smarter-than-a-5th-grader-questions",
+            "license": ""
+          }
+        ]
+      }
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 14,
+    "candidatesTokenCount": 118,
+    "totalTokenCount": 169,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 14
+      }
+    ],
+    "thoughtsTokenCount": 37,
+    "serviceTier": "standard"
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": "Rk2MasqYFruV_uMP0omP4QM"
+}

@@ -35,7 +35,7 @@ from typing import Any
 try:
     import yaml
 except ImportError:
-    print("pip install pyyaml", file=sys.stderr)
+    print("Missing PyYAML. Run: uv sync", file=sys.stderr)
     raise
 
 ROOT = Path(__file__).parent

@@ -1,0 +1,8 @@
+{
+  "error": {
+    "message": "Missing required parameter: 'input[0].content[1]'.",
+    "type": "invalid_request_error",
+    "param": "input[0].content[1]",
+    "code": "missing_required_parameter"
+  }
+}

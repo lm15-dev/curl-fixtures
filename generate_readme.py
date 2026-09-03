@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import json
 from pathlib import Path
-from datetime import datetime
+from datetime import datetime, timezone
 
 import yaml
 
@@ -147,7 +147,8 @@ def make_readme(data, latest):
     lines.append('- Run history: `results/history.jsonl`')
     lines.append('- Response bodies: `results/bodies/<case-id>/<timestamp>.txt`')
     lines.append('')
-    lines.append(f'_README generated at {datetime.utcnow().isoformat()}Z by `generate_readme.py`._')
+    generated_at = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
+    lines.append(f'_README generated at {generated_at} by `generate_readme.py`._')
     lines.append('')
     return '\n'.join(lines)
 

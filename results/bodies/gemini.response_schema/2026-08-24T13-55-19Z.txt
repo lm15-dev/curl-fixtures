@@ -1,0 +1,31 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "[{\"recipeName\":\"Chocolate Chip Cookies\",\"ingredients\":[\"Flour\",\"Butter\",\"Sugar\",\"Brown Sugar\",\"Eggs\",\"Vanilla Extract\",\"Baking Soda\",\"Salt\",\"Chocolate Chips\"]},{\"recipeName\":\"Oatmeal Raisin Cookies\",\"ingredients\":[\"Oats\",\"Flour\",\"Butter\",\"Brown Sugar\",\"Sugar\",\"Eggs\",\"Vanilla Extract\",\"Cinnamon\",\"Baking Soda\",\"Salt\",\"Raisins\"]},{\"recipeName\":\"Sugar Cookies\",\"ingredients\":[\"Flour\",\"Butter\",\"Sugar\",\"Eggs\",\"Vanilla Extract\",\"Baking Powder\",\"Salt\"]},{\"recipeName\":\"Peanut Butter Cookies\",\"ingredients\":[\"Peanut Butter\",\"Flour\",\"Sugar\",\"Brown Sugar\",\"Eggs\",\"Baking Soda\",\"Salt\"]}]"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 8,
+    "candidatesTokenCount": 134,
+    "totalTokenCount": 451,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 8
+      }
+    ],
+    "thoughtsTokenCount": 309,
+    "serviceTier": "standard"
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": "SE2Mav3QCNqZ_uMP36_DiAM"
+}

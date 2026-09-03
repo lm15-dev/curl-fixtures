@@ -1,0 +1,31 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "Here's a nice fact about Montreal:\n\nDid you know Montreal has an extensive **Underground City**? Officially called the **RÉSO** (from *réseau*, meaning \"network\"), it's a vast network of interconnected tunnels, shopping malls, metro stations, universities, and office buildings, spanning over **32 kilometers (20 miles)**.\n\nIt allows residents and visitors to commute, shop, eat, and even attend events in comfort, especially during the cold winter months, without ever having to step outside! It's one of the largest underground complexes in the world."
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 9,
+    "candidatesTokenCount": 122,
+    "totalTokenCount": 1155,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 9
+      }
+    ],
+    "thoughtsTokenCount": 1024,
+    "serviceTier": "standard"
+  },
+  "modelVersion": "gemini-2.5-flash",
+  "responseId": "Sk2MavrYJ92u_uMP25j76AM"
+}
